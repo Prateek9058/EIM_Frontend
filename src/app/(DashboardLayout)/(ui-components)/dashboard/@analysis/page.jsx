@@ -5,10 +5,11 @@ import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import Chip from "@mui/material/Chip";
-import MdOutlineArrowOutward from `@/app/(components)/mui-components/icons/index`
+import {ArrowOutward} from '@/app/(components)/mui-components/icons/index'
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import styled from "@emotion/styled";
+import {TransparentChip} from '@/app/(components)/mui-components/Chip/index'
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -154,12 +155,11 @@ const Analysis = () => {
         <Grid mt={2}>
           <Typography variant="h3">
             257{" "}
-            <Chip
+            <TransparentChip
               label="16.8 %"
               variant="filled"
-              className="customChip"
               size="small"
-              icon={<MdOutlineArrowOutward/>}
+              icon={<ArrowOutward/>}
             />
           </Typography>
         </Grid>
@@ -178,19 +178,12 @@ const Analysis = () => {
           <Grid mt={2}>
             <Typography variant="h3">
               257{" "}
-              <Chip
-                label="16.8 %"
-                variant="filled"
-                size="small"
-                icon={<ArrowOutwardIcon color="#fff" />}
-                sx={{
-                  borderRadius: "4px",
-                  border: "0.6px solid #255182",
-                  ml: 1,
-                  backgroundColor: "rgba(30, 69, 106, 0.26)",
-                  color: "#fff",
-                }}
-              />
+              <TransparentChip
+              label="16.8 %"
+              variant="filled"
+              size="small"
+              icon={<ArrowOutward/>}
+            />
             </Typography>
           </Grid>
         </Grid>
