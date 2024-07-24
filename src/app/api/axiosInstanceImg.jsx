@@ -2,8 +2,8 @@ import axios from "axios";
 import { signOut } from "next-auth/react";
 const axiosInstanceImg = axios.create({
   // baseURL: "http://103.119.171.134:5000",
-  // baseURL: "https://apitrack.psiborg.io/",
-  baseURL: "http://10.5.50.33:8080",
+  baseURL: "https://api.eim.digital/",
+  // baseURL: "http://10.5.50.33:8080",
 });
 const requestInterceptor = axiosInstanceImg.interceptors.request.use(
   (request) => {

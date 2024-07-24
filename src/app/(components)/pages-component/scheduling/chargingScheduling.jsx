@@ -6,14 +6,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Card, Divider ,Avatar} from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import MapImg from "../../../../public/Img/Vector.svg"
+import MapImg from "../../../../../public/Img/Vector.svg"
 import CardMedia from '@mui/material/CardMedia';
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow, InfoBox, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import axios from 'axios';
 import styled from "@emotion/styled";
 import Image  from 'next/image';
-import { CustomGrid } from '../mui-components/CustomGrid';
-import CustomTextField from '../mui-components/Text-Field\'s';
+import { CustomGrid } from '../../mui-components/CustomGrid';
+import CustomTextField from "../../mui-components/Text-Field's";
 // import Search from '@/components/Search/index'
 
 const center = {

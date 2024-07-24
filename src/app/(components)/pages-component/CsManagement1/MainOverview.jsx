@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import Graph from './graph'
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import Graph2 from './graph2';
-import Overview from '@/app/(components)/CsManagement1/overview/Overview';
+import Overview from '@/app/(components)/pages-component/CsManagement1/overview/Overview';
 import TimerIcon from '@mui/icons-material/Timer';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import Chip from '@mui/material/Chip';
 import styled from "@emotion/styled";
 import CommonDatePicker from"@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index"
-import ManagementGrid from '../mui-components/Card';
+import ManagementGrid from '../../mui-components/Card';
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
     padding: theme.spacing(2),

@@ -3,8 +3,8 @@ import { Grid, Typography, Button } from '@mui/material'
 import React, { useState } from 'react'
 import LoopOutlinedIcon from '@mui/icons-material/LoopOutlined';
 // import Tabs from '@/components/tabs/index'
-import VehicleScheduling from '@/app/(components)/scheduling/vehicleScheduling';
-import ChargingScheduling from '@/app/(components)/scheduling/chargingScheduling';
+import VehicleScheduling from '@/app/(components)/pages-component/scheduling/vehicleScheduling';
+import ChargingScheduling from '@/app/(components)/pages-component/scheduling/chargingScheduling';
 import { CustomDropdown } from '@/app/(components)/mui-components/DropdownButton/index';
 import ManagementGrid from '@/app/(components)/mui-components/Card';
 

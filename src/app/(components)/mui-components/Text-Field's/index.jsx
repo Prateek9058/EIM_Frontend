@@ -35,7 +35,6 @@ const CustomTextField = ({
         disabled={disabled}
         sx={{
           borderRadius: "8px",
-          mb: 3,
         }}
         InputLabelProps={{ shrink: true }}
         InputProps={

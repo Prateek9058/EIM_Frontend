@@ -1,36 +1,62 @@
-"use client";
-import React, { useState, useEffect } from "react";
+"use client"
+import React, { useState, useEffect } from 'react'
+import Map from '../../map/map'
 import { Grid, Typography, Box, Button, Chip, Tooltip, IconButton } from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
-import CustomTextField from "@/app/(components)/mui-components/Text-Field's/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
-import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
-import { CustomDownloadExcel } from "../../mui-components/DownloadExcel";
+import { CustomDownloadExcel } from '../../mui-components/DownloadExcel'; 
+import { ChargingStationRow } from '../../table/rows';
 
-const Table = ({
-    data,
-    deviceData,
-    value,
-    rowsPerPage,
-    setRowsPerPage,
-    page,
-    setPage,
-    searchQuery,
-    setSearchQuery,
-    loading,
-    handleExport,
-    getDataFromChildHandler,
-}) => {
-    const columns = [
-        'VehicleId','Status','Avg. Speed (Km/hrs)','Avg. Payload (Ton)','Total Distance Traveled(Km)',
-        'Avg. Consumption','Breakdown','Current Soc', 'Estimated Range','Scheduling Status',"Action",
-    ];
+const iconUrls = [
+    { icon: '/truck1.svg', color: "blue" },
+    { icon: '/truck2.svg', color: "red" },
+    { icon: '/truck3.svg', color: "green" },
+    { icon: '/truck4.svg', color: "skyblue" },
+];
+const coordinate = [
+    { lat: "28.51079782059423", log: "77.40362813493975" },
+    { lat: "28.510404514720925", log: "77.40712974097106" },
+    { lat: "28.512297585971584", log: "77.40356012099012" },
+    { lat: "28.510728275696316", log: "77.40199688895548" },
+    { lat: "28.511107212816803", log: "77.4063730115565" },
+    { lat: "28.512937158827324", log: "77.41783963937374" },
+]
+const buttonData = [
+    { label: 'Offline', color: "red" },
+    { label: 'Charging', color: "green" },
+    { label: 'Trip', color: "blue" },
+    { label: 'Parked', color: "skyblue" },
+];
+const columns =[
+    'Charger Station ID',
+    'Charger Status',
+    'Hub Name',
+    'Charger Name',
+    'Host Details',
+    'Protocols',
+    'Uptime',
+    'Make',
+    'Firmware version',
+    'Firmware Update',
+    'Action'
+  ]
+const Charging = ({ value }) => {
+    const [page, setPage] = React.useState(0);
+    const [loading, setLoading] = useState(false);
+    const [rowsPerPage, setRowsPerPage] = React.useState(25);
+    const [deviceData, setDeviceData] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [date, setDate] = useState(null);
+    const [data, setData] = useState(null);
     const [open, setOpenDialog] = React.useState(false);
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
+    const getDataFromChildHandler = (date, dataArr) => {
+        setDate(date);
+    };
     useEffect(() => {
         const handler = setTimeout(() => {
             setSearchQuery(debouncedSearchQuery);
@@ -82,9 +108,12 @@ const Table = ({
                 />,
             ];
         }
-    };
+    };    useEffect(() => {
+        setData(ChargingStationRow)
+    }, [])
+
     const getFormattedData = (data) => {
-        console.log("data",data)
+        console.log("data", data)
         return data?.map((item, index) => ({
             employeeId: (
                 <Box>
@@ -102,12 +131,11 @@ const Table = ({
                     />
                 </Box>
             ),
-
-            status:(
+            status: (
                 <Box>
                   <Typography 
                  sx={{ 
-                    color: item?.status === 'charging' ? 'green': item?.status === 'Parked' ? 'yellow' : 'blue' 
+                    color: item?.status === 'Online' ? 'green': "red"
                   }}
                   >
                     {item?.status  ?item?.status: "NA"}
@@ -126,7 +154,7 @@ const Table = ({
                 <Grid container justifyContent="center" spacing={2} key={index}>
                     <Grid item xs={12} >
                         <Tooltip title="View">
-                            <Link href={`/fleetManagement/123?tab=${value}`}>
+                            <Link href={`/csManagement/1235?tab=${value}`}>
                                 <IconButton size="small">
                                     <IoEyeOutline color="rgba(14, 1, 71, 1)" />
                                 </IconButton>
@@ -136,62 +164,64 @@ const Table = ({
                 </Grid>,
             ],
         }));
-    };
-
+    }
     return (
         <Grid container >
-            <Grid
-                container
-                justifyContent="space-between"
-                alignItems="center"
-                p={2}
-                sx={{ backgroundColor: "#669BE9", color: "#fff", borderRadius: "16px 16px 0px 0px" }}>
-                <Grid item>
-                    <Typography variant="h3">
-                        Fleet (121)
-                    </Typography>
-                </Grid>
-                <Grid item className="customSearch">
-                    <Grid container>
-                        <Grid item mr={1}>
-                            <CustomDownloadExcel  name={"Download Excel"} rows={data} data={"Fleet (121)"}/>
-                        </Grid>
-                        <Grid item mr={1}>
-                            <CommonDatePicker
-                                getDataFromChildHandler={
-                                    getDataFromChildHandler
-                                }
-                            />
-                        </Grid>
-                        {/* <CustomTextField
+            <Grid item xs={12} height={"380px"}>
+                <Map iconUrls={iconUrls} buttonData={buttonData} coordinate={coordinate} />
+            </Grid>
+            <Grid container >
+                <Grid
+                    container
+                    justifyContent="space-between"
+                    alignItems="center"
+                    p={2}
+                    sx={{ backgroundColor: "#669BE9", color: "#fff", borderRadius: "16px 16px 0px 0px" }}>
+                    <Grid item>
+                        <Typography variant="h3">
+                            Charging Station 
+                        </Typography>
+                    </Grid>
+                    <Grid item className="customSearch">
+                        <Grid container>
+                            <Grid item mr={1}>
+                                <CustomDownloadExcel name={"Download Excel"} rows={data} data={"Fleet (121)"} />
+                            </Grid>
+                            <Grid item mr={1}>
+                                <CommonDatePicker
+                                    getDataFromChildHandler={
+                                        getDataFromChildHandler
+                                    }
+                                />
+                            </Grid>
+                            {/* <CustomTextField
                             type="search"
                             placeholder="Search empId / Name"
                             value={debouncedSearchQuery}
                             onChange={handleSearchChange}
                         /> */}
+                        </Grid>
                     </Grid>
                 </Grid>
+                {loading ? (
+                    <TableSkeleton
+                        rowNumber={new Array(10).fill(0)}
+                        tableCell={new Array(5).fill("15%")}
+                        actions={new Array(2).fill(0)}
+                    />
+                ) : (
+                    <CustomTable
+                        page={page}
+                        rows={getFormattedData(data)}
+                        count={data?.length}
+                        columns={columns}
+                        setPage={setPage}
+                        rowsPerPage={rowsPerPage}
+                        setRowsPerPage={setRowsPerPage}
+                    />
+                )}
             </Grid>
-            {loading ? (
-                <TableSkeleton
-                    rowNumber={new Array(10).fill(0)}
-                    tableCell={new Array(5).fill("15%")}
-                    actions={new Array(2).fill(0)}
-                />
-            ) : (
-                <CustomTable
-                    page={page}
-                    rows={getFormattedData(data)}
-                    count={data?.length}
-                    columns={columns}
-                    setPage={setPage}
-                    rowsPerPage={rowsPerPage}
-                    setRowsPerPage={setRowsPerPage}
-                />
-            )}
-
         </Grid>
-    );
-};
-
-export default Table;
+    )
+}
+export default Charging

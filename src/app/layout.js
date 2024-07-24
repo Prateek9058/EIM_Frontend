@@ -1,5 +1,6 @@
 "use client"
 import "./globals.css";
+import "./customCss.scss";
 import { ThemeProvider } from "@mui/material/styles";
 import {baselightTheme} from '../utils/theme/DefaultColors'
 import CssBaseline from "@mui/material/CssBaseline";

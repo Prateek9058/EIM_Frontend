@@ -1,14 +1,14 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import Map from '../map/map'
+import Map from '../../map/map'
 import { Grid, Typography, Box, Button, Chip, Tooltip, IconButton } from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
-import Link from "next/link";
-import { IoEyeOutline } from "react-icons/io5";
-import { CustomDownloadExcel } from '../mui-components/DownloadExcel';
-import { Trip } from '../table/rows';
+import { CustomDownloadExcel } from '../../mui-components/DownloadExcel'; 
+import { RevenueManagementData  } from '../../table/rows';
+import ManagementGrid from '../../mui-components/Card';
+import Fusion from './fusion'
 
 const iconUrls = [
     { icon: '/truck1.svg', color: "blue" },
@@ -47,27 +47,25 @@ const Charging = ({ value }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [date, setDate] = useState(null);
     const [data, setData] = useState(null);
+    const [fusion,setFusion]=useState(false)
+    const [fusionValue,setFusionValue]=useState(null)
+    const [open, setOpenDialog] = React.useState(false);
+    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
     const getDataFromChildHandler = (date, dataArr) => {
         setDate(date);
     };
-    const columns = [
-        'Region',
-        'E-tractor ID',
-        'Trips',
-        'Avg. Speed',
-        'Avg. Payload',
-        'Max. Payload',
-        'Distance Traveled',
-        'Avg. Breakdown',
-        'Total Tevs',
-        'Tves Handle 40F',
-        'Tves Handle 20F',
-        'Tves Each Trip',
-        'Action'
-    ]
-    const [open, setOpenDialog] = React.useState(false);
-    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
+    const columns =[
+        'E-Tractor ID',
+        'Charging Cycle',
+        'Units Consumed',
+        'Swapping Cycle',
+        'Units Consumed',
+        'Total Unit',
+        'Selected Package',
+        'Variable Unit',
+        'Total'
+      ]
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -81,6 +79,10 @@ const Charging = ({ value }) => {
     const handleSearchChange = (event) => {
         setDebouncedSearchQuery(event.target.value);
     };
+    const handleOpenFusion =(item)=>{
+        setFusion(true)
+        setFusionValue(item)
+    }
 
     const handleOpenDialog = () => {
         setOpenDialog(true);
@@ -120,8 +122,8 @@ const Charging = ({ value }) => {
                 />,
             ];
         }
-    }; useEffect(() => {
-        setData(Trip)
+    };    useEffect(() => {
+        setData( RevenueManagementData )
     }, [])
 
     const getFormattedData = (data) => {
@@ -143,40 +145,36 @@ const Charging = ({ value }) => {
                     />
                 </Box>
             ),
-
-            firstName: item?.firstName ?? "N/A",
-            TotalTripDay: (<Chip
+            chargingcycle:( <Chip
                 key={index}
-                color='primary'
-                sx={{ width: "50px" }}
-                label={item?.TotalTripDay}
+                color="primary"
+                sx={{ width: "80px" ,color:"#C0FE72"}}
+                label={ item?.chargingcycle }
+            />),   
+            lastName: item?.lastName ?? "N/A",
+            swappingcycle:( <Chip
+                key={index}
+                color="primary"
+                sx={{ width: "80px" ,color:"#C0FE72"}}
+                label={ item?.swappingcycle }
+            />),  
+            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
+            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
+            selectedpackage:( <Chip
+                key={index}
+                color="primary"
+                sx={{ width: "80px",color:"#C0FE72" }}
+                label={ item?.selectedpackage}
+                onClick={()=>{handleOpenFusion(item?.selectedpackage)} }
             />),
-            mobileNumber1: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber2: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber3: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber4: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber5: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber6: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber7: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber8: item?.mobileNumber ? item?.mobileNumber : "N/A",
+            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
+         
             jobRole: item?.jobRole ? item?.jobRole : "N/A",
-            Action: [
-                <Grid container justifyContent="center" spacing={2} key={index}>
-                    <Grid item xs={12} >
-                        <Tooltip title="View">
-                            <Link href={`/fleetManagement/123?tab=${value}`}>
-                                <IconButton size="small">
-                                    <IoEyeOutline color="rgba(14, 1, 71, 1)" />
-                                </IconButton>
-                            </Link>
-                        </Tooltip>
-                    </Grid>
-                </Grid>,
-            ],
         }));
     }
     return (
         <Grid container >
+            <Fusion open={fusion} setOpen={setFusion} fusionValue={fusionValue}/>
             <Grid item xs={12} height={"380px"}>
                 <Map iconUrls={iconUrls} buttonData={buttonData} coordinate={coordinate} />
             </Grid>
@@ -189,7 +187,7 @@ const Charging = ({ value }) => {
                     sx={{ backgroundColor: "#669BE9", color: "#fff", borderRadius: "16px 16px 0px 0px" }}>
                     <Grid item>
                         <Typography variant="h3">
-                            Fleet (121)
+                           Revenue Management
                         </Typography>
                     </Grid>
                     <Grid item className="customSearch">

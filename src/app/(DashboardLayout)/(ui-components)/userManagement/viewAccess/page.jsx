@@ -7,7 +7,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Assign from '@/app/(components)/userManagement/AddAccess/Assign';
+import Assign from '@/app/(components)/pages-component/userManagement/AddAccess/Assign';
 import styled from '@emotion/styled';
 import ManagementGrid from '@/app/(components)/mui-components/Card';
 const CustomGrid = styled(Grid)(({ theme }) => ({

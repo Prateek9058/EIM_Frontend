@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import { Typography, Grid, TextField, Divider, IconButton } from '@mui/material';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import Graph from '@/app/(components)/CsManagement1/graph';
+import Graph from '@/app/(components)/pages-component/CsManagement1/graph';
 
 export default function AlertDialog({ open, setOpen }) {
     const handleClose = () => {

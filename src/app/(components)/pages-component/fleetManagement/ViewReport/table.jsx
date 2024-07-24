@@ -7,7 +7,7 @@ import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkele
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import { IoClose } from "react-icons/io5";
-import { CustomDownloadExcel } from "../../mui-components/DownloadExcel";
+import { CustomDownloadExcel } from "../../../mui-components/DownloadExcel";
 
 const Table = ({
     data,

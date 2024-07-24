@@ -1,14 +1,16 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import Map from '../map/map'
+import Map from '../../map/map'
 import { Grid, Typography, Box, Button, Chip, Tooltip, IconButton } from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
-import { CustomDownloadExcel } from '../mui-components/DownloadExcel'; 
-import { RevenueManagementData  } from '../table/rows';
-import ManagementGrid from '../mui-components/Card';
-import Fusion from './fusion'
+import Link from "next/link";
+import { IoEyeOutline } from "react-icons/io5";
+import { useRouter } from 'next/navigation';
+import { CustomDownloadExcel } from '../../mui-components/DownloadExcel'; 
+import {  E_tractorData } from '../../table/rows';
+import ManagementGrid from '../../mui-components/Card';
 
 const iconUrls = [
     { icon: '/truck1.svg', color: "blue" },
@@ -47,10 +49,6 @@ const Charging = ({ value }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [date, setDate] = useState(null);
     const [data, setData] = useState(null);
-    const [fusion,setFusion]=useState(false)
-    const [fusionValue,setFusionValue]=useState(null)
-    const [open, setOpenDialog] = React.useState(false);
-    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
     const getDataFromChildHandler = (date, dataArr) => {
         setDate(date);
@@ -58,14 +56,16 @@ const Charging = ({ value }) => {
     const columns =[
         'E-Tractor ID',
         'Charging Cycle',
+        'Charging Time (Hrs)',
+        'Start SoC',
+        'End SoC',
+        'Current SoC',
+        'Charged SoC',
         'Units Consumed',
-        'Swapping Cycle',
-        'Units Consumed',
-        'Total Unit',
-        'Selected Package',
-        'Variable Unit',
-        'Total'
+        'Action'
       ]
+    const [open, setOpenDialog] = React.useState(false);
+    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -79,10 +79,6 @@ const Charging = ({ value }) => {
     const handleSearchChange = (event) => {
         setDebouncedSearchQuery(event.target.value);
     };
-    const handleOpenFusion =(item)=>{
-        setFusion(true)
-        setFusionValue(item)
-    }
 
     const handleOpenDialog = () => {
         setOpenDialog(true);
@@ -123,7 +119,7 @@ const Charging = ({ value }) => {
             ];
         }
     };    useEffect(() => {
-        setData( RevenueManagementData )
+        setData( E_tractorData)
     }, [])
 
     const getFormattedData = (data) => {
@@ -148,33 +144,34 @@ const Charging = ({ value }) => {
             chargingcycle:( <Chip
                 key={index}
                 color="primary"
-                sx={{ width: "80px" ,color:"#C0FE72"}}
+                sx={{ width: "80px" }}
                 label={ item?.chargingcycle }
             />),   
             lastName: item?.lastName ?? "N/A",
-            swappingcycle:( <Chip
-                key={index}
-                color="primary"
-                sx={{ width: "80px" ,color:"#C0FE72"}}
-                label={ item?.swappingcycle }
-            />),  
+            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
             mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
             mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
-            selectedpackage:( <Chip
-                key={index}
-                color="primary"
-                sx={{ width: "80px",color:"#C0FE72" }}
-                label={ item?.selectedpackage}
-                onClick={()=>{handleOpenFusion(item?.selectedpackage)} }
-            />),
-            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
-         
+            // mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "N/A",
+            // mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
+            mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
             jobRole: item?.jobRole ? item?.jobRole : "N/A",
+            Action: [
+                <Grid container justifyContent="center" spacing={2} key={index}>
+                    <Grid item xs={12} >
+                        <Tooltip title="View">
+                            <Link href={`/csManagement/1235?tab=${value}`}>
+                                <IconButton size="small">
+                                    <IoEyeOutline color="rgba(14, 1, 71, 1)" />
+                                </IconButton>
+                            </Link>
+                        </Tooltip>
+                    </Grid>
+                </Grid>,
+            ],
         }));
     }
     return (
         <Grid container >
-            <Fusion open={fusion} setOpen={setFusion} fusionValue={fusionValue}/>
             <Grid item xs={12} height={"380px"}>
                 <Map iconUrls={iconUrls} buttonData={buttonData} coordinate={coordinate} />
             </Grid>
@@ -187,7 +184,7 @@ const Charging = ({ value }) => {
                     sx={{ backgroundColor: "#669BE9", color: "#fff", borderRadius: "16px 16px 0px 0px" }}>
                     <Grid item>
                         <Typography variant="h3">
-                           Revenue Management
+                            E-Tractor
                         </Typography>
                     </Grid>
                     <Grid item className="customSearch">

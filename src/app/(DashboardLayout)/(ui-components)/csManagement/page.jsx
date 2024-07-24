@@ -2,15 +2,15 @@
 import { Grid,Button,Typography } from '@mui/material'
 import React,{useState} from 'react'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import Overview from '@/app/(components)/CsManagement1/MainOverview';
-import Charging from '@/app/(components)/CsManagement1/chargingStation';
-import DriverVehicle from '@/app/(components)/CsManagement1/DriverVehicle';
-import RevenueManagement from '@/app/(components)/CsManagement1/Revenue';
+import Overview from '@/app/(components)/pages-component/CsManagement1/MainOverview';
+import Charging from '@/app/(components)/pages-component/CsManagement1/chargingStation';
+import DriverVehicle from '@/app/(components)/pages-component/CsManagement1/DriverVehicle';
+import RevenueManagement from '@/app/(components)/pages-component/CsManagement1/Revenue';
 import ToastComponent, {
   notifyError,
   notifySuccess,
 } from "@/app/(components)/mui-components/Snackbar/index";import ManagementGrid from '@/app/(components)/mui-components/Card';
-import AddTractor from '@/app/(components)/CsManagement1/addTractor'
+import AddTractor from '@/app/(components)/pages-component/CsManagement1/addTractor'
 
 const CsManagement = () => {
     const [value, setValue] = useState(0); 

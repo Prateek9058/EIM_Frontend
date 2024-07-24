@@ -1,14 +1,14 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import Map from '../map/map'
+import Map from '../../map/map'
 import { Grid, Typography, Box, Button, Chip, Tooltip, IconButton } from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
-import { CustomDownloadExcel } from '../mui-components/DownloadExcel'; 
-import { ChargingStationRow } from '../table/rows';
+import { CustomDownloadExcel } from '../../mui-components/DownloadExcel';
+import { Trip } from '../../table/rows';
 
 const iconUrls = [
     { icon: '/truck1.svg', color: "blue" },
@@ -30,19 +30,15 @@ const buttonData = [
     { label: 'Trip', color: "blue" },
     { label: 'Parked', color: "skyblue" },
 ];
-const columns =[
-    'Charger Station ID',
-    'Charger Status',
-    'Hub Name',
-    'Charger Name',
-    'Host Details',
-    'Protocols',
-    'Uptime',
-    'Make',
-    'Firmware version',
-    'Firmware Update',
-    'Action'
-  ]
+const days = ["Today", "Weekly", "Yearly"]
+const region = ["mumbai", "Delhi", "Agra", "banaras", "kolkata"]
+const buttons = [
+    {
+        data: "Fleet (212)", customdownload: "Download Excel",
+        regiondropdown: [{ name: "Region", variant: "outlined", region: region }],
+        dailydropdown: [{ name: "Today", variant: "contained", days: days }]
+    }
+];
 const Charging = ({ value }) => {
     const [page, setPage] = React.useState(0);
     const [loading, setLoading] = useState(false);
@@ -51,12 +47,28 @@ const Charging = ({ value }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [date, setDate] = useState(null);
     const [data, setData] = useState(null);
-    const [open, setOpenDialog] = React.useState(false);
-    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
     const getDataFromChildHandler = (date, dataArr) => {
         setDate(date);
     };
+    const columns = [
+        'Region',
+        'E-tractor ID',
+        'Trips',
+        'Avg. Speed',
+        'Avg. Payload',
+        'Max. Payload',
+        'Distance Traveled',
+        'Avg. Breakdown',
+        'Total Tevs',
+        'Tves Handle 40F',
+        'Tves Handle 20F',
+        'Tves Each Trip',
+        'Action'
+    ]
+    const [open, setOpenDialog] = React.useState(false);
+    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
+
     useEffect(() => {
         const handler = setTimeout(() => {
             setSearchQuery(debouncedSearchQuery);
@@ -108,8 +120,8 @@ const Charging = ({ value }) => {
                 />,
             ];
         }
-    };    useEffect(() => {
-        setData(ChargingStationRow)
+    }; useEffect(() => {
+        setData(Trip)
     }, [])
 
     const getFormattedData = (data) => {
@@ -131,30 +143,28 @@ const Charging = ({ value }) => {
                     />
                 </Box>
             ),
-            status: (
-                <Box>
-                  <Typography 
-                 sx={{ 
-                    color: item?.status === 'Online' ? 'green': "red"
-                  }}
-                  >
-                    {item?.status  ?item?.status: "NA"}
-                  </Typography>
-                </Box>
-              ),
-            lastName: item?.lastName ?? "N/A",
-            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
-            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
-            mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "N/A",
-            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
-            mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
+
+            firstName: item?.firstName ?? "N/A",
+            TotalTripDay: (<Chip
+                key={index}
+                color='primary'
+                sx={{ width: "50px" }}
+                label={item?.TotalTripDay}
+            />),
+            mobileNumber1: item?.mobileNumber ? item?.mobileNumber : "N/A",
+            mobileNumber2: item?.mobileNumber ? item?.mobileNumber : "N/A",
+            mobileNumber3: item?.mobileNumber ? item?.mobileNumber : "N/A",
+            mobileNumber4: item?.mobileNumber ? item?.mobileNumber : "N/A",
+            mobileNumber5: item?.mobileNumber ? item?.mobileNumber : "N/A",
+            mobileNumber6: item?.mobileNumber ? item?.mobileNumber : "N/A",
+            mobileNumber7: item?.mobileNumber ? item?.mobileNumber : "N/A",
+            mobileNumber8: item?.mobileNumber ? item?.mobileNumber : "N/A",
             jobRole: item?.jobRole ? item?.jobRole : "N/A",
             Action: [
                 <Grid container justifyContent="center" spacing={2} key={index}>
                     <Grid item xs={12} >
                         <Tooltip title="View">
-                            <Link href={`/csManagement/1235?tab=${value}`}>
+                            <Link href={`/fleetManagement/123?tab=${value}`}>
                                 <IconButton size="small">
                                     <IoEyeOutline color="rgba(14, 1, 71, 1)" />
                                 </IconButton>
@@ -179,7 +189,7 @@ const Charging = ({ value }) => {
                     sx={{ backgroundColor: "#669BE9", color: "#fff", borderRadius: "16px 16px 0px 0px" }}>
                     <Grid item>
                         <Typography variant="h3">
-                            Charging Station 
+                            Fleet (121)
                         </Typography>
                     </Grid>
                     <Grid item className="customSearch">
@@ -220,8 +230,10 @@ const Charging = ({ value }) => {
                         setRowsPerPage={setRowsPerPage}
                     />
                 )}
+
             </Grid>
         </Grid>
     )
 }
+
 export default Charging

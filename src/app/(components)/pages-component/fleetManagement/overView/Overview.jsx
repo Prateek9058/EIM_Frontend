@@ -1,7 +1,7 @@
 "use client"
 import { Button, Grid, Typography, Divider } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import Graph from '@/app/(components)/fleetManagement/vehicle/graph'
+import Graph from '@/app/(components)/pages-component/fleetManagement/vehicle/graph'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -11,8 +11,8 @@ import Map from '@/app/(components)/map/map'
 import Chip from '@mui/material/Chip';
 import DistanceTravel from '../ViewReport/DistanceTravel';
 import { useRouter } from 'next/navigation';
-import { CustomDropdown } from '../../mui-components/DropdownButton/index';
-import { Fleet } from '../../table/rows';
+import { CustomDropdown } from '../../../mui-components/DropdownButton/index';
+import { Fleet } from '../../../table/rows';
 import styled from "@emotion/styled";
 import Table from "./table"
 import LinearProgress from '@mui/material/LinearProgress';

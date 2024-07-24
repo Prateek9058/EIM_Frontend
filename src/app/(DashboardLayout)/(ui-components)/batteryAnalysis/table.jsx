@@ -1,18 +1,28 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Grid, Typography, Box, Button, Chip, Tooltip, IconButton } from "@mui/material";
+import {
+    Grid,
+    Typography,
+    Box,
+    Button,
+    Chip,
+    Tooltip,
+    IconButton,
+} from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import { CustomDownloadExcel } from "@/app/(components)/mui-components/DownloadExcel/index";
 import Link from "next/link";
-import { IoEyeOutline } from "react-icons/io5";
-import { useRouter } from 'next/navigation';
+import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
+import CustomTextField from "@/app/(components)/mui-components/Text-Field's";
+
+import { useRouter } from "next/navigation";
+import { EyeIcon } from "@/app/(components)/mui-components/icons/index";
 
 const Table = ({
     data,
-    deviceData,
-    value,
     rowsPerPage,
     setRowsPerPage,
     page,
@@ -24,7 +34,17 @@ const Table = ({
     getDataFromChildHandler,
 }) => {
     const columns = [
-        "Battery ID", "Status", "Temperature(°C)", "Voltage(V)", "Battery SoC(%)", "Battery SoH(%)", "Error", "Charging cycle", "Avg. Charging time","Battery Location","Action"
+        "Battery ID",
+        "Status",
+        "Temperature(°C)",
+        "Voltage(V)",
+        "Battery SoC(%)",
+        "Battery SoH(%)",
+        "Error",
+        "Charging cycle",
+        "Avg. Charging time",
+        "Battery Location",
+        "Action",
     ];
     const [open, setOpenDialog] = React.useState(false);
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
@@ -55,108 +75,89 @@ const Table = ({
     };
     const router = useRouter();
     const handleViewClick = (id) => {
-      router.push(`/batteryAnalysis/${id}`);
-    };
-    const getStatus = (str) => {
-        if (str?.toUpperCase() === "ACTIVE")
-            return { status: "ACTIVE", color: "customChip activeGreen" };
-        else return { status: "InActive", color: "customChip activeRed" };
-    };
-    const getStatusInfo = (ele, index) => {
-        if (ele?.toUpperCase() === "ACTIVE") {
-            return [
-                <Chip
-                    key={index}
-                    sx={{ width: "120px" }}
-                    className="customChip activeGreen"
-                    label={ele}
-                    color="primary"
-                />,
-            ];
-        } else {
-            return [
-                <Chip
-                    key={index}
-                    className={getStatus(ele)?.color}
-                    sx={{ width: "120px" }}
-                    label={getStatus(ele)?.status}
-                />,
-            ];
-        }
+        router.push(`/batteryAnalysis/${id}`);
     };
     const getFormattedData = (data) => {
-        console.log("data", data)
+        console.log("data", data);
         return data?.map((item, index) => ({
-            batteryId: (
-                <Box>
-                    <span>{item?.batteryId}</span>
-                    <Box
-                        component="span"
-                        sx={{
-                            display: "inline-block",
-                            width: "10px",
-                            height: "10px",
-                            borderRadius: "50%",
-                            backgroundColor: item.color,
-                            marginLeft: "10px",
-                        }}
-                    />
-                </Box>
-            ),
-            lastName: item?.lastName ?? "N/A",
-            lastName2: item?.lastName ?? "N/A",
-            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
-            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
-            mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "N/A",
-            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
-            mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
-            jobRole: item?.jobRole ? item?.jobRole : "N/A",
+            batteryId: item?.batteryId ? item?.batteryId : "N/A",
+            status: item?.status ?? "N/A",
+            temperature: item?.temperature ?? "N/A",
+            voltage: item?.voltage ? item?.voltage : "N/A",
+            batterySoc: item?.batterySoc ? item?.batterySoc : "N/A",
+            batterySoh: item?.batterySoh ? item?.batterySoh : "N/A",
+            error: item?.error ? item?.error : "N/A",
+            chargingCycle: item?.chargingCycle ? item?.chargingCycle : "N/A",
+            avgChargingTime: item?.avgChargingTime ? item?.avgChargingTime : "N/A",
+            batteryLocation: item?.batteryLocation ? item?.batteryLocation : "N/A",
             Action: [
-                <Grid container justifyContent="center" spacing={2} key={index}>
-                    <Grid item xs={12} >
+                <Grid container justifyContent="center" key={index}>
+                    <Grid item xs={12} sm={4} md={4}>
                         <Tooltip title="View">
-                                <IconButton size="small" onClick={()=>{handleViewClick(item?._id)}}>
-                                    <IoEyeOutline color="rgba(14, 1, 71, 1)" />
-                                </IconButton>
+                            <IconButton
+                                size="small"
+                                onClick={() => {
+                                    handleViewClick(item?._id);
+                                }}
+                            >
+                                <EyeIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Grid>
+                    <Grid item xs={12} sm={4} md={4}>
+                        <Tooltip title="Edit">
+                            <IconButton size="small">
+                                <FaRegEdit color="rgba(14, 1, 71, 1)" />
+                            </IconButton>
+                        </Tooltip>
+                    </Grid>
+                    <Grid item xs={12} sm={4} md={4}>
+                        <Tooltip title="Delete">
+                            <IconButton size="small">
+                                <MdDeleteOutline color="rgba(14, 1, 71, 1)" />
+                            </IconButton>
                         </Tooltip>
                     </Grid>
                 </Grid>,
             ],
         }));
     };
-
     return (
-        <Grid container >
+        <Grid container>
             <Grid
                 container
                 justifyContent="space-between"
                 alignItems="center"
                 p={2}
-                sx={{ backgroundColor: "#669BE9", color: "#fff", borderRadius: "16px 16px 0px 0px" }}>
+                sx={{
+                    backgroundColor: "#669BE9",
+                    color: "#fff",
+                    borderRadius: "16px 16px 0px 0px",
+                }}
+            >
                 <Grid item>
-                    <Typography variant="h3">
-                        Batteries Data
-                    </Typography>
+                    <Typography variant="h3">Batteries Data</Typography>
                 </Grid>
                 <Grid item className="customSearch">
                     <Grid container>
                         <Grid item mr={1}>
-                            <CustomDownloadExcel name={"Download Excel"} rows={data} data={"Fleet (121)"} />
+                            <CustomDownloadExcel
+                                name={"Download Excel"}
+                                rows={data}
+                                data={"Fleet (121)"}
+                            />
                         </Grid>
                         <Grid item mr={1}>
                             <CommonDatePicker
-                                getDataFromChildHandler={
-                                    getDataFromChildHandler
-                                }
+                                getDataFromChildHandler={getDataFromChildHandler}
                             />
                         </Grid>
-                        {/* <CustomTextField
+                        <CustomTextField
                             type="search"
                             placeholder="Search empId / Name"
                             value={debouncedSearchQuery}
                             onChange={handleSearchChange}
-                        /> */}
+                        />
                     </Grid>
                 </Grid>
             </Grid>
@@ -177,7 +178,6 @@ const Table = ({
                     setRowsPerPage={setRowsPerPage}
                 />
             )}
-
         </Grid>
     );
 };

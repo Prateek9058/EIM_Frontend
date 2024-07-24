@@ -1,178 +1,254 @@
-"use client"
-import { Typography, Grid, Button, IconButton, Divider, Box } from '@mui/material'
-import React, { useState, useEffect } from 'react'
-import { Doughnut } from 'react-chartjs-2'
-import { Chart, registerables } from 'chart.js'
-import Table from './table'
-import { Fleet } from '@/app/(components)/table/rows'
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-import Graph1 from '@/app/(components)/CsManagement1/graph2';
-import { CustomDropdown } from '@/app/(components)/mui-components/DropdownButton/index';
-import ManagementGrid from '@/app/(components)/mui-components/Card'
-import { CustomGrid } from '@/app/(components)/mui-components/CustomGrid'
-import CommonDatePicker from"@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index"
-import axios from 'axios'
-import axiosInstance from '@/app/api/axiosInstance'
+"use client";
+import {
+  Typography,
+  Grid,
+  Button,
+  IconButton,
+  Divider,
+  Box,
+} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Doughnut } from "react-chartjs-2";
+import { Chart, registerables } from "chart.js";
+import Table from "./table";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import Graph1 from "@/app/(components)/pages-component/CsManagement1/graph2";
+import { CustomDropdown } from "@/app/(components)/mui-components/DropdownButton/index";
+import ManagementGrid from "@/app/(components)/mui-components/Card";
+import { CustomGrid } from "@/app/(components)/mui-components/CustomGrid";
+import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
+import axiosInstance from "@/app/api/axiosInstance";
+import AddBattery from "./addBattery";
+import ToastComponent, {
+  notifyError,
+  notifySuccess,
+} from "@/app/(components)/mui-components/Snackbar/index";
 
 Chart.register(...registerables);
 const data1 = {
-    labels: [
-        '60% - 100%',
-        '60% - 40%',
-        '40% - 0%',
-    ],
-    datasets: [{
-        label: 'My First Datasetsss',
-        data: [1895, 60, 120,],
-        backgroundColor: [
-            '#CB8055',
-            '#577B8D',
-            '#240750',
-        ],
-        borderColor: 'transparent', 
-        hoverOffset: 10,
-    }]
-}
+  labels: ["60% - 100%", "60% - 40%", "40% - 0%"],
+  datasets: [
+    {
+      label: "My First Datasetsss",
+      data: [1895, 60, 120],
+      backgroundColor: ["#3849E3", "#9FFF25", "#FF5191"],
+      borderColor: "transparent",
+      hoverOffset: 10,
+    },
+  ],
+};
 const options = {
-    animations: {
-        animateScale: true
+  animations: {
+    animateScale: true,
+  },
+  maintainAspectRatio: false,
+  responsive: true,
+  plugins: {
+    legend: {
+      display: true,
+      position: "right",
+      align: "right",
+      fullSize: true,
+      labels: {
+        pointStyle: "circle",
+        padding: 15,
+        color: "#fff",
+        usePointStyle: true,
+        textAlign: "left",
+      },
     },
-    maintainAspectRatio: false, 
-    responsive: true,
-    plugins: {
-        legend: {
-            display: true,
-            position: "right",
-            align: "right",
-            fullSize: true,
-            labels: {
-                pointStyle: 'circle',
-                padding: 15,
-                color:"#fff",
-                usePointStyle: true,
-                textAlign: 'left',
-            }
-        },
-        tooltip: {
-            enabled: true
-        }
+    tooltip: {
+      enabled: true,
     },
-    interaction: {
-        mode: 'index',
-        intersect: false
-    },
+  },
+  interaction: {
+    mode: "index",
+    intersect: false,
+  },
 };
 const config = {
-    type: 'line',
-    data: data1,
-    options: {
-        ...options,
-    }
+  type: "line",
+  data: data1,
+  options: {
+    ...options,
+  },
 };
 const data2 = [
-    { label: "Total battery packs", value: 50, },
-    { label: "Offline battery", value: 1250, },
-    { label: "On E-Tractor", Tripvalue: 150, trip: "Trip", charging: "Charging", chargingValue: 1000 },
-    { label: "Swapping station", Tripvalue: 150, trip: "Available", charging: "Charging", chargingValue: 1000 },
+  { label: "Total battery packs", value: 50 },
+  { label: "Offline battery", value: 1250 },
+  {
+    label: "On E-Tractor",
+    Tripvalue: 150,
+    trip: "Trip",
+    charging: "Charging",
+    chargingValue: 1000,
+  },
+  {
+    label: "Swapping station",
+    Tripvalue: 150,
+    trip: "Available",
+    charging: "Charging",
+    chargingValue: 1000,
+  },
 ];
-const menuItems = ["Today", "Weekly", "Yearly"]
+const menuItems = ["Today", "Weekly", "Yearly"];
 const Page = () => {
-    const [page, setPage] = React.useState(0);
-    const [loading, setLoading] = useState(false);
-    const [rowsPerPage, setRowsPerPage] = React.useState(25);
-    const [deviceData, setDeviceData] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [date, setDate] = useState(null);
-    const [data, setData] = useState(null);
-    const getDataFromChildHandler = (date, dataArr) => {
-        setDate(date);
-    };
-    const droDownButtons = [
-        { label: "Region", menuItems: ["Daily", "Weekly", "Yearly"] },
-        { label: "Customer", menuItems: ["Customer 1", "Customer 2", "Customer 3"] },
-    ]
-    const breadcrumbItems = [
-        { label: "Dashboard", link: "/" },
-        { label: "Battery-Analysis", link: "/batteryAnalysis" },
-    ];
-    const handleEfficiencyData=async()=>{
-        try {
-            const res=await axiosInstance.get(`/battery/getAll?page=${page + 1
-        }&pageSize=${rowsPerPage}&search=${searchQuery}`)
-            console.log("res",res)
-            setData(res?.data)
-        } catch (error) {
-            console("batteryeffiency",error)
-        }
+  const [page, setPage] = React.useState(0);
+  const [loading, setLoading] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [date, setDate] = useState(null);
+  const [data, setData] = useState(null);
+  const [open, setOpen] = useState(false);
+  const getDataFromChildHandler = (date, dataArr) => {
+    setDate(date);
+  };
+  const droDownButtons = [
+    { label: "Region", menuItems: ["Daily", "Weekly", "Yearly"] },
+    {
+      label: "Customer",
+      menuItems: ["Customer 1", "Customer 2", "Customer 3"],
+    },
+  ];
+  const breadcrumbItems = [
+    { label: "Dashboard", link: "/" },
+    { label: "Battery-Analysis", link: "/batteryAnalysis" },
+  ];
+  const handleEfficiencyData = async () => {
+    try {
+      const res = await axiosInstance.get(
+        `/battery/getAll?page=${
+          page + 1
+        }&pageSize=${rowsPerPage}&search=${searchQuery}`
+      );
+      console.log("res", res);
+      setData(res?.data);
+    } catch (error) {
+      console.log("batteryeffiency", error);
     }
-    useEffect(() => {
-        handleEfficiencyData()
-    }, [])
-    return (
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Battery Analysis"} dropDown={droDownButtons} button={"Add Battery"} />
-            </Grid>
-            {data2.map((item, index) => {
-                const isLargeCard = index >= 2
-                return (<Grid key={index} item xs={12} sm={6} md={isLargeCard ? 3.6 : 2.4}>
-                    <CustomGrid>
-                        <Grid container direction="row" justifyContent={isLargeCard ? "center" : "space-between"} >
-                            <Grid item sx={{ mb: 2 }}>
-                                <Typography variant='h5'>{item.label} </Typography>
-                            </Grid>
-                        </Grid>
-                        <Typography variant='h2' color={"#14165F"} fontWeight={600}>{item.value}</Typography>
-                            {isLargeCard && (
-                                <Grid container columnGap={3} justifyContent={ "center"}>
-                                    <Typography variant='h2' color={"#14165F"} fontWeight={600}><span style={{ fontSize: "15px", color: "#fff" }}>{item?.trip}:</span> {item.Tripvalue}</Typography>
-                                    <Typography variant='h2' color={"#14165F"} fontWeight={600}><span style={{ fontSize: "15px", color: "#fff" }}>{item?.charging}:</span> {item.chargingValue}</Typography>
-                                </Grid>
-                            )}
-                    </CustomGrid>
-                </Grid>)
-            })}
-            {[1, 2, 3].map((index) => (
-                <Grid key={index} item xl={4} md={4} sm={12} xs={12}>
-                    <CustomGrid>
-                        <Grid container justifyContent={"space-between"} alignItems={"center"}>
-                            <Typography variant='h6'> {index === 1 ? 'Average battery SoH' : index === 2 ? 'Battery Temperature' : 'Avg. Battery Charge Cycle'}</Typography>
-                            <CustomDropdown buttonname="This Week" menuitems={menuItems} />
-                        </Grid>
-                        <Grid container xs={12} sx={{ height: "200px",p:2}} mt={5} mb={3}>
-                            <Doughnut data={data1} options={config.options} />
-                        </Grid>
-                    </CustomGrid>
+  };
+  useEffect(() => {
+    handleEfficiencyData();
+  }, [page, rowsPerPage, searchQuery, date]);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  return (
+    <Grid container spacing={2}>
+      <ToastComponent />
+      <Grid item xs={12}>
+        <ManagementGrid
+          breadcrumbItems={breadcrumbItems}
+          handleClickOpen={handleOpen}
+          moduleName={"Battery Analysis"}
+          dropDown={droDownButtons}
+          button={"Add Battery"}
+        />
+      </Grid>
+      <AddBattery
+        open={open}
+        setOpen={setOpen}
+        handleEfficiencyData={handleEfficiencyData}
+      />
+      {data2.map((item, index) => {
+        const isLargeCard = index >= 2;
+        return (
+          <Grid key={index} item xs={12} sm={6} md={isLargeCard ? 3.6 : 2.4}>
+            <CustomGrid>
+              <Grid
+                container
+                direction="row"
+                justifyContent={isLargeCard ? "center" : "space-between"}
+              >
+                <Grid item sx={{ mb: 2 }}>
+                  <Typography variant="h5">{item.label} </Typography>
                 </Grid>
-            ))}
-            <Grid item xs={12} >
-                <CustomGrid>
-                    <Grid container justifyContent={"space-between"} alignItems={"center"}>
-                        <Typography><AccessTimeFilledIcon sx={{ verticalAlign: 'middle' }} /> Units Consumption/Charge (KWh) Report </Typography>
-                        <CommonDatePicker
-                                getDataFromChildHandler={
-                                    getDataFromChildHandler
-                                }
-                            />
-                    </Grid>
-                    <Graph1 />
-                </CustomGrid>
+              </Grid>
+              <Typography variant="h2" color={"#14165F"} fontWeight={600}>
+                {item.value}
+              </Typography>
+              {isLargeCard && (
+                <Grid container columnGap={3} justifyContent={"center"}>
+                  <Typography variant="h2" color={"#14165F"} fontWeight={600}>
+                    <span style={{ fontSize: "15px", color: "#fff" }}>
+                      {item?.trip}:
+                    </span>{" "}
+                    {item.Tripvalue}
+                  </Typography>
+                  <Typography variant="h2" color={"#14165F"} fontWeight={600}>
+                    <span style={{ fontSize: "15px", color: "#fff" }}>
+                      {item?.charging}:
+                    </span>{" "}
+                    {item.chargingValue}
+                  </Typography>
+                </Grid>
+              )}
+            </CustomGrid>
+          </Grid>
+        );
+      })}
+      {[1, 2, 3].map((index) => (
+        <Grid key={index} item xl={4} md={4} sm={12} xs={12}>
+          <CustomGrid>
+            <Grid
+              container
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <Typography variant="h6">
+                {" "}
+                {index === 1
+                  ? "Average battery SoH"
+                  : index === 2
+                  ? "Battery Temperature"
+                  : "Avg. Battery Charge Cycle"}
+              </Typography>
+              <CustomDropdown buttonname="This Week" menuitems={menuItems} />
             </Grid>
-            <Grid item xs={12}>
-                <Table
-                    data={data}
-                    deviceData={deviceData}
-                    rowsPerPage={rowsPerPage}
-                    setRowsPerPage={setRowsPerPage}
-                    page={page}
-                    setPage={setPage}
-                    searchQuery={searchQuery}
-                    setSearchQuery={setSearchQuery}
-                    loading={loading}
-                    getDataFromChildHandler={getDataFromChildHandler}
-                />
+            <Grid
+              container
+              xs={12}
+              sx={{ height: "200px", p: 2 }}
+              mt={5}
+              mb={3}
+            >
+              <Doughnut data={data1} options={config.options} />
             </Grid>
+          </CustomGrid>
         </Grid>
-    )
-}
-export default Page
+      ))}
+      <Grid item xs={12}>
+        <CustomGrid>
+          <Grid
+            container
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Typography>
+              <AccessTimeFilledIcon sx={{ verticalAlign: "middle" }} /> Units
+              Consumption/Charge (KWh) Report{" "}
+            </Typography>
+            <CommonDatePicker
+              getDataFromChildHandler={getDataFromChildHandler}
+            />
+          </Grid>
+          <Graph1 />
+        </CustomGrid>
+      </Grid>
+      <Grid item xs={12}>
+        <Table
+          data={data}
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+          page={page}
+          setPage={setPage}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          loading={loading}
+          getDataFromChildHandler={getDataFromChildHandler}
+        />
+      </Grid>
+    </Grid>
+  );
+};
+export default Page;

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import Map from '../../map/map'
+import Map from '../../../map/map'
 import { Grid, Typography, Box, Button, Chip, Tooltip, IconButton } from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
@@ -8,9 +8,9 @@ import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Dat
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
 import { useRouter } from 'next/navigation';
-import { CustomDownloadExcel } from '../../mui-components/DownloadExcel'; 
-import { Fleet } from '../../table/rows';
-import ManagementGrid from '../../mui-components/Card';
+import { CustomDownloadExcel } from '../../../mui-components/DownloadExcel'; 
+import { Fleet } from '../../../table/rows';
+import ManagementGrid from '../../../mui-components/Card';
 
 const iconUrls = [
     { icon: '/truck1.svg', color: "blue" },

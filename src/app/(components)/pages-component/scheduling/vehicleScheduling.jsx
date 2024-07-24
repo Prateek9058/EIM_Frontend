@@ -7,9 +7,9 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 // import Search from '@/components/Search/index'
-import { CustomGrid } from '../mui-components/CustomGrid';
-import CustomTextField from '../mui-components/Text-Field\'s';
-import MapImg from "../../../../public/Img/Vector.svg"
+import { CustomGrid } from '../../mui-components/CustomGrid';
+import CustomTextField from "../../mui-components/Text-Field's";
+import MapImg from "../../../../../public/Img/Vector.svg"
 import Image from 'next/image';
 
 const VehicleScheduling = () => {

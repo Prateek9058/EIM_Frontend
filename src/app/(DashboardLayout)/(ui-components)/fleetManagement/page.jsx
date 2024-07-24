@@ -1,11 +1,11 @@
 "use client"
 import { Button, Grid, Typography, } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import Overview from '@/app/(components)/fleetManagement/overView/Overview';
-import Charging from '@/app/(components)/fleetManagement/charging/charging';
-import Trip from '@/app/(components)/fleetManagement/Trip';
+import Overview from '@/app/(components)/pages-component/fleetManagement/overView/Overview';
+import Charging from '@/app/(components)/pages-component/fleetManagement/charging/charging';
+import Trip from '@/app/(components)/pages-component/fleetManagement/Trip';
 import ManagementGrid from '@/app/(components)/mui-components/Card';
-import AddTractor from '@/app/(components)/fleetManagement/addTractor'
+import AddTractor from '@/app/(components)/pages-component/fleetManagement/addTractor'
 import ToastComponent, {
   notifyError,
   notifySuccess,
@@ -15,6 +15,8 @@ import axiosInstance from '@/app/api/axiosInstance';
 const Page = () => {
   const [value, setValue] = useState(0); // Initial active tab index
   const [customer,setCustomer]=useState(null)
+  const [open, setOpen] = useState(false)
+
   const handleChange = (event, newValue) => {
     setValue(newValue); // Update the active tab index
   };
@@ -51,7 +53,6 @@ const Page = () => {
     { label: "Region", menuItems: ["Daily", "Weekly", "Yearly"] },
     { label: "Customer", menuItems: ["Customer 1", "Customer 2", "Customer 3"] }
   ]
-  const [open, setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
   }

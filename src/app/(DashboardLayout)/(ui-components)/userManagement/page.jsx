@@ -2,8 +2,8 @@
 import ManagementGrid from '@/app/(components)/mui-components/Card'
 import { Grid } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import SuperAdmin from '@/app/(components)/userManagement/superAdmin/SuperAdmin'
-import AddUser from '@/app/(components)/userManagement/addUser/AddUser'
+import SuperAdmin from '@/app/(components)/pages-component/userManagement/superAdmin/SuperAdmin'
+import AddUser from '@/app/(components)/pages-component/userManagement/addUser/AddUser'
 import axiosInstance from '@/app/api/axiosInstance'
 
 const UserManagement = () => {

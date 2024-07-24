@@ -53,10 +53,7 @@ const getBorderRadius = (index, tabLength) => {
 const ManagementGrid = ({
   type,
   moduleName,
-  selectedItem,
   breadcrumbItems,
-  handleMenuItemClick,
-  open1,
   CustomButtonGroup,
   value,
   handleChange,
