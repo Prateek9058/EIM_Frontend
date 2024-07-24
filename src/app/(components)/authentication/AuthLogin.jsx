@@ -1,139 +1,178 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import {
-    Box,
-    Typography,
-    FormGroup,
-    FormControlLabel,
-    Button,
-    Stack,
-    Checkbox,
-    TextField
+  Box,
+  Typography,
+  FormGroup,
+  FormControlLabel,
+  Button,
+  Stack,
+  Checkbox,
+  Divider,
+  TextField,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
-import CustomTextField from "@/app/(components)/forms/theme-elements/CustomTextField";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axiosInstance from "@/app/api/axiosInstance";
-const AuthLogin = ({ title, subtitle,  }) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState(null);
-    const handleLogin = async () => {
-        event.preventDefault();
-        const body = {
-            userName: username,
-            password: password,
-        }
-        setErrorMessage(null)
-        if (!username || !password) {
-            setErrorMessage("Please provide both the username or password.")
-            return
-        }
-        try {
-            const response = await axiosInstance.post(
-                "/auth/login",
-                body
-            );
-            console.log(response)
-            if (response.status) {
-                signIn("credentials", {
-                    username: username,
-                    password: password,
-                    callbackUrl: `/`,
-                    redirect: true,
-                });
-                localStorage.setItem("token", response?.data?.access_Token)
-            }
-        }
-        catch (error) {
-            console.log("Catch Block Work", error);
-            setErrorMessage(error?.response?.data?.message);
-        }
+
+import styled from "@emotion/styled";
+const CustomTextField = styled(TextField)(({ theme }) => ({
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "grey", // Default border color
+    },
+    "&:hover fieldset": {
+      borderColor: "grey", // Border color on hover
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#C0FE72", // Border color when focused (input clicked)
+    },
+  },
+  "& .MuiInputLabel-root": {
+    color: "#fff", // Default label color
+  },
+  "&.Mui-focused .MuiInputLabel-root": {
+    color: "#C0FE72", // Label color when focused
+  },
+  "& .MuiOutlinedInput-input": {
+    color: "#C0FE72", // Text color
+  },
+  "& .MuiInputBase-input::placeholder": {
+    color: "#fff", // Placeholder color
+    opacity: 1, // Ensure visibility
+  },
+}))
+
+const AuthLogin = ({ title, subtitle }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const body = {
+      userName: username,
+      password: password,
+    };
+    setErrorMessage(null);
+    if (!username || !password) {
+      setErrorMessage("Please provide both the username and password.");
+      return;
     }
-    return (
-        <>
-            {title ? (<Typography fontWeight={"700"} variant="h2" mb={1}></Typography>) : null}
-            <form onSubmit={handleLogin}>
-                <Stack>
-                    <Box>
-                        <Typography
-                            variant="subtitle1"
-                            fontWeight={600}
-                            component="label"
-                            htmlFor="username"
-                            mb="5px">
-                            Username
-                        </Typography>
-                        <TextField
-                            variant={"outlined"}
-                            fullWidth
-                            id="username"
-                            name="username"
-                            value={username}
-                            onChange={(e) =>
-                                setUsername(e.target.value)
-                            }
-                        />
-                    </Box>
-                    <Box mt={"25px"}>
-                        <Typography
-                            variant="subtitle1"
-                            fontWeight={600}
-                            component="label"
-                            htmlFor="password"
-                            mb="5px">
-                            Password
-                        </Typography>
-                        <TextField
-                            type="password"
-                            variant="outlined"
-                            fullWidth
-                            name="password"
-                            value={password}
-                            onChange={(e) =>
-                                setPassword(e.target.value)
-                            }
-                        />
+    try {
+      const response = await axiosInstance.post("/auth/login", body);
+      if (response.status) {
+        signIn("credentials", {
+          username: username,
+          password: password,
+          callbackUrl: `/`,
+          redirect: true,
+        });
+        localStorage.setItem("token", response?.data?.access_Token);
+      }
+    } catch (error) {
+      setErrorMessage(error?.response?.data?.message);
+    }
+  };
 
-                    </Box>
-                    <Stack
-                        justifyContent="space-between"
-                        direction="row"
-                        alignItems="center"
-                        my={2}
+  const handleClickShowPassword = () => setShowPassword((prev) => !prev);
+  const handleMouseDownPassword = (event) => event.preventDefault();
+
+  return (
+    <>
+      {title ? (
+        <Typography fontWeight={"700"} variant="h2" mb={1}>
+          {title}
+        </Typography>
+      ) : null}
+      <form onSubmit={handleLogin}>
+        <Stack>
+          <Box>
+            <CustomTextField
+              label="Username"
+              variant="outlined"
+              fullWidth
+              id="username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Box>
+          <Box mt={"25px"}>
+            <CustomTextField
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              fullWidth
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
                     >
-                        <FormGroup>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        defaultChecked
-                                        sx={{
-                                            color: "secondary.main",
-                                        }}
-                                    />
-                                }
-                                label="Remember this Device"
-                            />
-                        </FormGroup>
-                    </Stack>
-                </Stack>
-                {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-                <Box>
-                    <Button
-                        color="secondary"
-                        variant="contained"
-                        size="large"
-                        fullWidth
-                        type="submit"
-                    >
-                        Sign In
-                    </Button>
-                </Box>{" "}
+                      {showPassword ? (
+                        <VisibilityOff sx={{ color: "#fff" }} />
+                      ) : (
+                        <Visibility sx={{ color: "#fff" }} />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Box>
+          <Stack
+            justifyContent="space-between"
+            direction="row"
+            alignItems="center"
+            my={2}
+          >
+            <Typography>Forget Password</Typography>
+          </Stack>
+        </Stack>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        <Box>
+          <Button
+            sx={{
+              backgroundColor: "#C0FE72",
+              color: "#000",
+              fontWeight: "500",
+              "&:hover": {
+                backgroundColor: "#C0FE72",
+              },
+            }}
+            variant="contained"
+            size="large"
+            fullWidth
+            type="submit"
+          >
+            Sign In
+          </Button>
+        </Box>
+        <Divider sx={{ mt: 2 }}>or</Divider>
+      </form>
+      <Box
+        justifyContent={"center"}
+        alignItems={"center"}
+        display={"flex"}
+        mt={2}
+      >
+        <Typography>
+          To Know more <span style={{ color: "#C0FE72" }}>T&C</span>
+        </Typography>
+      </Box>
+      {subtitle}
+    </>
+  );
+};
 
-            </form>
-            {subtitle}
-        </>
-    )
-}
-
-export default AuthLogin
+export default AuthLogin;

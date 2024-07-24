@@ -277,6 +277,11 @@ const baselightTheme = createTheme({
         },
         input: {
           padding: "12px 14px",
+           color:"#fff",
+           "&::placeholder": {
+            color: "#fff", 
+            opacity: 0.5,
+          },
         },
         inputSizeSmall: {
           padding: "8px 14px",

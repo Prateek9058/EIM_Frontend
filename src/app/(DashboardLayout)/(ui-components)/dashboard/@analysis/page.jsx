@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Typography, Grid } from "@mui/material";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import {AccessTimeFilled} from '@/app/(components)/mui-components/icons/index';
 import Chip from "@mui/material/Chip";
 import {ArrowOutward} from '@/app/(components)/mui-components/icons/index'
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
@@ -147,7 +147,7 @@ const Analysis = () => {
       <Grid container>
         <Grid container justifyContent={"space-between"} alignItems={"center"}>
           <Typography variant="h4">
-            <AccessTimeFilledIcon sx={{ verticalAlign: "middle", p: "3px" }} />{" "}
+            <AccessTimeFilled sx={{ verticalAlign: "middle", p: "3px" }} />{" "}
             E - Tractor travel (Km)
           </Typography>
           <CommonDatePicker getDataFromChildHandler={getDataFromChildHandler} />
@@ -169,7 +169,7 @@ const Analysis = () => {
         <Grid container>
           <Grid container justifyContent={"space-between"}>
             <Typography variant="h3">
-              <AccessTimeFilledIcon
+              <AccessTimeFilled
                 sx={{ verticalAlign: "middle", p: "3px" }}
               />{" "}
               E - Tractor average consumption (kWh/Km)
