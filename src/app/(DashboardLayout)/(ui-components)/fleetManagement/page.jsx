@@ -58,7 +58,6 @@ const Page = () => {
   }
   return (
     <Grid container xs={6} sm={12} xl={12} >
-      <ToastComponent/>
       <AddTractor open={open} setOpen={setOpen} />
       <ManagementGrid moduleName={"Fleet Management"} breadcrumbItems={breadcrumbItems} dropDown={droDownButtons} button={"Add E-Tractor"} handleClickOpen={handleOpen} tabs={tabs} value={value} handleChange={handleChange} TabPanelList={TabPanelList} />
     </Grid>

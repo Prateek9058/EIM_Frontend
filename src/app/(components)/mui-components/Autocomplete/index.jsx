@@ -67,7 +67,8 @@ export default function Asynchronous({icon,place}) {
             '& .MuiInput-underline:before': { borderBottom: 'none' },
             '& .MuiInput-underline:hover:not(.Mui-disabled):before': { borderBottom: 'none' },
             '& .MuiInput-underline:after': { borderBottom: 'none' },
-            '& input::placeholder': { color: 'white', fontWeight: 500 },
+            '& input::placeholder': { color: 'white', fontWeight: 500,opacity:1 },
+            '& input': { color: 'white', },
           }}
           variant="standard"
           {...params}

@@ -125,7 +125,7 @@ const Page = ({ iconUrls, buttonData, Height, coordinate }) => {
                   },
                 }}>
                 {buttonData &&
-                  <ButtonGroup variant="outlined" aria-label="Basic button group" sx={{ bgcolor: 'background.paper', }}>
+                  <ButtonGroup variant="contained" aria-label="Basic button group" sx={{ bgcolor: 'background.paper',color:"#000" }}>
                     {buttonData.map((button, index) => (
                       <Button
                         key={index}
