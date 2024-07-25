@@ -6,10 +6,10 @@ import Graph2 from './graph2';
 import Overview from '@/app/(components)/pages-component/CsManagement1/overview/Overview';
 import TimerIcon from '@mui/icons-material/Timer';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import Chip from '@mui/material/Chip';
 import styled from "@emotion/styled";
 import CommonDatePicker from"@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index"
 import ManagementGrid from '../../mui-components/Card';
+import { ColoredChip } from '../../mui-components/Chip';
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
     padding: theme.spacing(2),
@@ -51,14 +51,14 @@ const Overview1 = () => {
                         <Grid container justifyContent={"space-between"} alignItems={"center"}>
                             <Typography variant='h6'><TimerIcon sx={{ verticalAlign: 'middle', p: "3px" }} /> {item.title}</Typography>
                         </Grid>
-                        <Typography variant='h4' color={"rgba(30, 30, 100, 1)"} sx={{ mt: 2 }}>{item.content} <Chip
+                        <Typography variant='h4' color="primary" sx={{ mt: 2 }}>{item.content} <ColoredChip
                             label="16.8 %"
                             variant="filled"
                             size='small'
-                            icon={<ArrowOutwardIcon color="#C0FE72" />}
-                            sx={{ borderRadius: "4px", ml: 1, backgroundColor: "#23262966", color: "#C0FE72", border: "0.6px solid #232629" }} /></Typography>
+                            icon={<ArrowOutwardIcon color="secondary" />}
+                      /></Typography>
                         <Graph />
-                        <Divider sx={{ border: "0.4px solid #fff" ,mb:3}} />
+                        <Divider sx={{mb:3}} />
                     </ CustomGrid>
                 </Grid>
             ))}
@@ -72,12 +72,12 @@ const Overview1 = () => {
                                 }/>
                     </Grid>
                     <Grid container mt={1}>
-                    <Typography variant='h3' color={"rgba(30, 30, 100, 1)"}>63  <span style={{ fontSize: "15px", fontWeight: 600 }}>Charging station</span> <Chip
+                    <Typography variant='h3' color="primary">63  <span style={{ fontSize: "15px", fontWeight: 600 }}>Charging station</span> <ColoredChip
                             label="16.8 %"
                             variant="filled"
                             size='small'
-                            icon={<ArrowOutwardIcon color="#C0FE72" />}
-                            sx={{ borderRadius: "4px", ml: 1, backgroundColor: "#23262966", color: "#C0FE72", border: "0.6px solid #232629" }} /></Typography>
+                            icon={<ArrowOutwardIcon color='secondary'/>}
+                          /></Typography>
                     </Grid>
                     <Graph2 />
                 </ CustomGrid>

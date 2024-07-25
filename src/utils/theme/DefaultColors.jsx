@@ -18,7 +18,7 @@ const baselightTheme = createTheme({
       light: "rgba(52, 125, 0, 0.25)",
     },
     secondary: {
-      main: "#A9CF46",
+      main: "#C0FE72",
     },
     success: {
       main: "#347D00",
@@ -260,7 +260,7 @@ const baselightTheme = createTheme({
     MuiDivider: {
       styleOverrides: {
         root: {
-          borderColor: theme.palette.divider,
+          borderColor: "#fff",
         },
       },
     },

@@ -6,7 +6,7 @@ import SidebarItems from "./SidebarItems";
 
 const Sidebar = ({ isMobileSidebarOpen, onSidebarClose, isSidebarOpen }) => {
     const [sidebarVariant, setSidebarVariant] = React.useState("permanent");
-    const lgUp = useMediaQuery((theme) => theme.breakpoints.up("xl"));
+    const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
     const mdUp = useMediaQuery((theme) => theme.breakpoints.up("md"));
     const sidebarWidth = "270px";
     React.useEffect(() => {

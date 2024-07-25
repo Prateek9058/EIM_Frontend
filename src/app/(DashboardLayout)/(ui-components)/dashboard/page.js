@@ -19,11 +19,11 @@ const MainGrid = styled(Grid)(({ theme }) => ({
 }))
 function ShorterGrid() {
     const data = [
-        { label: "Region", value: 50, icon: MapImg },
+        { label: "Region", value: "All", icon: MapImg },
         { label: "Customer", value: 1250, icon: IdCard },
         { label: "Fleet", value: 150, icon: Truck },
-        { label: "Comsumption Rate", value: 650, icon: Road },
-        { label: "Total mileage accumulated", value: 60, icon: Route, },
+        { label: "Comsumption Rate", value: "650 kWh/km", icon: Road },
+        { label: "Total mileage accumulated", value: "60 km", icon: Route, },
     ];
     const iconUrls = [
         '/truck1.svg',
@@ -73,8 +73,15 @@ function ShorterGrid() {
                                 </Grid>
                             </Grid>)
                             }
-                            <Typography variant='h2' sx={{ pl: 7 }}>{item?.value}</Typography>
-                        </Grid>                      
+                            {index === 3 && <Typography variant='h3' sx={{
+                                pl: {
+                                    sm: 4,
+                                    md: 0,
+                                    lg:6
+                                },
+                            }}>{item?.value}</Typography>}
+                            {index != 3 && <Typography variant='h3' sx={{ pl: 7 }}>{item?.value}</Typography>
+                            }                        </Grid>
                     </MainGrid>
                 </Grid>
             ))}

@@ -99,6 +99,7 @@ const AuthLogin = ({ title, subtitle }) => {
               id="username"
               name="username"
               value={username}
+              inputProps={{shrink:"true"}}
               onChange={(e) => setUsername(e.target.value)}
             />
           </Box>
@@ -112,6 +113,7 @@ const AuthLogin = ({ title, subtitle }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               InputProps={{
+                shrink: true,
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
