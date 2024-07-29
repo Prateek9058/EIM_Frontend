@@ -61,14 +61,6 @@ const Table = ({
   const handleCancel = () => {
     setOpenDialog(false);
   };
-  const Colordata = [
-    { id: 1, color: "#C0FE72" ,title:"charged"},
-    { id: 2, color: "#FF0000",title:"discharged" },
-    { id: 3, color: "#FF0000" ,title:"discharged"},
-    { id: 4, color: "#FFC300" ,title:"charging"},
-    // Add more items as needed
-  ];
-
   const getFormattedData = (data) => {
     console.log("data", data);
     return data?.map((item, index) => ({
@@ -87,16 +79,36 @@ const Table = ({
       chargingcycle: item?.chargingcycle ?? "N/A",
 
       Action: [
-        <Grid container justifyContent="center" spacing={2} >
-        {Colordata?.map((item, index) => (
-          <Grid item xs={6} md={3} key={item.id}>
-            <Tooltip title={item?.title}>
+        <Grid container justifyContent="center" spacing={2} key={index} >
+          <Grid item xs={6} md={3} >
+            <Tooltip title={"charged"}>
               <IconButton size="small">
-                <PiCarBattery color={item.color} />
+                <PiCarBattery color= {"#C0FE72"}/>
               </IconButton>
             </Tooltip>
           </Grid>
-        ))}
+          <Grid item xs={6} md={3} >
+            <Tooltip title={"discharged"}>
+              <IconButton size="small">
+                <PiCarBattery color={"#FF0000"} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+          <Grid item xs={6} md={3} >
+            <Tooltip title={"discharged"}>
+              <IconButton size="small">
+                <PiCarBattery color={"#FF0000"} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+          <Grid item xs={6} md={3} >
+            <Tooltip title={"charging"}>
+              <IconButton size="small">
+                <PiCarBattery color={"#FFC300"} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+      
       </Grid>
       ],
     }));
