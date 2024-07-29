@@ -41,36 +41,31 @@ const buttons = [
         dailydropdown: [{ name: "Today", variant: "contained", days: days }]
     }
 ];
-const Charging = ({ value }) => {
-    const [page, setPage] = React.useState(0);
-    const [loading, setLoading] = useState(false);
-    const [rowsPerPage, setRowsPerPage] = React.useState(25);
-    const [deviceData, setDeviceData] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [date, setDate] = useState(null);
-    const [data, setData] = useState(null);
-
-    const getDataFromChildHandler = (date, dataArr) => {
-        setDate(date);
-    };
+const Charging = ({ value ,data,
+    rowsPerPage,
+    setRowsPerPage,
+    page,
+    setPage,
+    searchQuery,
+    setSearchQuery,
+    loading,
+    handleExport,
+    getDataFromChildHandler,}) => {
     const columns = [
       'Region',
-      'Vehicle ID',
-      'Current SoC',
-      'Current SoH',
-      'Current Status',
-      'Last Charging',
+      'E-tractor ID',
+      'Current SoC (%)',
+      'Current SoH (%)',
+      'Current units charged (kw)',
+      'Current status',
+      'Estimated Charging time(hr.)',
       'Charging Cycle',
       'Swapping Cycle',
-      'Total Unit',
-      'SoC Estimated Time',
-      'SoC Unit Consumed',
       'Avg. Charging Time',
       'Action'
     ]
     const [open, setOpenDialog] = React.useState(false);
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
-
     useEffect(() => {
         const handler = setTimeout(() => {
             setSearchQuery(debouncedSearchQuery);
@@ -96,67 +91,18 @@ const Charging = ({ value }) => {
         setOpenDialog(false);
     };
 
-    const getStatus = (str) => {
-        if (str?.toUpperCase() === "ACTIVE")
-            return { status: "ACTIVE", color: "customChip activeGreen" };
-        else return { status: "InActive", color: "customChip activeRed" };
-    };
-    const getStatusInfo = (ele, index) => {
-        if (ele?.toUpperCase() === "ACTIVE") {
-            return [
-                <Chip
-                    key={index}
-                    sx={{ width: "120px" }}
-                    className="customChip activeGreen"
-                    label={ele}
-                    color="primary"
-                />,
-            ];
-        } else {
-            return [
-                <Chip
-                    key={index}
-                    className={getStatus(ele)?.color}
-                    sx={{ width: "120px" }}
-                    label={getStatus(ele)?.status}
-                />,
-            ];
-        }
-    };    useEffect(() => {
-        setData(Fleet)
-    }, [])
-
     const getFormattedData = (data) => {
-        console.log("data", data)
         return data?.map((item, index) => ({
-            employeeId: (
-                <Box>
-                    <span>{item?.employeeId}</span>
-                    <Box
-                        component="span"
-                        sx={{
-                            display: "inline-block",
-                            width: "10px",
-                            height: "10px",
-                            borderRadius: "50%",
-                            backgroundColor: item.color,
-                            marginLeft: "10px",
-                        }}
-                    />
-                </Box>
-            ),
-
-            firstName: item?.firstName ?? "N/A",
-            lastName: item?.lastName ?? "N/A",
-            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
-            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
-            mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "N/A",
-            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
-            mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
-            mobileNumber6: item?.mobileNumber3 ? item?.mobileNumber4 : "N/A",
-            mobileNumber7: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
-            jobRole: item?.jobRole ? item?.jobRole : "N/A",
+            region: item?.port?item?.port?.regionName:"NA",
+            fleetId: item?.fleetId ?? "N/A",
+            currentSoc: item?.currentSoc ?? "N/A",
+            currentSoh: item?.currentSoh ?? "N/A",
+            currentUnit: item?.currentUnit ? item?.currentUnit : "N/A",
+            status: item?.status ? item?.status : "N/A",
+            estimatedCharging: item?.estimatedCharging ? item?.estimatedCharging : "N/A",
+            chargingCycle: item?.chargingCycle ? item?.chargingCycle : "N/A",
+            swappingCycle: item?.swappingCycle ? item?.swappingCycle : "N/A",
+            avgCharging: item?.avgCharging ? item?.avgCharging : "N/A",
             Action: [
                 <Grid container justifyContent="center" spacing={2} key={index}>
                     <Grid item xs={12} >
@@ -186,7 +132,7 @@ const Charging = ({ value }) => {
                     sx={{ backgroundColor: "#669BE9", color: "#fff", borderRadius: "16px 16px 0px 0px" }}>
                     <Grid item>
                         <Typography variant="h3">
-                            Fleet (121)
+                            Fleet ({data?.totalDocuments})
                         </Typography>
                     </Grid>
                     <Grid item className="customSearch">
@@ -219,8 +165,8 @@ const Charging = ({ value }) => {
                 ) : (
                     <CustomTable
                         page={page}
-                        rows={getFormattedData(data)}
-                        count={data?.length}
+                        rows={getFormattedData(data?.data)}
+                        count={data?.totalDocuments}
                         columns={columns}
                         setPage={setPage}
                         rowsPerPage={rowsPerPage}

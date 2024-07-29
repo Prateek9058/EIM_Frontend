@@ -8,9 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import TimerIcon from "@mui/icons-material/Timer";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import Map from "@/app/(components)/map/map";
-import Chip from "@mui/material/Chip";
 import DistanceTravel from "../ViewReport/DistanceTravel";
-import { useRouter } from "next/navigation";
 import { CustomDropdown } from "../../../mui-components/DropdownButton/index";
 import { Fleet } from "../../../table/rows";
 import styled from "@emotion/styled";
@@ -44,17 +42,24 @@ const buttonData = [
   { label: "Trip", color: "blue" },
   { label: "Parked", color: "skyblue" },
 ];
-const Overview = ({ value }) => {
+const Overview = ({
+  value,
+  data,
+  rowsPerPage,
+  setRowsPerPage,
+  page,
+  setPage,
+  searchQuery,
+  setSearchQuery,
+  loading,
+  params,
+  handleExport,
+  getDataFromChildHandler,
+}) => {
   const [distance, setDistance] = React.useState(false);
   const [payload, setPayload] = React.useState(false);
   const [trips, setTrips] = React.useState(false);
-  const [page, setPage] = React.useState(0);
-  const [loading, setLoading] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(25);
-  const [deviceData, setDeviceData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [date, setDate] = useState(null);
-  const [data, setData] = useState(null);
+
   const [data2, setData2] = useState(null);
   const [progress, setProgress] = React.useState(0);
 
@@ -67,11 +72,8 @@ const Overview = ({ value }) => {
   const handleTrips = () => {
     setTrips(true);
   };
-  const getDataFromChildHandler = (date, dataArr) => {
-    setDate(date);
-  };
+
   useEffect(() => {
-    setData(Fleet);
     setData2(Fleet);
   }, []);
   React.useEffect(() => {
@@ -115,19 +117,7 @@ const Overview = ({ value }) => {
       handleFunction: handleTrips,
     },
   ];
-  const router = useRouter();
   const days = ["Today", "Weekly", "Yearly"];
-  const region = ["mumbai", "Delhi", "Agra", "banaras", "kolkata"];
-  const [selectedItem, setSelectedItem] = React.useState();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open1 = Boolean(anchorEl);
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleMenuItemClick = (item) => {
-    setSelectedItem(item);
-    handleClose();
-  };
   return (
     <Grid container spacing={2}>
       <DistanceTravel
@@ -140,8 +130,14 @@ const Overview = ({ value }) => {
         open={payload}
         setOpen={setPayload}
         data1="Trip Payload"
+        data={data2}
       />
-      <DistanceTravel open={trips} setOpen={setTrips} data1="Trips" />
+      <DistanceTravel
+        open={trips}
+        setOpen={setTrips}
+        data1="Trips"
+        data={data2}
+      />
       {data1.map((item, index) => (
         <Grid key={index} item xl={4} md={4} sm={12} xs={12}>
           <CustomGrid>
@@ -158,7 +154,7 @@ const Overview = ({ value }) => {
                 variant="contained"
                 size="small"
                 buttonname="Daily"
-                menuItems={days}
+                menuitems={days}
               />
             </Grid>
             <Typography variant="h4" color={"primary"}>
@@ -205,8 +201,8 @@ const Overview = ({ value }) => {
       <Grid item xs={12}>
         <Table
           data={data}
+          params={params}
           value={value}
-          deviceData={deviceData}
           rowsPerPage={rowsPerPage}
           setRowsPerPage={setRowsPerPage}
           page={page}

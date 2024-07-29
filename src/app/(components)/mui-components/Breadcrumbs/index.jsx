@@ -28,6 +28,8 @@ const CustomBreadcrumbs = ({ breadcrumbItems }) => {
   const pathname = usePathname();
   const isXs = useMediaQuery((theme) => theme.breakpoints.only("xs"));
   const isSm = useMediaQuery((theme) => theme.breakpoints.only("sm"));
+  const isMd = useMediaQuery((theme) => theme.breakpoints.only("md"));
+  const isLg = useMediaQuery((theme) => theme.breakpoints.only("lg"));
 
   return (
     <Grid
@@ -36,10 +38,10 @@ const CustomBreadcrumbs = ({ breadcrumbItems }) => {
         pr: "12px",
         pt: "12px",
         position: "fixed",
-        top: { xs: "10px", sm: "20px", md: "18px", lg: "20px" },
+        top: { xs: "16px", sm: "20px", md: "18px", lg: "20px" },
         zIndex: "99",
         width: { xs: "90%", sm: "75%", md: "65%", lg: "60%" },
-        marginLeft: isXs || isSm ? "50px" : "flex-start", // Align breadcrumbs to the right on small screens
+        marginLeft: isXs ? "50px" : isSm ?"60px" :isMd? "60px": "flex-start"// Align breadcrumbs to the right on small screens
       }}
       direction="row"
       alignItems="center"

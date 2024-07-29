@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import AutoBox from '@/app/(components)/mui-components/Autocomplete/index'
+import AutoBox from '@/app/(DashboardLayout)/(ui-components)/userManagement/autocomplete'
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -54,31 +54,33 @@ const Assign = ({ value }) => {
                     }}
                 />
             )) :
-                // <Autocomplete
-                //     multiple
-                //     id="checkboxes-tags-demo"
-                //     sx={{ ml: value === "2" ? 6 : value === "3" ? 19 : value === "4" ? 38 : value === "5" ? 59 : value === "6" ? 80 : 96 }}
-                //     options={top100Films}
-                //     disableCloseOnSelect
-                //     getOptionLabel={(option) => option.title}
-                //     renderOption={(props, option, { selected }) => (
-                //         <li {...props}>
-                //             <Checkbox
-                //                 icon={icon}
-                //                 checkedIcon={checkedIcon}
-                //                 style={{ marginRight: 8 }}
-                //                 checked={selected}
-                //             />
-                //             {option.title}
-                //         </li>
-                //     )}
-                //     style={{ width: 360 }}
-                //     renderInput={(params) => (
-                //         <TextField {...params} label="Checkboxes" variant="standard" placeholder="Favorites" />
-                //     )}
-                // />
-                <AutoBox/>
+           
+                <Autocomplete
+                    multiple
+                    id="checkboxes-tags-demo"
+                    sx={{ ml: value === "2" ? 6 : value === "3" ? 19 : value === "4" ? 38 : value === "5" ? 59 : value === "6" ? 80 : 96 }}
+                    options={top100Films}
+                    disableCloseOnSelect
+                    getOptionLabel={(option) => option.title}
+                    renderOption={(props, option, { selected }) => (
+                        <li {...props}>
+                            <Checkbox
+                                icon={icon}
+                                checkedIcon={checkedIcon}
+                                style={{ marginRight: 8 }}
+                                checked={selected}
+                            />
+                            {option.title}
+                        </li>
+                    )}
+                    style={{ width: 360 }}
+                    renderInput={(params) => (
+                        <TextField {...params} label="Checkboxes" variant="standard" placeholder="Favorites" />
+                    )}
+                />
+       
                 }
+                
         </Grid>
     )
 }

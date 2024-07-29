@@ -4,6 +4,10 @@ import { Grid, Typography, Avatar } from '@mui/material';
 import Map from '@/app/(components)/map/map'
 import { styled } from '@mui/system';
 import IdCard from "../../../../../public/Img/id-card-solid.svg"
+// import truck1 from "../../../../../public/Img/truck1.svg"
+// import truck2 from "../../../../../public/Img/truck2.svg"
+// import truck3 from "../../../../../public/Img/truck3.svg"
+// import truck4 from "../../../../../public/Img/truck4.svg"
 import Truck from "../../../../../public/Img/truck-moving-solid.svg"
 import MapImg from "../../../../../public/Img/map.svg"
 import Route from "../../../../../public/Img/route-solid.svg"
@@ -26,10 +30,10 @@ function ShorterGrid() {
         { label: "Total mileage accumulated", value: "60 km", icon: Route, },
     ];
     const iconUrls = [
-        '/truck1.svg',
-        '/truck2.svg',
-        '/truck3.svg',
-        '/truck4.svg',
+        './truck1.svg',
+        './truck2.svg',
+        './truck3.svg',
+        './truck4.svg',
     ];
     const coordinate = [
         { lat: "28.51079782059423", log: "77.40362813493975" },
@@ -49,6 +53,7 @@ function ShorterGrid() {
     ];
     return (
         <Grid spacing={2} container >
+         
             {data.map((item, index) => (
                 <Grid key={index} item xs={12} sm={6} md={2.4} lg={2.4}>
                     <MainGrid >

@@ -10,13 +10,13 @@ import { signOut } from "next-auth/react";
 import { RiSettings3Line } from "react-icons/ri";
 
 const Menuitems1= [
-  // {
-  //   id: uniqueId(),
-  //   title: "Settings",
-  //   icon:  RiSettings3Line,
-  //   href: "/profile",
-  //   role: ["Admin"],
-  // },
+  {
+    id: uniqueId(),
+    title: "Settings",
+    icon:  RiSettings3Line,
+    href: "/settings",
+    role: ["Admin"],
+  },
   {
     id: uniqueId(),
     title: "Logout",

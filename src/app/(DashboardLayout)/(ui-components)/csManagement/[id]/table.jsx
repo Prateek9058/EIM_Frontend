@@ -133,12 +133,7 @@ const Table = ({
                                 }
                             />
                         </Grid>
-                        {/* <CustomTextField
-                            type="search"
-                            placeholder="Search empId / Name"
-                            value={debouncedSearchQuery}
-                            onChange={handleSearchChange}
-                        /> */}
+                    
                     </Grid>
                 </Grid>
             </Grid>

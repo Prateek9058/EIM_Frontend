@@ -3,7 +3,6 @@ import { AppBar, Grid, styled, IconButton } from "@mui/material";
 import PropTypes from "prop-types";
 import Profile from "./Profile";
 import { LuMenu } from "react-icons/lu";
-// import Notification from "./Notification";
 import Image from "next/image";
 import Logo from '../../../../../public/Img/logo.svg'
 
@@ -52,7 +51,7 @@ const Header = ({ toggleMobileSidebar }) => {
         <Grid item>
           <Grid container alignItems="center" spacing={2}>
             {/* Uncomment Notification component if needed */}
-            {/* <Grid item><Notification /></Grid> */}
+            
             <Grid item><Profile /></Grid>
           </Grid>
         </Grid>

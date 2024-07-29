@@ -24,6 +24,7 @@ import { EyeIcon } from "@/app/(components)/mui-components/icons/index";
 const Table = ({
     data,
     rowsPerPage,
+    handleEfficiencyData,
     setRowsPerPage,
     page,
     setPage,
@@ -40,7 +41,6 @@ const Table = ({
         "Voltage(V)",
         "Battery SoC(%)",
         "Battery SoH(%)",
-        "Error",
         "Charging cycle",
         "Avg. Charging time",
         "Battery Location",
@@ -58,8 +58,10 @@ const Table = ({
         };
     }, [debouncedSearchQuery, setSearchQuery]);
 
-    const handleSearchChange = (event) => {
-        setDebouncedSearchQuery(event.target.value);
+    const handleSearchChange = async(event) => {
+        const {value}=event.target
+        setDebouncedSearchQuery(value)
+        await handleEfficiencyData(value)
     };
 
     const handleOpenDialog = () => {
@@ -86,39 +88,38 @@ const Table = ({
             voltage: item?.voltage ? item?.voltage : "N/A",
             batterySoc: item?.batterySoc ? item?.batterySoc : "N/A",
             batterySoh: item?.batterySoh ? item?.batterySoh : "N/A",
-            error: item?.error ? item?.error : "N/A",
             chargingCycle: item?.chargingCycle ? item?.chargingCycle : "N/A",
             avgChargingTime: item?.avgChargingTime ? item?.avgChargingTime : "N/A",
             batteryLocation: item?.batteryLocation ? item?.batteryLocation : "N/A",
             Action: [
-                <Grid container justifyContent="center" key={index}>
-                    <Grid item xs={12} sm={4} md={4}>
-                        <Tooltip title="View">
-                            <IconButton
-                                size="small"
-                                onClick={() => {
-                                    handleViewClick(item?._id);
-                                }}
-                            >
-                                <EyeIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
-                    <Grid item xs={12} sm={4} md={4}>
-                        <Tooltip title="Edit">
-                            <IconButton size="small">
-                                <FaRegEdit color="rgba(14, 1, 71, 1)" />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
-                    <Grid item xs={12} sm={4} md={4}>
-                        <Tooltip title="Delete">
-                            <IconButton size="small">
-                                <MdDeleteOutline color="rgba(14, 1, 71, 1)" />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
-                </Grid>,
+                <Grid container justifyContent="center" spacing={2} key={index} width={"130px"}>
+                <Grid item xs={12} sm={4} md={4}>
+                  <Tooltip title="View">
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        handleViewClick(item?._id);
+                      }}
+                    >
+                      <EyeIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+                <Grid item xs={12} sm={4} md={4}>
+                  <Tooltip title="Edit">
+                    <IconButton size="small">
+                      <FaRegEdit color="rgba(14, 1, 71, 1)" />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+                <Grid item xs={12} sm={4} md={4}>
+                  <Tooltip title="Delete">
+                    <IconButton size="small">
+                      <MdDeleteOutline color="rgba(14, 1, 71, 1)" />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              </Grid>
             ],
         }));
     };
@@ -154,9 +155,9 @@ const Table = ({
                         </Grid>
                         <CustomTextField
                             type="search"
-                            placeholder="Search empId / Name"
+                            placeholder="Search batteryId/ Name"
                             value={debouncedSearchQuery}
-                            onChange={handleSearchChange}
+                            onChange={(e)=>{handleSearchChange(e)}}
                         />
                     </Grid>
                 </Grid>

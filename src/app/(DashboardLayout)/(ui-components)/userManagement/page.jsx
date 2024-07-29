@@ -8,7 +8,8 @@ import axiosInstance from '@/app/api/axiosInstance'
 
 const UserManagement = () => {
   const[open,setOpen]=useState(false)
-  const [data,setData]=useState()
+  const [data,setData]=useState();
+  const [select,setSelected] = useState(null)
 
   const[type,setType]=useState()
   const handleOpen=()=>{
@@ -18,8 +19,12 @@ const UserManagement = () => {
     try {
       setType(item)
       const res=await axiosInstance.get('/role/getAll')
+     if(res?.status === 200 || res?.status === 201){
       console.log("res",res)
       setData(res?.data?.data)
+      setSelected(res?.data?.data[0]?.name)
+
+     }
     } catch (error) {
     }
   }
@@ -40,12 +45,12 @@ const UserManagement = () => {
     { label: "User-Management", link: "/userManagement" },
     
 ];
-console.log("setType",type)
+console.log("setType",select)
   return (
     <Grid container >
       <AddUser open={open} setOpen={setOpen}/>
-      <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Super Admin"} button={"Add User"} handleClickOpen={handleOpen} handleTableData={handleTableData} CustomButtonGroup={data} TabPanelList={TabPanelList} value={value} handleChange={handleChange} />
-      <SuperAdmin  type={type}/>
+      <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Super Admin"} button={"Add User"} handleClickOpen={handleOpen} handleTableData={handleTableData} CustomButtonGroup={data} TabPanelList={TabPanelList} value={value} handleChange={handleChange} select={select}/>
+      <SuperAdmin  type={type ? type : select}/>
     </Grid>
   )
 }

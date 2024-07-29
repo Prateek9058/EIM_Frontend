@@ -111,7 +111,7 @@ const Table = ({
                 <Grid container justifyContent="center" spacing={2} key={index}>
                     <Grid item xs={4} >
                         <Tooltip title="View">
-                            <Link href={`userManagement/viewAccess`}>
+                            <Link href={`userManagement/${item?._id}`}>
                                 <IconButton size="small">
                                     <IoEyeOutline color="rgba(14, 1, 71, 1)" />
                                 </IconButton>

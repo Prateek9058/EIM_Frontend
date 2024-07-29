@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, IconButton } from "@mui/material";
 import { rows } from "@/app/(components)/table/rows";
 import Table from './table'
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [page, setPage] = React.useState(0);
@@ -12,6 +13,7 @@ const Page = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [date, setDate] = useState(null);
   const [data, setData] = useState(null);
+  const router=useRouter();
 
   const getDataFromChildHandler = (date, dataArr) => {
     setDate(date);
@@ -19,11 +21,17 @@ const Page = () => {
 
   useEffect(()=>{
     setData(rows)
-  })
+  },[])
+  const handleView=()=>{
+    router.push('/fleetManagement')
+  }
   return (
     <Grid container rowGap={2}>
       <Table
         data={data}
+        heading={"Top 10 Performing E-Tractors"}
+        button={"View all"}
+        handleView={handleView}
         deviceData={deviceData}
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
@@ -37,6 +45,7 @@ const Page = () => {
       <Table
         data={data}
         deviceData={deviceData}
+        heading={"Swapping Station"}
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
         page={page}
@@ -50,6 +59,7 @@ const Page = () => {
         data={data}
         deviceData={deviceData}
         rowsPerPage={rowsPerPage}
+        heading={"Charging Station"}
         setRowsPerPage={setRowsPerPage}
         page={page}
         setPage={setPage}

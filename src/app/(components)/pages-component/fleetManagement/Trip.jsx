@@ -30,42 +30,32 @@ const buttonData = [
     { label: 'Trip', color: "blue" },
     { label: 'Parked', color: "skyblue" },
 ];
-const days = ["Today", "Weekly", "Yearly"]
-const region = ["mumbai", "Delhi", "Agra", "banaras", "kolkata"]
-const buttons = [
-    {
-        data: "Fleet (212)", customdownload: "Download Excel",
-        regiondropdown: [{ name: "Region", variant: "outlined", region: region }],
-        dailydropdown: [{ name: "Today", variant: "contained", days: days }]
-    }
-];
-const Charging = ({ value }) => {
-    const [page, setPage] = React.useState(0);
-    const [loading, setLoading] = useState(false);
-    const [rowsPerPage, setRowsPerPage] = React.useState(25);
-    const [deviceData, setDeviceData] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [date, setDate] = useState(null);
-    const [data, setData] = useState(null);
-
-    const getDataFromChildHandler = (date, dataArr) => {
-        setDate(date);
-    };
-    const columns = [
-        'Region',
-        'E-tractor ID',
-        'Trips',
-        'Avg. Speed',
-        'Avg. Payload',
-        'Max. Payload',
-        'Distance Traveled',
-        'Avg. Breakdown',
-        'Total Tevs',
-        'Tves Handle 40F',
-        'Tves Handle 20F',
-        'Tves Each Trip',
-        'Action'
-    ]
+  const columns = [
+    'Region',
+    'E-tractor ID',
+    'Trips',
+    'Avg. Speed',
+    'Avg. Payload',
+    'Max. Payload',
+    'Distance Traveled',
+    'Avg. Breakdown',
+    'Total Tevs',
+    'Tves Handle 40F',
+    'Tves Handle 20F',
+    'Tves Each Trip',
+    'Action'
+]
+const Charging = ({ value ,data,
+    rowsPerPage,
+    setRowsPerPage,
+    page,
+    setPage,
+    searchQuery,
+    setSearchQuery,
+    loading,
+    handleExport,
+    getDataFromChildHandler,}) => {
+   
     const [open, setOpenDialog] = React.useState(false);
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
@@ -120,44 +110,26 @@ const Charging = ({ value }) => {
                 />,
             ];
         }
-    }; useEffect(() => {
-        setData(Trip)
-    }, [])
+    };
 
     const getFormattedData = (data) => {
         console.log("data", data)
         return data?.map((item, index) => ({
-            employeeId: (
-                <Box>
-                    <span>{item?.employeeId}</span>
-                    <Box
-                        component="span"
-                        sx={{
-                            display: "inline-block",
-                            width: "10px",
-                            height: "10px",
-                            borderRadius: "50%",
-                            backgroundColor: item.color,
-                            marginLeft: "10px",
-                        }}
-                    />
-                </Box>
-            ),
-
-            firstName: item?.firstName ?? "N/A",
-            TotalTripDay: (<Chip
+            region: item?.port?item?.port?.regionName:"NA",
+            fleetId: item?.fleetId ?? "N/A",
+            trip: (<Chip
                 key={index}
                 color='primary'
                 sx={{ width: "50px" }}
-                label={item?.TotalTripDay}
+                label={item?.trip ??"NA"}
             />),
-            mobileNumber1: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber2: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber3: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber4: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber5: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber6: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber7: item?.mobileNumber ? item?.mobileNumber : "N/A",
+            avgSpeed: item?.avgSpeed ? item?.avgSpeed : "N/A",
+            avgPayload: item?.avgPayload ? item?.avgPayload : "N/A",
+            maxPayload: item?.maxPayload ? item?.maxPayload : "N/A",
+            distance: item?.distance ? item?.distance : "N/A",
+            breakdown: item?.breakdown ? item?.breakdown : "N/A",
+            totalUnit: item?.totalUnit ? item?.totalUnit : "N/A",
+            totalHandle: item?.totalHandle ? item?.totalHandle : "N/A",
             mobileNumber8: item?.mobileNumber ? item?.mobileNumber : "N/A",
             jobRole: item?.jobRole ? item?.jobRole : "N/A",
             Action: [
@@ -189,7 +161,7 @@ const Charging = ({ value }) => {
                     sx={{ backgroundColor: "#669BE9", color: "#fff", borderRadius: "16px 16px 0px 0px" }}>
                     <Grid item>
                         <Typography variant="h3">
-                            Fleet (121)
+                            Fleet ({data?.totalDocuments})
                         </Typography>
                     </Grid>
                     <Grid item className="customSearch">
@@ -222,8 +194,8 @@ const Charging = ({ value }) => {
                 ) : (
                     <CustomTable
                         page={page}
-                        rows={getFormattedData(data)}
-                        count={data?.length}
+                        rows={getFormattedData(data?.data)}
+                        count={data?.totalDocuments}
                         columns={columns}
                         setPage={setPage}
                         rowsPerPage={rowsPerPage}

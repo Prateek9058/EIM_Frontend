@@ -96,7 +96,7 @@ const Page = () => {
   const [page, setPage] = React.useState(0);
   const [loading, setLoading] = useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(null);
   const [date, setDate] = useState(null);
   const [data, setData] = useState(null);
   const [open, setOpen] = useState(false);
@@ -114,12 +114,12 @@ const Page = () => {
     { label: "Dashboard", link: "/" },
     { label: "Battery-Analysis", link: "/batteryAnalysis" },
   ];
-  const handleEfficiencyData = async () => {
+  const handleEfficiencyData = async (value) => {
     try {
       const res = await axiosInstance.get(
         `/battery/getAll?page=${
           page + 1
-        }&pageSize=${rowsPerPage}&search=${searchQuery}`
+        }&pageSize=${rowsPerPage}&search=${value??""}`
       );
       console.log("res", res);
       setData(res?.data);
@@ -128,8 +128,8 @@ const Page = () => {
     }
   };
   useEffect(() => {
-    handleEfficiencyData();
-  }, [page, rowsPerPage, searchQuery, date]);
+      handleEfficiencyData();
+  }, [page, rowsPerPage, date]);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -243,6 +243,7 @@ const Page = () => {
           page={page}
           setPage={setPage}
           searchQuery={searchQuery}
+          handleEfficiencyData={handleEfficiencyData}
           setSearchQuery={setSearchQuery}
           loading={loading}
           getDataFromChildHandler={getDataFromChildHandler}

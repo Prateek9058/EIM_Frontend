@@ -117,10 +117,6 @@ const Table = ({
             mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
             mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
             mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "N/A",
-            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
-            mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
-            jobRole: item?.jobRole ? item?.jobRole : "N/A",
-          
         }));
     };
 

@@ -92,55 +92,14 @@ const Charging = ({ value }) => {
         setOpenDialog(false);
     };
 
-    const getStatus = (str) => {
-        if (str?.toUpperCase() === "ACTIVE")
-            return { status: "ACTIVE", color: "customChip activeGreen" };
-        else return { status: "InActive", color: "customChip activeRed" };
-    };
-    const getStatusInfo = (ele, index) => {
-        if (ele?.toUpperCase() === "ACTIVE") {
-            return [
-                <Chip
-                    key={index}
-                    sx={{ width: "120px" }}
-                    className="customChip activeGreen"
-                    label={ele}
-                    color="primary"
-                />,
-            ];
-        } else {
-            return [
-                <Chip
-                    key={index}
-                    className={getStatus(ele)?.color}
-                    sx={{ width: "120px" }}
-                    label={getStatus(ele)?.status}
-                />,
-            ];
-        }
-    };    useEffect(() => {
+    useEffect(() => {
         setData( E_tractorData)
     }, [])
 
     const getFormattedData = (data) => {
         console.log("data", data)
         return data?.map((item, index) => ({
-            employeeId: (
-                <Box>
-                    <span>{item?.employeeId}</span>
-                    <Box
-                        component="span"
-                        sx={{
-                            display: "inline-block",
-                            width: "10px",
-                            height: "10px",
-                            borderRadius: "50%",
-                            backgroundColor: item.color,
-                            marginLeft: "10px",
-                        }}
-                    />
-                </Box>
-            ),
+            employeeId :item?.employeeId??"NA",
             chargingcycle:( <Chip
                 key={index}
                 color="primary"
@@ -151,8 +110,6 @@ const Charging = ({ value }) => {
             mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
             mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
             mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
-            // mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "N/A",
-            // mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
             mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
             jobRole: item?.jobRole ? item?.jobRole : "N/A",
             Action: [

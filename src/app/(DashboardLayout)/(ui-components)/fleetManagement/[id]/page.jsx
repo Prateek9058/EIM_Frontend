@@ -16,7 +16,7 @@ const vehicleCharging = [
 'Date', 'Last SoC', 'Last SoH','Last Status','Last Charging', 'Charging Cycle','Swapping Cycle','Total Unit','SoC Estimated Time','SoC Unit Consumed','Avg. Charging Time'
 ];
 
-const Page = (params) => {
+const Page = ({params}) => {
     const searchParams = useSearchParams()
     const tabValue = searchParams.get('tab')
     const [page, setPage] = React.useState(0);
@@ -40,6 +40,7 @@ setData(Fleet)
                 tabValue === "1" ? (
                     <Table
                         data={data}
+                        params={params}
                         columns={vehicle}
                         deviceData={deviceData}
                         rowsPerPage={rowsPerPage}

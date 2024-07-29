@@ -11,11 +11,13 @@ const Login = () => {
   return (
     <>
       <PageContainer title={"Login"} description={"this is login page"}>
-        <Grid container sx={{ color: "#fff", height: "100vh" }}>
+        <Grid container sx={{ color: "#fff",  }}>
           <Grid
             item
-            xs={6}
+            xs={12}
+            md={6}
             sx={{
+              height: "100vh",
               background:
                 "linear-gradient(127.07deg, #589CFF -26.97%, #013376 71.52%)",
               display: "flex",
@@ -26,7 +28,7 @@ const Login = () => {
           >
             <Stack rowGap={2}>
               <Stack rowGap={1}>
-                <Typography variant="h2" sx={{ color: "#C0FE72" }}>
+                <Typography variant="h2" color={"secondary"}>
                   Log In
                 </Typography>
                 <Typography>
@@ -46,7 +48,8 @@ const Login = () => {
               />
             </Stack>
           </Grid>
-          <Grid item xs={6} sx={{ position: "relative" }}>
+          <Grid item xs={12}
+            md={6} sx={{ position: "relative" ,height: "100vh"}}>
             <Image src={TruckImg} alt="Truck" layout="fill" />
             <Grid
               sx={{

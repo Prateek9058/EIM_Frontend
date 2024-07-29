@@ -50,7 +50,7 @@ const Overview = () => {
         <Grid container >
             <CustomGrid>
                 <Grid item xs={12} md={6} p={2}>
-                    <CustomTextField fullWidth type="search" placeholder="Search" />
+                    <CustomTextField fullWidth type="search" placeholder="Search"  />
                     <Divider />
                     {cardsData?.map((card, index) => (
                         <Grid item xs={12} key={index} >
@@ -81,8 +81,8 @@ const Overview = () => {
                                             <Typography>{card.distance}</Typography>
                                         </Grid>
                                         <Grid item xs={10}>
-                                            <Typography sx={{ color: "#C0FE72" }}>{card.queueCharging}</Typography>
-                                            <Typography sx={{ color: "#C0FE72" }}>{card.queueSwapping}</Typography>
+                                            <Typography  color={"secondary"}>{card.queueCharging}</Typography>
+                                            <Typography color={"secondary"}>{card.queueSwapping}</Typography>
                                         </Grid>
                                     </Grid>
                                 </CardContent>

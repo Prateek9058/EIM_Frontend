@@ -55,53 +55,10 @@ const Table = ({
     const handleCancel = () => {
         setOpenDialog(false);
     };
-
-    const getStatus = (str) => {
-        if (str?.toUpperCase() === "ACTIVE")
-            return { status: "ACTIVE", color: "customChip activeGreen" };
-        else return { status: "InActive", color: "customChip activeRed" };
-    };
-    const getStatusInfo = (ele, index) => {
-        if (ele?.toUpperCase() === "ACTIVE") {
-            return [
-                <Chip
-                    key={index}
-                    sx={{ width: "120px" }}
-                    className="customChip activeGreen"
-                    label={ele}
-                    color="primary"
-                />,
-            ];
-        } else {
-            return [
-                <Chip
-                    key={index}
-                    className={getStatus(ele)?.color}
-                    sx={{ width: "120px" }}
-                    label={getStatus(ele)?.status}
-                />,
-            ];
-        }
-    };
     const getFormattedData = (data) => {
         console.log("data",data)
         return data?.map((item, index) => ({
-            employeeId: (
-                <Box>
-                    <span>{item?.employeeId}</span>
-                    <Box
-                        component="span"
-                        sx={{
-                            display: "inline-block",
-                            width: "10px",
-                            height: "10px",
-                            borderRadius: "50%",
-                            backgroundColor: item.color,
-                            marginLeft: "10px",
-                        }}
-                    />
-                </Box>
-            ),
+            employeeId:item?.employeeId??'NA',
             status:(
                 <Box>
                   <Typography 

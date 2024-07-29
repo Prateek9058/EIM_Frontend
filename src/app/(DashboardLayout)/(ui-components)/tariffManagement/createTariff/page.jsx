@@ -4,10 +4,6 @@ import { Grid, TextField, Typography, Button } from '@mui/material'
 import React from 'react'
 import styled from '@emotion/styled'
 
-const CustomTextField = styled(TextField)(({ theme }) => ({
-  background: 'linear-gradient(111.41deg, rgba(139, 153, 173, 0.36) 0%, rgba(255, 255, 255, 0.12) 100%)',
-  color: "#fff"
-}))
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(5),
   backgroundColor: '#6099EB',
@@ -18,7 +14,7 @@ const CustomGrid = styled(Grid)(({ theme }) => ({
 const TimeRateSection = ({ ratePlaceholder,  }) => (
   <>
     <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-      <CustomTextField type='number' placeholder={ratePlaceholder}  />
+      <TextField type='number' placeholder={ratePlaceholder}  />
     </Grid>
     <Grid item xs={2} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Typography>00</Typography>
@@ -39,7 +35,7 @@ const CreateTariff = () => {
       <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Create Tariff"} />
       <CustomGrid container rowGap={5} columnGap={5}>
         <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <CustomTextField label="Tariff Name" placeholder="Enter Tariff Name" />
+          <TextField label="Tariff Name" placeholder="Enter Tariff Name" />
         </Grid>
         <TimeRateSection ratePlaceholder="Rate - (- 1.50 )" />
         <TimeRateSection ratePlaceholder="Rate - (0.00)" />

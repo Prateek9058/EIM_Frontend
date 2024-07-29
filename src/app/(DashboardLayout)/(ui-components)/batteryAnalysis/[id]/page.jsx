@@ -33,7 +33,7 @@ const Page = ({ params }) => {
     return (
         <Grid container rowGap={2} sm={12} md={12}>
             <Table
-                data={data}
+                data={[]}
                 params={params}
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}

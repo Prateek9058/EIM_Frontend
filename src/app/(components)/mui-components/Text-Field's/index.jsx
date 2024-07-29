@@ -31,6 +31,7 @@ const CustomTextField = ({
         defaultValue={defaultValue}
         placeholder={placeholder}
         helperText={helperText}
+        onChange={onChange}
    
         disabled={disabled}
         sx={{

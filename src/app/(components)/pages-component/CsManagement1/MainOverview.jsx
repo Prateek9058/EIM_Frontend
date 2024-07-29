@@ -34,9 +34,9 @@ const Overview1 = () => {
     ]
     const TabPanelList = [
         { component: <Overview /> },
-        { component: "" },
-        { component: "" },
-        { component: "" },
+        { component: <Overview /> },
+        { component: <Overview /> },
+        { component: <Overview /> },
     ];
     const data = [
         { title: 'No. of Session', content: "400" },

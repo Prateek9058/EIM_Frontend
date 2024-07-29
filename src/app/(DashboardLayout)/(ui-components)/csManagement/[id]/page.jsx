@@ -1,10 +1,10 @@
 "use client"
 import { Button, Grid, Typography } from '@mui/material'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Table from './table'
-import { Charging_Station_id, E_Tractor_id, charging, vehicleTrip } from '@/app/(components)/table/columndata';
 import { useSearchParams } from 'next/navigation'
 import ManagementGrid from '@/app/(components)/mui-components/Card';
+import { Fleet } from '@/app/(components)/table/rows'
 
 const ChargingId = ({ params }) => {
     const searchParams = useSearchParams()
@@ -31,14 +31,18 @@ const ChargingId = ({ params }) => {
         { label: "CS/SS-Management", link: "/csManagement" },
         { label: `${params.id}`, link: `/csManagement/${params.id}?tab=${tabValue}` },
       ];
+      useEffect(()=>{
+        setData(Fleet)
+      })
     return (
-        <Grid container rowGap={2} sm={12} md={12}>
+        <Grid container  sm={12} md={12}>
             <ManagementGrid  breadcrumbItems ={breadcrumbItems }/>
             {tabValue && (
                 tabValue === "2" ? (
                     <Table
                     name={`Charging Station ID (${params.id})`}
                     columns={vehicle1}
+                    data={data}
                     deviceData={deviceData}
                     rowsPerPage={rowsPerPage}
                     setRowsPerPage={setRowsPerPage}
@@ -53,6 +57,7 @@ const ChargingId = ({ params }) => {
                     <Table
                     name={`E-Tractor ID (${params.id})`}
                     columns={E_tractor}
+                    data={data}
                     deviceData={deviceData}
                     rowsPerPage={rowsPerPage}
                     setRowsPerPage={setRowsPerPage}

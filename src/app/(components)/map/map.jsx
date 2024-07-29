@@ -94,7 +94,7 @@ const Page = ({ iconUrls, buttonData, Height, coordinate }) => {
                 position={{ lat: point.location.latitude, lng: point.location.longitude }}
                 onClick={() => setActiveMarker(index)}
                 icon={{
-                  url: iconUrls && (iconUrls && iconUrls[index % iconUrls.length].icon),
+                  url: iconUrls && iconUrls[index % iconUrls.length].icon,
                   anchor: new google.maps.Point(17, 46),
                   scaledSize: new google.maps.Size(80, 80),
                 }}

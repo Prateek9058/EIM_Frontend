@@ -22,29 +22,32 @@ import styled from "@emotion/styled";
 const CustomTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "grey", // Default border color
+      borderColor: "grey",
     },
     "&:hover fieldset": {
-      borderColor: "grey", // Border color on hover
+      borderColor: "grey",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#C0FE72", // Border color when focused (input clicked)
+      borderColor: "#C0FE72",
     },
   },
   "& .MuiInputLabel-root": {
-    color: "#fff", // Default label color
+    color: "#fff",
+  },
+  "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+    color: "#C0FE72", // Label color when input is filled
   },
   "&.Mui-focused .MuiInputLabel-root": {
-    color: "#C0FE72", // Label color when focused
+    color: "#fff",
   },
   "& .MuiOutlinedInput-input": {
-    color: "#C0FE72", // Text color
+    color: "#fff",
   },
   "& .MuiInputBase-input::placeholder": {
-    color: "#fff", // Placeholder color
-    opacity: 1, // Ensure visibility
+    color: "#fff",
+    opacity: 1,
   },
-}))
+}));
 
 const AuthLogin = ({ title, subtitle }) => {
   const [username, setUsername] = useState("");
@@ -99,7 +102,7 @@ const AuthLogin = ({ title, subtitle }) => {
               id="username"
               name="username"
               value={username}
-              inputProps={{shrink:"true"}}
+              inputProps={{ shrink: "true" }}
               onChange={(e) => setUsername(e.target.value)}
             />
           </Box>
@@ -144,14 +147,7 @@ const AuthLogin = ({ title, subtitle }) => {
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <Box>
           <Button
-            sx={{
-              backgroundColor: "#C0FE72",
-              color: "#000",
-              fontWeight: "500",
-              "&:hover": {
-                backgroundColor: "#C0FE72",
-              },
-            }}
+            color="secondary"
             variant="contained"
             size="large"
             fullWidth

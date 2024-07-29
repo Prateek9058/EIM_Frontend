@@ -6,10 +6,6 @@ import styled from '@emotion/styled'
 import Map from '@/app/(components)/map/map'
 import Autocomplete from '@mui/material/Autocomplete';
 
-const CustomTextField = styled(TextField)(({ theme }) => ({
-    background: 'linear-gradient(111.41deg, rgba(139, 153, 173, 0.36) 0%, rgba(255, 255, 255, 0.12) 100%)',
-    color: "#fff"
-}))
 const CustomGrid = styled(Grid)(({ theme }) => ({
     padding: theme.spacing(2),
     backgroundColor: '#6099EB',
@@ -39,7 +35,7 @@ const buttonData = [
 ];
 const FieldSection = ({ placeholder }) => (
     <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        <CustomTextField placeholder={placeholder} />
+        <TextField placeholder={placeholder} />
     </Grid>
 );
 
@@ -50,7 +46,7 @@ const AutoCompleteSection = ({ label, options }) => (
             id="combo-box-demo"
             options={options}
             fullWidth
-            renderInput={(params) => <CustomTextField {...params} label={label} />}
+            renderInput={(params) => <TextField {...params} label={label} />}
         />
     </Grid>
 );
@@ -65,24 +61,24 @@ const AddPort = () => {
             <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName="Add Port" />
             <CustomGrid container rowGap={3} columnGap={5}>
                 <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <CustomTextField label="Location Name" placeholder="Enter Location" />
+                    <TextField label="Location Name" placeholder="Enter Location" />
                 </Grid>
                 <Grid item xs={12} height="380px">
                     <Map iconUrls={iconUrls} buttonData={buttonData} coordinate={coordinate} />
                 </Grid>
                 <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <CustomTextField type='text' placeholder="Enter Location name"  />
+                    <TextField type='text' placeholder="Enter Location name"  />
                 </Grid>
                 <Grid container rowGap={3} columnGap={5}>
                     <FieldSection placeholder="Region Name (Auto-fill)" />
                     <FieldSection placeholder="Location Name (Auto-fill)" />
                     <Grid item xs={2} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                        <CustomTextField placeholder="Port name (Auto-fill)" />
+                        <TextField placeholder="Port name (Auto-fill)" />
                     </Grid>
                     <FieldSection placeholder="Pin code (Auto-fill)" />
                     <FieldSection placeholder="State (Auto-fill)" />
                     <Grid item xs={2} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                        <CustomTextField placeholder="District (Auto-fill)" />
+                        <TextField placeholder="District (Auto-fill)" />
                     </Grid>
                     <AutoCompleteSection label="Select User" options={top100Films} />
                     <AutoCompleteSection label="Select Tariff" options={top100Films} />
@@ -92,7 +88,7 @@ const AddPort = () => {
                             id="combo-box-demo"
                             options={top100Films}
                             fullWidth
-                            renderInput={(params) => <CustomTextField {...params} label="Assign E-tractor" />}
+                            renderInput={(params) => <TextField {...params} label="Assign E-tractor" />}
                         />
                     </Grid>
                 </Grid>

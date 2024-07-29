@@ -64,12 +64,18 @@ const ManagementGrid = ({
   handleClickOpen,
   tabCenter,
   dropDown,
-  buttonItem
+  buttonItem,
+  select
 }) => {
   const tabLength = tabs ? tabs.length : 0
   const [visibleStart, setVisibleStart] = React.useState(0);
   const [buttonType, setButtonType] = useState(null)
-
+console.log(buttonType)
+useEffect(()=>{
+if(select){
+  setButtonType(select)
+}
+},[select])
   const handleNext = () => {
     if (visibleStart + 6 < CustomButtonGroup.length) {
       setVisibleStart(visibleStart + 1);
@@ -183,7 +189,7 @@ const ManagementGrid = ({
               {CustomButtonGroup?.slice(visibleStart, visibleStart + 6)?.map((item, index) => (
                 <Grid item key={index} sx={{ borderRadius: "0px", borderRight: index < 5 ? "1px solid #fff" : "" }}>
                   <ButtonGroup aria-label="Basic button group" variant="text" >
-                    <Button variant={buttonType === item?.name ?"contained" : ""}  sx={{ borderRadius: index === 0? "10px 0 0 10px" : index === 5?"0 10px 10px 0":"0",   borderRight: index < 5 ? "1px solid #fff" : "", color: "#fff" }} onClick={(e) => { handleClick(item?.name) }}>{item?.name}</Button>
+                    <Button variant={buttonType == item?.name ?"contained" : ""}  sx={{ borderRadius: index === 0? "10px 0 0 10px" : index === 5?"0 10px 10px 0":"0",   borderRight: index < 5 ? "1px solid #fff" : "", color: "#fff" }} onClick={(e) => { handleClick(item?.name) }}>{item?.name}</Button>
                   </ButtonGroup>
                 </Grid>
               ))}
