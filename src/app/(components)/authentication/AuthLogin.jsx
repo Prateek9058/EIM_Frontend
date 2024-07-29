@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axiosInstance from "@/app/api/axiosInstance";
+import ToastComponent,{notifyError,notifySuccess} from "../mui-components/Snackbar";
 
 import styled from "@emotion/styled";
 const CustomTextField = styled(TextField)(({ theme }) => ({
@@ -75,10 +76,16 @@ const AuthLogin = ({ title, subtitle }) => {
           callbackUrl: `/`,
           redirect: true,
         });
+        console.log("login",response)
+        if(response.status==201 || response.status ==200){
+          notifySuccess(response?.data?.message)
+     
+        }
         localStorage.setItem("token", response?.data?.access_Token);
       }
     } catch (error) {
       setErrorMessage(error?.response?.data?.message);
+      notifyError(error?.response?.data?.message)
     }
   };
 
@@ -87,6 +94,7 @@ const AuthLogin = ({ title, subtitle }) => {
 
   return (
     <>
+    <ToastComponent/>
       {title ? (
         <Typography fontWeight={"700"} variant="h2" mb={1}>
           {title}

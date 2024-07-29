@@ -1,13 +1,13 @@
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Typography, AppBar, styled } from "@mui/material";
 import Breadcrumbs from "@/app/(components)/mui-components/Breadcrumbs/index";
 import { Tabs, Tab, Button, IconButton } from "@mui/material";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { CustomDropdown } from "../DropdownButton";
-import CustomButtonGroup from '@/app/(components)/mui-components/ButtonGroup/index';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CustomButtonGroup from "@/app/(components)/mui-components/ButtonGroup/index";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -33,7 +33,8 @@ function a11yProps(index) {
 const ChildBarStyled = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
   transition: "none",
-  backgroundColor: '#6099EB', borderRadius: "8px"
+  backgroundColor: "#6099EB",
+  borderRadius: "8px",
 }));
 const getBorderRadius = (index, tabLength) => {
   let borderRadius = {};
@@ -65,17 +66,21 @@ const ManagementGrid = ({
   tabCenter,
   dropDown,
   buttonItem,
-  select
+  select,
 }) => {
-  const tabLength = tabs ? tabs.length : 0
+  const tabLength = tabs ? tabs.length : 0;
+  const buttonLength = CustomButtonGroup ? CustomButtonGroup.length : 0;
+
   const [visibleStart, setVisibleStart] = React.useState(0);
-  const [buttonType, setButtonType] = useState(null)
-console.log(buttonType)
-useEffect(()=>{
-if(select){
-  setButtonType(select)
-}
-},[select])
+  const [buttonType, setButtonType] = useState(null);
+  const visibleButtons =
+    CustomButtonGroup?.slice(visibleStart, visibleStart + 6) || [];
+  console.log(buttonType);
+  useEffect(() => {
+    if (select) {
+      setButtonType(select);
+    }
+  }, [select]);
   const handleNext = () => {
     if (visibleStart + 6 < CustomButtonGroup.length) {
       setVisibleStart(visibleStart + 1);
@@ -86,57 +91,57 @@ if(select){
     if (visibleStart > 0) {
       setVisibleStart(visibleStart - 1);
     }
-  }
+  };
   const handleClick = (item) => {
-    setButtonType(item)
-    handleTableData(item)
-  }
+    setButtonType(item);
+    handleTableData(item);
+  };
   return (
     <>
       {breadcrumbItems && <Breadcrumbs breadcrumbItems={breadcrumbItems} />}
-      <ChildBarStyled position="static"  >
+      <ChildBarStyled position="static">
         <Grid
           container
-          sx={{ padding: "12px", }}
+          sx={{ padding: "12px" }}
           justifyContent={"space-between"}
         >
           <Grid item>
-            {moduleName && <Typography component={"h2"} variant="h3" color="info">
-              {moduleName}
-            </Typography>}
+            {moduleName && (
+              <Typography component={"h2"} variant="h3" color="info">
+                {moduleName}
+              </Typography>
+            )}
           </Grid>
           <Grid item>
-            {buttonItem && <Button
-              variant="contained"
-              size="large"
-            >{buttonItem}</Button>
-            }
+            {buttonItem && (
+              <Button variant="contained" size="large">
+                {buttonItem}
+              </Button>
+            )}
             {!tabs
               ? button && (
-                <Button
-                  onClick={handleClickOpen}
-                  endIcon={<IoMdAddCircleOutline color="#C0FE72" />}
+                  <Button
+                    onClick={handleClickOpen}
+                    endIcon={<IoMdAddCircleOutline color="#C0FE72" />}
+                    variant="contained"
+                    size="large"
+                    type={type}
+                  >
+                    {button}
+                  </Button>
+                )
+              : ""}
+            {dropDown &&
+              dropDown.map((button, index) => (
+                <CustomDropdown
+                  key={index}
                   variant="contained"
                   size="large"
-                  type={type}
-                >
-                  {button}
-                </Button>
-              )
-              : ""}
-            {dropDown && dropDown.map((button, index) => (
-              <CustomDropdown
-                key={index}
-                variant="contained"
-                size="large"
-                buttonname={button.label}
-                menuitems={button.menuItems}
-              />
-            ))}
-
-
+                  buttonname={button.label}
+                  menuitems={button.menuItems}
+                />
+              ))}
           </Grid>
-
         </Grid>
         <Grid container>
           {tabs && (
@@ -148,20 +153,29 @@ if(select){
                 alignItems: "center",
               }}
             >
-              <Tabs value={value} onChange={handleChange} sx={{
-                "& .MuiTabs-indicator": {
-                  backgroundColor: "transparent",
-                }
-              }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                sx={{
+                  "& .MuiTabs-indicator": {
+                    backgroundColor: "transparent",
+                  },
+                }}
+              >
                 {tabs.map((tab, index) => (
-                  <Tab key={index} label={tab.label} {...a11yProps(index)} sx={{
-                    border: "1px solid #fff",
-                    ...getBorderRadius(index, tabLength),
-                    '&.Mui-selected': {
+                  <Tab
+                    key={index}
+                    label={tab.label}
+                    {...a11yProps(index)}
+                    sx={{
                       border: "1px solid #fff",
                       ...getBorderRadius(index, tabLength),
-                    }
-                  }} />
+                      "&.Mui-selected": {
+                        border: "1px solid #fff",
+                        ...getBorderRadius(index, tabLength),
+                      },
+                    }}
+                  />
                 ))}
               </Tabs>
               {button && (
@@ -177,33 +191,83 @@ if(select){
               )}
             </Grid>
           )}
-          {CustomButtonGroup && (<Grid
-            container
-            sx={{
-              p: '0px 12px 12px 12px',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Grid item display={"flex"} alignItems="center" sx={{ border: "1px solid #fff", borderRadius: "10px" }}>
-              {CustomButtonGroup?.slice(visibleStart, visibleStart + 6)?.map((item, index) => (
-                <Grid item key={index} sx={{ borderRadius: "0px", borderRight: index < 5 ? "1px solid #fff" : "" }}>
-                  <ButtonGroup aria-label="Basic button group" variant="text" >
-                    <Button variant={buttonType == item?.name ?"contained" : ""}  sx={{ borderRadius: index === 0? "10px 0 0 10px" : index === 5?"0 10px 10px 0":"0",   borderRight: index < 5 ? "1px solid #fff" : "", color: "#fff" }} onClick={(e) => { handleClick(item?.name) }}>{item?.name}</Button>
-                  </ButtonGroup>
-                </Grid>
-              ))}
-
+          {CustomButtonGroup && (
+            <Grid
+              container
+              sx={{
+                p: "0px 12px 12px 12px",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Grid
+                item
+                display={"flex"}
+                alignItems="center"
+                sx={{ border: "1px solid #fff", borderRadius: "10px" }}
+              >
+                {visibleButtons?.map((item, index) => {
+                  const isLastVisibleButton =
+                    index === visibleButtons.length - 1;
+                  return (
+                    <Grid
+                      item
+                      key={index}
+                      sx={{
+                        borderRadius: "0px",
+                        borderRight: !isLastVisibleButton
+                          ? "1px solid #fff"
+                          : "",
+                      }}
+                    >
+                      <ButtonGroup
+                        aria-label="Basic button group"
+                        variant="text"
+                      >
+                        <Button
+                          variant={buttonType == item?.name ? "contained" : ""}
+                          sx={{
+                            borderRadius:
+                              buttonLength === 1
+                                ? "10px" // Single button case, rounded corners all around
+                                : index === 0 && visibleStart === 0
+                                ? "10px 0 0 10px" // First visible button and it's the first button in the list
+                                : isLastVisibleButton &&
+                                  visibleStart + index === buttonLength - 1
+                                ? "0 10px 10px 0" // Last visible button and it's the last button in the list
+                                : "0", // Middle buttons, no rounded corners
+                            borderRight: !isLastVisibleButton
+                              ? "1px solid #fff"
+                              : "",
+                            color: "#fff",
+                          }}
+                          onClick={(e) => {
+                            handleClick(item?.name);
+                          }}
+                        >
+                          {item?.name}
+                        </Button>
+                      </ButtonGroup>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+              <Grid item>
+                <IconButton
+                  onClick={handlePrevious}
+                  disabled={visibleStart === 0}
+                >
+                  <ArrowForwardIcon style={{ transform: "rotate(180deg)" }} />
+                </IconButton>
+                <IconButton
+                  onClick={handleNext}
+                  disabled={visibleStart + 6 >= CustomButtonGroup.length}
+                >
+                  <ArrowForwardIcon />
+                </IconButton>
+              </Grid>
             </Grid>
-            <Grid item >
-              <IconButton onClick={handlePrevious} disabled={visibleStart === 0}>
-                <ArrowForwardIcon style={{ transform: 'rotate(180deg)' }} />
-              </IconButton>
-              <IconButton onClick={handleNext} disabled={visibleStart + 6 >= CustomButtonGroup.length}>
-                <ArrowForwardIcon />
-              </IconButton>
-            </Grid>
-          </Grid>)}
+          )}
         </Grid>
       </ChildBarStyled>
       {TabPanelList && (
@@ -219,12 +283,3 @@ if(select){
   );
 };
 export default ManagementGrid;
-
-
-
-
-
-
-
-
-

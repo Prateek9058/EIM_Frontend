@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import SuperAdmin from '@/app/(components)/pages-component/userManagement/superAdmin/SuperAdmin'
 import AddUser from '@/app/(components)/pages-component/userManagement/addUser/AddUser'
 import axiosInstance from '@/app/api/axiosInstance'
+import ToastComponent from '@/app/(components)/mui-components/Snackbar'
 
 const UserManagement = () => {
   const[open,setOpen]=useState(false)
@@ -48,7 +49,8 @@ const UserManagement = () => {
 console.log("setType",select)
   return (
     <Grid container >
-      <AddUser open={open} setOpen={setOpen}/>
+      <AddUser open={open} setOpen={setOpen} handleTableData={handleTableData}/>
+      <ToastComponent/>
       <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Super Admin"} button={"Add User"} handleClickOpen={handleOpen} handleTableData={handleTableData} CustomButtonGroup={data} TabPanelList={TabPanelList} value={value} handleChange={handleChange} select={select}/>
       <SuperAdmin  type={type ? type : select}/>
     </Grid>

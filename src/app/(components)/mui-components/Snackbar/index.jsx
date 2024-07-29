@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const ToastComponent = () => {
   return (
     <div>
-      <ToastContainer  autoClose={3000}
+      <ToastContainer autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

@@ -11,8 +11,7 @@ import {
 } from "@mui/material";
 import CustomTable from "../index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
-import { GrMapLocation } from "react-icons/gr";
-
+import { PiCarBattery } from "react-icons/pi";
 const Table = ({
   data,
   heading,
@@ -30,14 +29,10 @@ const Table = ({
   getDataFromChildHandler,
 }) => {
   const columns = [
-    "Region",
-    "E-Tractor ID",
-    "Current status",
-    "Total Travelled (km)",
-    "Avg. consumption(kWh/km)",
-    "Total units consumed(kWh)",
-    "Avg. payload (Ton)",
-    "Action",
+    "Station ID",
+    "SS status",
+    "Swapping queue",
+    "Battery availability status",
   ];
   const [open, setOpenDialog] = React.useState(false);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
@@ -66,41 +61,44 @@ const Table = ({
   const handleCancel = () => {
     setOpenDialog(false);
   };
+  const Colordata = [
+    { id: 1, color: "#C0FE72" ,title:"charged"},
+    { id: 2, color: "#FF0000",title:"discharged" },
+    { id: 3, color: "#FF0000" ,title:"discharged"},
+    { id: 4, color: "#FFC300" ,title:"charging"},
+    // Add more items as needed
+  ];
 
   const getFormattedData = (data) => {
     console.log("data", data);
     return data?.map((item, index) => ({
-      region:item?.region ??"NA",
-      id: item?.id ?? "N/A",
+      Id: item?.Id ?? "N/A",
       status: (
         <Box>
           <Typography
             sx={{
-              color:
-                item?.status === "Charging"? "#BFFC72": item?.status === "Parked"? "#FFC700":item?.status === "Trip"?"#1A2773"
-                  : "#FF0000"
+              color: item?.status === "Occupied" ? "#C2FD73" : "#fff",
             }}
           >
             {item?.status ? item?.status : "NA"}
           </Typography>
         </Box>
       ),
-      totaltraveled: item?.totaltraveled ?? "N/A",
-      avgconsumption: item?.avgconsumption ? item?.avgconsumption : "--",
-      mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
-      mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
+      chargingcycle: item?.chargingcycle ?? "N/A",
+
       Action: [
-        <Grid container justifyContent="center" spacing={2} key={index}>
-          <Grid item xs={12}>
-            <Tooltip title="View">
-                <IconButton size="small">
-                  <GrMapLocation color="#C0FE72" />
-                </IconButton>
+        <Grid container justifyContent="center" spacing={2} >
+        {Colordata?.map((item, index) => (
+          <Grid item xs={6} md={3} key={item.id}>
+            <Tooltip title={item?.title}>
+              <IconButton size="small">
+                <PiCarBattery color={item.color} />
+              </IconButton>
             </Tooltip>
           </Grid>
-        </Grid>,
+        ))}
+      </Grid>
       ],
-
     }));
   };
 
@@ -123,19 +121,12 @@ const Table = ({
         <Grid item className="customSearch">
           <Grid container>
             <Grid item mr={1}>
-   {     button &&      <Button variant="contained" onClick={handleView}>{button}</Button>}
+              {button && (
+                <Button variant="contained" onClick={handleView}>
+                  {button}
+                </Button>
+              )}
             </Grid>
-            {/* <Grid item mr={1}>
-              <CommonDatePicker
-                getDataFromChildHandler={getDataFromChildHandler}
-              />
-            </Grid> */}
-            {/* <CustomTextField
-                            type="search"
-                            placeholder="Search empId / Name"
-                            value={debouncedSearchQuery}
-                            onChange={handleSearchChange}
-                        /> */}
           </Grid>
         </Grid>
       </Grid>

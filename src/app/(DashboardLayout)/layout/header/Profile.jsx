@@ -73,7 +73,7 @@ export default function AccountMenu() {
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: "background.paper",
+              bgcolor:"primary",
               transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
@@ -88,7 +88,7 @@ export default function AccountMenu() {
         <Divider />
         <MenuItem
           onClick={() => {
-            handleClose(), router.push("/profile");
+            handleClose(), router.push("/settings");
           }}
         >
           <ListItemIcon>

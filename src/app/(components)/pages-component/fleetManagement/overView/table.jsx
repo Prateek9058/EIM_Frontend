@@ -35,11 +35,14 @@ const Table = ({
     "Region",
     "E-tractor ID",
     "Status",
+    "Avg. speed (km/hr.)",
     "Avg. Payload (Ton)",
-    "Avg. Consumption",
-    "Numberplate",
-    "Current Soc",
-    "Effective Range",
+    "Total distance travelled(km)",
+    "Avg. Consumption(kwh/km)",
+    "Breakdown",
+    "NumberPlate",
+    "Current Soc(%)",
+    "Effective Range(km)",
     "Action",
   ];
   const [open, setOpenDialog] = React.useState(false);
@@ -72,8 +75,8 @@ const Table = ({
   const getFormattedData = (data) => {
     console.log("data", data);
     return data?.map((item, index) => ({
-      region: item?.port ? item?.port?.regionName : "NA",
-      fleetId: item?.fleetId ? item?.fleetId : "NA",
+      region: item?.port ? item?.port?.regionName : "--",
+      fleetId: item?.fleetId ? item?.fleetId : "--",
       status: (
         <Box>
           <Typography
@@ -83,18 +86,21 @@ const Table = ({
                   ? "#BFFC72"
                   : item?.status === "parked"
                   ? "#FFC700"
-                  : "#0F0D15",
+                  : item?.status === "trip"?"#0F0D15":"#fff",
             }}
           >
-            {item?.status ? item?.status : "NA"}
+            {item?.status ? item?.status : "--"}
           </Typography>
         </Box>
       ),
-      avgPayload: item?.avgPayload ? item?.avgPayload : "N/A",
-      avgConsumption: item?.avgConsumption ? item?.avgConsumption : "N/A",
-      breakdown: item?.numberPlate ? item?.numberPlate : "N/A",
-      currentSoc: item?.currentSoc ? item?.currentSoc : "N/A",
-      effectiveRange: item?.effectiveRange ? item?.effectiveRange : "N/A",
+      avgSpeed: item?.avgSpeed ? item?.avgSpeed : "--",
+      avgPayload: item?.avgPayload ? item?.avgPayload : "--",
+      totalDistance: item?.totalDistance ? item?.totalDistance : "--",
+      avgConsumption: item?.avgConsumption ? item?.avgConsumption : "--",
+      breakdown: item?.breakdown ? item?.breakdown : "--",
+      numberPlate: item?.numberPlate ? item?.numberPlate : "--",
+      currentSoc: item?.currentSoc ? item?.currentSoc : "--",
+      effectiveRange: item?.effectiveRange ? item?.effectiveRange : "--",
       Action: [
         <Grid container justifyContent="center" spacing={2} key={index}>
           <Grid item xs={12}>

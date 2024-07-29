@@ -12,11 +12,13 @@ import { CustomGrid } from "@/app/(components)/mui-components/CustomGrid";
 import { useForm } from "react-hook-form";
 import { Visibility,VisibilityOff } from "@/app/(components)/mui-components/icons";
 import { useRouter } from "next/navigation";
+import axiosInstance from "@/app/api/axiosInstance";
+import ToastComponent,{notifyError,notifySuccess} from "@/app/(components)/mui-components/Snackbar";
 
 const breadcrumbItems = [
   { label: "Dashboard", link: "/" },
   { label: "Settings", link: "/settings" },
-  { label: "Edit", link: "/settings/edit" },
+  { label: "Change Password", link: "/settings/edit" },
 ];
 const Edit = () => {
   const { register, handleSubmit, formState, getValues } = useForm();
@@ -32,15 +34,27 @@ const Edit = () => {
       setConfirmPasswordVisible((prev) => !prev);
     }
   };
-  const onsubmit = () => {
+  const onsubmit = async(formData) => {
     console.log("sdljgjakjh", formData);
+    try {
+      const res=await axiosInstance.put('/auth/changePassword',formData)
+      if(res.status ===200 || res.status===201)
+      {notifySuccess(res?.data?.message)
+        console.log(res)
+      }
+    } catch (error) {
+      console.log(error)
+      notifyError(error?.response?.data?.message)
+      
+    }
   };
   const handleBackClick = () => {
-    router.push('/settings'); // Replace '/desired-page' with your actual route
+    router.push('/settings')
   };
   return (
     <Grid container rowGap={2} position={"relative"}>
-      <ManagementGrid moduleName={"Edit"} breadcrumbItems={breadcrumbItems} />
+      <ToastComponent/>
+      <ManagementGrid moduleName={"Change Password"} breadcrumbItems={breadcrumbItems} />
       <form onSubmit={handleSubmit(onsubmit)}>
         <Grid container>
           <CustomGrid container>
@@ -53,11 +67,11 @@ const Edit = () => {
                   placeholder="Enter current password"
                   fullWidth
                   type={"password"}
-                  {...register("password", {
+                  {...register("currentPassword", {
                     required: "current password is required!",
                   })}
-                  error={!!errors.password}
-                  helperText={errors.password?.message}
+                  error={!!errors.currentPassword}
+                  helperText={errors.currentPassword?.message}
                 />
               </Grid>
               <Grid item xs={5}>
@@ -81,7 +95,7 @@ const Edit = () => {
                       </IconButton>
                     ),
                   }}
-                  {...register("newpassword", {
+                  {...register("newPassword", {
                     required: "password is required!",
                     pattern: {
                       value:
@@ -90,8 +104,8 @@ const Edit = () => {
                         "must conatin atleast 1 uppercase letter, lowercase letter, digit, and special character and must be of 6 digit",
                     },
                   })}
-                  error={!!errors.newpassword}
-                  helperText={errors.newpassword?.message}
+                  error={!!errors.newPassword}
+                  helperText={errors.newPassword?.message}
                 />
               </Grid>
               <Grid item xs={5}>
@@ -117,16 +131,16 @@ const Edit = () => {
                       </IconButton>
                     ),
                   }}
-                  {...register("confirm", {
+                  {...register("confirmPassword", {
                     required: "",
                     validate: (value) => {
-                      return value === getValues("newpassword")
+                      return value === getValues("newPassword")
                         ? null
                         : "password mismatched!";
                     },
                   })}
-                  error={errors.confirm ? true : false}
-                  helperText={errors.confirm && errors.confirm.message}
+                  error={!!errors.confirmPassword}
+                  helperText={errors.confirmPassword?.message}
                 />
               </Grid>
             </Grid>

@@ -29,7 +29,7 @@ const Scheduling = () => {
     { label: "Scheduling", link: "/scheduling" },
   ];
   const droDownButtons = [
-    { label: "Region", menuItems: ["Daily", "Weekly", "Yearly"] },
+    { label: "Region", menuItems:  ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"] },
     { label: "Customer", menuItems: ["Customer 1", "Customer 2", "Customer 3"] },
 ]
   return (

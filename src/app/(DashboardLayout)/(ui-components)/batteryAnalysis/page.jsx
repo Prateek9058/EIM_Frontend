@@ -104,7 +104,7 @@ const Page = () => {
     setDate(date);
   };
   const droDownButtons = [
-    { label: "Region", menuItems: ["Daily", "Weekly", "Yearly"] },
+    { label: "Region", menuItems:  ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"] },
     {
       label: "Customer",
       menuItems: ["Customer 1", "Customer 2", "Customer 3"],

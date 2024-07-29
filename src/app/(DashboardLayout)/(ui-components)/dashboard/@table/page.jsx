@@ -1,8 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Grid, IconButton } from "@mui/material";
-import { rows } from "@/app/(components)/table/rows";
+import { rows,RevenueManagementData,E_tractorData } from "@/app/(components)/table/rows";
 import Table from './table'
+import SwappingTable from './swappingTable'
+import ChargingTable from './chargingTable'
 import { useRouter } from "next/navigation";
 
 const Page = () => {
@@ -13,6 +15,8 @@ const Page = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [date, setDate] = useState(null);
   const [data, setData] = useState(null);
+  const [Swappingdata, setSwappingdata] = useState(null);
+  const [Chargingdata, setChargingdata] = useState(null);
   const router=useRouter();
 
   const getDataFromChildHandler = (date, dataArr) => {
@@ -21,6 +25,9 @@ const Page = () => {
 
   useEffect(()=>{
     setData(rows)
+    setSwappingdata(RevenueManagementData)
+    setChargingdata(E_tractorData)
+
   },[])
   const handleView=()=>{
     router.push('/fleetManagement')
@@ -42,8 +49,8 @@ const Page = () => {
         loading={loading}
         getDataFromChildHandler={getDataFromChildHandler}
       />
-      <Table
-        data={data}
+      <SwappingTable
+        data={Swappingdata}
         deviceData={deviceData}
         heading={"Swapping Station"}
         rowsPerPage={rowsPerPage}
@@ -55,8 +62,8 @@ const Page = () => {
         loading={loading}
         getDataFromChildHandler={getDataFromChildHandler}
       />
-      <Table
-        data={data}
+      <ChargingTable
+        data={Chargingdata}
         deviceData={deviceData}
         rowsPerPage={rowsPerPage}
         heading={"Charging Station"}
