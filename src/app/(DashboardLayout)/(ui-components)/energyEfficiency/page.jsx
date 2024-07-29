@@ -1,7 +1,7 @@
 "use client";
 import { Grid, Button, Typography, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { Fleet } from "@/app/(components)/table/rows";
+import { dummyData } from "@/app/(components)/table/rows";
 import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
 import { CustomGrid } from "@/app/(components)/mui-components/CustomGrid/index";
 import ManagementGrid from "@/app/(components)/mui-components/Card";
@@ -74,7 +74,7 @@ const EnergyEfficiency = () => {
     { label: "CS/SS-Efficiency", link: "/energyEfficiency" },
   ];
   useEffect(() => {
-    setData(Fleet);
+    setData(dummyData);
   }, []);
   return (
     <Grid container spacing={2}>

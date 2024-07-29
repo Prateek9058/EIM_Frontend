@@ -64,7 +64,7 @@ const Table = ({
   const getFormattedData = (data) => {
     console.log("data", data);
     return data?.map((item, index) => ({
-      Id: item?.Id ?? "N/A",
+      Id: item?.Id ?? "--",
       status: (
         <Box>
           <Typography
@@ -76,7 +76,7 @@ const Table = ({
           </Typography>
         </Box>
       ),
-      chargingcycle: item?.chargingcycle ?? "N/A",
+      chargingcycle: item?.chargingcycle ?? "--",
 
       Action: [
         <Grid container justifyContent="center" spacing={2} key={index} >

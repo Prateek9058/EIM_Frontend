@@ -64,7 +64,8 @@ const Charging = ({ value }) => {
         'Total Unit',
         'Selected Package',
         'Variable Unit',
-        'Total'
+        'Variable bill',
+        'Total bill'
       ]
 
     useEffect(() => {
@@ -103,22 +104,23 @@ const Charging = ({ value }) => {
     const getFormattedData = (data) => {
         console.log("data", data)
         return data?.map((item, index) => ({
-            employeeId :item?.employeeId??"NA",
+            Id :item?.Id?item?.Id:"--",
             chargingcycle:( <Chip
                 key={index}
                 color="primary"
                 sx={{ width: "80px" ,color:"#C0FE72"}}
                 label={ item?.chargingcycle }
             />),   
-            lastName: item?.lastName ?? "N/A",
+            lastName: item?.lastName ?? "--",
             swappingcycle:( <Chip
                 key={index}
                 color="primary"
                 sx={{ width: "80px" ,color:"#C0FE72"}}
                 label={ item?.swappingcycle }
             />),  
-            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
-            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
+            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
+            mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "--",
+            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
             selectedpackage:( <Chip
                 key={index}
                 color="primary"
@@ -126,9 +128,9 @@ const Charging = ({ value }) => {
                 label={ item?.selectedpackage}
                 onClick={()=>{handleOpenFusion(item?.selectedpackage)} }
             />),
-            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
+            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "--",
          
-            jobRole: item?.jobRole ? item?.jobRole : "N/A",
+            jobRole: item?.jobRole ? item?.jobRole : "--",
         }));
     }
     return (

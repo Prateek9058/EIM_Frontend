@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react'
 import Table from './table'
 import {useRouter} from 'next/navigation'
 import { Fleet } from '@/app/(components)/table/rows'
+import { dummyTariff } from "@/app/(components)/table/rows";
+
 
 const TariffManagement = () => {
     const [page, setPage] = React.useState(0);
@@ -29,7 +31,7 @@ const TariffManagement = () => {
         router.push('/tariffManagement/createTariff')
     }
     useEffect(()=>{
-        setData(Fleet)
+        setData(dummyTariff)
         },[])
 
     return (

@@ -93,16 +93,16 @@ const Charging = ({ value ,data,
 
     const getFormattedData = (data) => {
         return data?.map((item, index) => ({
-            region: item?.port?item?.port?.regionName:"NA",
-            fleetId: item?.fleetId ?? "N/A",
-            currentSoc: item?.currentSoc ?? "N/A",
-            currentSoh: item?.currentSoh ?? "N/A",
-            currentUnit: item?.currentUnit ? item?.currentUnit : "N/A",
-            status: item?.status ? item?.status : "N/A",
-            estimatedCharging: item?.estimatedCharging ? item?.estimatedCharging : "N/A",
-            chargingCycle: item?.chargingCycle ? item?.chargingCycle : "N/A",
-            swappingCycle: item?.swappingCycle ? item?.swappingCycle : "N/A",
-            avgCharging: item?.avgCharging ? item?.avgCharging : "N/A",
+            region: item?.port?item?.port?.regionName:"--",
+            fleetId: item?.fleetId ?? "--",
+            currentSoc: item?.currentSoc ?? "--",
+            currentSoh: item?.currentSoh ?? "--",
+            currentUnit: item?.currentUnit ? item?.currentUnit : "--",
+            status: item?.status ? item?.status : "--",
+            estimatedCharging: item?.estimatedCharging ? item?.estimatedCharging : "--",
+            chargingCycle: item?.chargingCycle ? item?.chargingCycle : "--",
+            swappingCycle: item?.swappingCycle ? item?.swappingCycle : "--",
+            avgCharging: item?.avgCharging ? item?.avgCharging : "--",
             Action: [
                 <Grid container justifyContent="center" spacing={2} key={index}>
                     <Grid item xs={12} >

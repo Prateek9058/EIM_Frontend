@@ -3,6 +3,7 @@ import ManagementGrid from '@/app/(components)/mui-components/Card'
 import { Grid, TextField, Typography, Button } from '@mui/material'
 import React from 'react'
 import styled from '@emotion/styled'
+import { useRouter } from 'next/navigation'
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(5),
@@ -30,6 +31,10 @@ const breadcrumbItems = [
   { label: "Create-Tariff", link: "/tariffManagement/createTariff" },
 ];
 const CreateTariff = () => {
+  const router =useRouter();
+  const handleBack =()=>{
+    router.push('/tariffManagement')
+  }
   return (
     <Grid container rowGap={2}>
       <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Create Tariff"} />
@@ -44,7 +49,7 @@ const CreateTariff = () => {
         <TimeRateSection ratePlaceholder="Rate - (0.00)" />
       </CustomGrid>
       <Grid container justifyContent={"flex-end"} columnGap={2} mr={3}>
-        <Button variant='outlined'>Cancel</Button>
+        <Button variant='outlined' onClick={handleBack}>Cancel</Button>
         <Button variant='contained'>Submit</Button>
       </Grid>
 

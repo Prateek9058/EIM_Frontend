@@ -70,7 +70,7 @@ const Table = ({
                   </Typography>
                 </Box>
               ),
-            lastName: item?.lastName ?? "N/A",
+            lastName: item?.lastName ?? "--",
         }));
     };
     return (

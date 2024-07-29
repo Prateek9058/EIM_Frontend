@@ -84,39 +84,13 @@ const Table = ({
     const getFormattedData = (data) => {
         console.log("data", data)
         return data?.map((item, index) => ({
-            employeeId: (
-                <Box>
-                    <span>{item?.employeeId}</span>
-                    <Box
-                        component="span"
-                        sx={{
-                            display: "inline-block",
-                            width: "10px",
-                            height: "10px",
-                            borderRadius: "50%",
-                            backgroundColor: item.color,
-                            marginLeft: "10px",
-                        }}
-                    />
-                </Box>
-            ),
-
-            status: (
-                <Box>
-                    <Typography
-                        sx={{
-                            color: item?.status === 'charging' ? 'green' : item?.status === 'Parked' ? 'yellow' : 'blue'
-                        }}
-                    >
-                        {item?.status ? item?.status : "NA"}
-                    </Typography>
-                </Box>
-            ),
-            lastName: item?.lastName ?? "N/A",
-            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
-            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
-            mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "N/A",
+            employeeId: item?.employeeId ??'--',
+            status:item?.status??'--',
+            lastName: item?.lastName ?? "--",
+            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "--",
+            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
+            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
+            mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "--",
         }));
     };
 

@@ -115,23 +115,23 @@ const Charging = ({ value ,data,
     const getFormattedData = (data) => {
         console.log("data", data)
         return data?.map((item, index) => ({
-            region: item?.port?item?.port?.regionName:"NA",
-            fleetId: item?.fleetId ?? "N/A",
+            region: item?.port?item?.port?.regionName:"--",
+            fleetId: item?.fleetId ?? "--",
             trip: (<Chip
                 key={index}
                 color='primary'
                 sx={{ width: "50px" }}
                 label={item?.trip ??"NA"}
             />),
-            avgSpeed: item?.avgSpeed ? item?.avgSpeed : "N/A",
-            avgPayload: item?.avgPayload ? item?.avgPayload : "N/A",
-            maxPayload: item?.maxPayload ? item?.maxPayload : "N/A",
-            distance: item?.distance ? item?.distance : "N/A",
-            breakdown: item?.breakdown ? item?.breakdown : "N/A",
-            totalUnit: item?.totalUnit ? item?.totalUnit : "N/A",
-            totalHandle: item?.totalHandle ? item?.totalHandle : "N/A",
-            mobileNumber8: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            jobRole: item?.jobRole ? item?.jobRole : "N/A",
+            avgSpeed: item?.avgSpeed ? item?.avgSpeed : "--",
+            avgPayload: item?.avgPayload ? item?.avgPayload : "--",
+            maxPayload: item?.maxPayload ? item?.maxPayload : "--",
+            distance: item?.distance ? item?.distance : "--",
+            breakdown: item?.breakdown ? item?.breakdown : "--",
+            totalUnit: item?.totalUnit ? item?.totalUnit : "--",
+            totalHandle: item?.totalHandle ? item?.totalHandle : "--",
+            mobileNumber8: item?.mobileNumber ? item?.mobileNumber : "--",
+            jobRole: item?.jobRole ? item?.jobRole : "--",
             Action: [
                 <Grid container justifyContent="center" spacing={2} key={index}>
                     <Grid item xs={12} >

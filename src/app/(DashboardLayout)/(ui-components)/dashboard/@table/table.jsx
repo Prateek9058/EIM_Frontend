@@ -71,7 +71,7 @@ const Table = ({
     console.log("data", data);
     return data?.map((item, index) => ({
       region:item?.region ??"NA",
-      id: item?.id ?? "N/A",
+      id: item?.id ?? "--",
       status: (
         <Box>
           <Typography
@@ -85,7 +85,7 @@ const Table = ({
           </Typography>
         </Box>
       ),
-      totaltraveled: item?.totaltraveled ?? "N/A",
+      totaltraveled: item?.totaltraveled ?? "--",
       avgconsumption: item?.avgconsumption ? item?.avgconsumption : "--",
       mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
       mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",

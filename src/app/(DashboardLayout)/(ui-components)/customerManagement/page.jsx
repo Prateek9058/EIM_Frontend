@@ -4,7 +4,7 @@ import { Grid } from '@mui/material'
 import ManagementGrid from '@/app/(components)/mui-components/Card'
 import Table from './table'
 import {useRouter} from 'next/navigation'
-import { Fleet } from '@/app/(components)/table/rows'
+import { Fleet ,dummyCustomerData} from '@/app/(components)/table/rows'
 import axiosInstance from '@/app/api/axiosInstance'
 
 

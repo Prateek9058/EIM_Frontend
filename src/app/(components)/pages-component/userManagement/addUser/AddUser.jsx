@@ -73,17 +73,22 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     reset();
     setManager();
     setRole();
+    setSelectRole();
+
   };
   const handleOpen = () => {
     setOpen1(true);
   };
   const upLoadFile = async (formdata2) => {
-    if (!file) {
-      notifyError("No file selected");
-      return;
-    }
+    // if (!file) {
+    //   notifyError("No file selected");
+    //   return;
+    // }
     const formData = new FormData();
-    formData.append("image", file);
+    if(file){
+      formData.append("image", image);
+      }
+    
     formData.append("userName", formdata2.userName);
     formData.append("emailId", formdata2.emailId);
     formData.append("mobileNumber", formdata2.mobileNumber);
@@ -92,7 +97,9 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     formData.append("address", formdata2.address);
     formData.append("employeeId", formdata2.employeeId);
     formData.append("parent", formdata2.parent);
+    if(formdata2.subAdmin){
     formData.append("subAdmin", formdata2.subAdmin);
+    }
     try {
       const response = await axiosInstanceImg.post(
         "/user/createUser",
@@ -166,6 +173,7 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     setSelectManager();
     setRole();
     setSelectRole();
+    setFile()
   };
   useEffect(() => {
     AddSubAdmin();
@@ -201,7 +209,7 @@ export default function AddUser({ open, setOpen, handleTableData }) {
                   Add New Role
                 </Button>
               </Grid>
-              {file ? (
+              { file ? (
                 <Grid
                   container
                   direction="column"
@@ -244,7 +252,7 @@ export default function AddUser({ open, setOpen, handleTableData }) {
                   </Typography>
                 </Grid>
               ) : (
-               selectRole?.toLowerCase() ==='sub admin' && (
+               (selectRole?.toLowerCase() ==='sub admin') && (
                   <Grid
                     container
                     direction="column"

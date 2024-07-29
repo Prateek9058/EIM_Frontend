@@ -54,21 +54,21 @@ export const Trip = [
     { region: 'Brazil', VehicleId: 'BR', status: "Trip", avgSpeed: 8515767, avgPayload: 24.67,TotalTripDay:5,TotalTripmonth:26,value:15,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89, },
   ]; 
 export const ChargingStationRow = [
-    { region: 'India',Id: 'IN', status: "Online", avgSpeed: 3287263,avgPayload: 402.69 ,TotalTripDay:5,TotalTripmonth:26,value:1,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'China',Id: 'CN', status: 'Offline', avgSpeed: 9596961, avgPayload: 146.16 ,TotalTripDay:5,TotalTripmonth:26,value:2,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'Italy',Id: 'IT', status: 'Offile', avgSpeed: 301340, avgPayload: 200.85,TotalTripDay:5,TotalTripmonth:26 ,value:3,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'United States',Id: 'US', status: 'Online', avgSpeed: 9833520, avgPayload: 33.26,TotalTripDay:5,TotalTripmonth:26 ,value:4,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'Canada',Id: 'CA', status: "Online", avgSpeed: 9984670, avgPayload: 3.77 ,TotalTripDay:50,TotalTripmonth:26,value:5,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'Australia',Id: 'AU', status: 'Offline', avgSpeed: 7692024, avgPayload: 3.31 ,TotalTripDay:596,TotalTripmonth:26,value:6,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'Germany',Id: 'DE', status: "Offline", avgSpeed: 357578, avgPayload: 232.21,TotalTripDay:5,TotalTripmonth:26 ,value:7,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'Ireland',Id: 'IE', status: "Online", avgSpeed: 70273, avgPayload: 69.13 ,TotalTripDay:5,TotalTripmonth:26,value:8,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'Mexico',Id: 'MX', status: "Offline",avgSpeed: 1972550,avgPayload: 64.18 ,TotalTripDay:5,TotalTripmonth:26,value:9,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'Japan',Id: 'JP', status: 'Ofiilne', avgSpeed: 377973, avgPayload: 334.38 ,TotalTripDay:5,TotalTripmonth:26,value:10,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'France',Id: 'FR', status: "Ofiilne", avgSpeed: 640679, avgPayload: 104.62 ,TotalTripDay:5,TotalTripmonth:26,value:11,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'United Kingdom',Id: 'GB', status:"Online", avgSpeed: 242495, avgPayload: 278.39,TotalTripDay:5,TotalTripmonth:26,value:12,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89, },
-    { region: 'Russia',Id: 'RU', status:"Online", avgSpeed: 17098246, avgPayload: 8.58 ,TotalTripDay:5,TotalTripmonth:26,value:13,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'Nigeria',Id: 'NG', status: "Ofiilne", avgSpeed: 923768, avgPayload: 217.46,TotalTripDay:5,TotalTripmonth:26 ,value:14,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
-    { region: 'Brazil',Id: 'BR', status: "Ofiilne", avgSpeed: 8515767, avgPayload: 24.67,TotalTripDay:5,TotalTripmonth:26,value:15,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89, },
+    { region: '75hkjuz94',Id: 'IN', status: "Online", avgSpeed: 3287263,avgPayload: 402.69 ,TotalTripDay:5,TotalTripmonth:26,value:1,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    { region: '75hkjuz94',Id: 'CN', status: 'Offline', avgSpeed: 9596961, avgPayload: 146.16 ,TotalTripDay:5,TotalTripmonth:26,value:2,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    { region: '75hkjuz94',Id: 'IT', status: 'Offile', avgSpeed: 301340, avgPayload: 200.85,TotalTripDay:5,TotalTripmonth:26 ,value:3,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    { region: '75hkjuz94 ',Id: 'US', status: 'Online', avgSpeed: 9833520, avgPayload: 33.26,TotalTripDay:5,TotalTripmonth:26 ,value:4,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    { region: '',Id: 'CA', status: "Online", avgSpeed: 9984670, avgPayload: 3.77 ,TotalTripDay:50,TotalTripmonth:26,value:5,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    { region: '',Id: 'AU', status: 'Offline', avgSpeed: 7692024, avgPayload: 3.31 ,TotalTripDay:596,TotalTripmonth:26,value:6,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    { region: '',Id: 'DE', status: "Offline", avgSpeed: 357578, avgPayload: 232.21,TotalTripDay:5,TotalTripmonth:26 ,value:7,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    { region: '',Id: 'IE', status: "Online", avgSpeed: 70273, avgPayload: 69.13 ,TotalTripDay:5,TotalTripmonth:26,value:8,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    { region: '75hkjuz94',Id: 'MX', status: "Offline",avgSpeed: 1972550,avgPayload: 64.18 ,TotalTripDay:5,TotalTripmonth:26,value:9,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    // { region: 'Japan',Id: 'JP', status: 'Ofiilne', avgSpeed: 377973, avgPayload: 334.38 ,TotalTripDay:5,TotalTripmonth:26,value:10,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    // { region: 'France',Id: 'FR', status: "Ofiilne", avgSpeed: 640679, avgPayload: 104.62 ,TotalTripDay:5,TotalTripmonth:26,value:11,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    // { region: 'United Kingdom',Id: 'GB', status:"Online", avgSpeed: 242495, avgPayload: 278.39,TotalTripDay:5,TotalTripmonth:26,value:12,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89, },
+    // { region: 'Russia',Id: 'RU', status:"Online", avgSpeed: 17098246, avgPayload: 8.58 ,TotalTripDay:5,TotalTripmonth:26,value:13,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    // { region: 'Nigeria',Id: 'NG', status: "Ofiilne", avgSpeed: 923768, avgPayload: 217.46,TotalTripDay:5,TotalTripmonth:26 ,value:14,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89,},
+    // { region: 'Brazil',Id: 'BR', status: "Ofiilne", avgSpeed: 8515767, avgPayload: 24.67,TotalTripDay:5,TotalTripmonth:26,value:15,breakdown:61,currentsoc:9,estimated:52,schedulingstatus:89, },
   ]; 
 export const E_tractorData = [
   { region: 'India',Id: '75hkjuz94', status: "Occupied", avgSpeed: 3287263,swappingcycle: 402.69 ,chargingcycle:5,TotalTripmonth:26,value:1,selectedpackage:"fusion A",currentsoc:9,estimated:52,schedulingstatus:89,},
@@ -104,3 +104,133 @@ export const  RevenueManagementData = [
     // { region: 'Nigeria',Id: 'NG', status: "Trip", avgSpeed: 923768, swappingcycle: 217.46,chargingcycle:5,TotalTripmonth:26 ,value:14,selectedpackage:"fusion A",currentsoc:9,estimated:52,schedulingstatus:89,},
     // { region: 'Brazil',Id: 'BR', status: "Trip", avgSpeed: 8515767, swappingcycle: 24.67,chargingcycle:5,TotalTripmonth:26,value:15,selectedpackage:"fusion A",currentsoc:9,estimated:52,schedulingstatus:89, },
   ]; 
+   export const dummyTariff = [
+    {
+      employeeId: "49zalcd28",
+      color: "#C0FE72",
+      status: "Tariff 1",
+      lastName: "7",
+      mobileNumber: "-1.5",
+      mobileNumber1:  "-5.5",
+      mobileNumber2:  "-2.5",
+      mobileNumber3: "123-456-7893"
+    },
+    {
+      employeeId: "49zalcd28",
+      color: "#FF5722",
+      status: "Tariff 1",
+      lastName: "7",
+      mobileNumber: "-1.5",
+      mobileNumber1:  "-5.5",
+      mobileNumber2: "-2.5",
+      mobileNumber3: "234-567-8904"
+    },
+    {
+      employeeId: "49zalcd28",
+      color: "#3F51B5",
+      status: "Tariff 1",
+      lastName: "7",
+      mobileNumber: "-1.5",
+      mobileNumber1:  "-5.5",
+      mobileNumber2: "-2.5",
+      mobileNumber3: "345-678-9015"
+    }
+  ];
+
+export const dummyCustomerData = [
+  {
+    portId: "P001",
+    color: "#C0FE72",
+    name: "Port Alpha",
+    regionName: "North",
+    customer:  "John Doe" ,
+    tariff:  "Tariff " 
+  },
+  {
+    portId: "P002",
+    color: "#FF5722",
+    name: "Port Beta",
+    regionName: "East",
+    customer:  "Jane Smith" ,
+    tariff: "Tariff " 
+  },
+  {
+    portId: "P003",
+    color: "#3F51B5",
+    name: "Port Gamma",
+    regionName: "West",
+    customer: "Alice Johnson",
+    tariff: "Tariff " 
+  }
+];
+export const dummyData = [
+  {
+    batteryId: "B001",
+    status: "",
+    lastName: "Smith",
+    mobileNumber: "",
+    mobileNumber1: "123-456-7891",
+    mobileNumber2: "11.2",
+    mobileNumber4: "1",
+    mobileNumber5: "14 min ago",
+    jobRole: ""
+  },
+  {
+    batteryId: "B002",
+   
+    status: "",
+    lastName: "Doe",
+    mobileNumber: "",
+    mobileNumber1: "234-567-8902",
+    mobileNumber2: "61.2",
+    mobileNumber4: "2",
+    mobileNumber5: "",
+    jobRole: ""
+  },
+  {
+    batteryId: "B003",
+  
+    status: "Available ",
+    lastName: "Johnson",
+    mobileNumber: "",
+    mobileNumber1: "345-678-9013",
+    mobileNumber2: "61.2",
+    mobileNumber4: "3",
+    mobileNumber5: "14 min ago",
+    jobRole: "Low capacity"
+  }
+];
+export const particularBatteryData = [
+  {
+    date: "2024-07-29",
+    temperature: 25.3,
+    voltage: 3.7,
+    soc: 85,
+    soh: 95,
+    error: "None"
+  },
+  {
+    date: "2024-07-28",
+    temperature: 27.1,
+    voltage: 3.8,
+    soc: 80,
+    soh: 93,
+    error: "Low Voltage"
+  },
+  {
+    date: "2024-07-27",
+    temperature: 26.4,
+    voltage: 3.6,
+    soc: 78,
+    soh: 92,
+    error: "Over Temperature"
+  },
+  {
+    date: "2024-07-26",
+    temperature: 24.8,
+    voltage: 3.7,
+    soc: 82,
+    soh: 94,
+    error: "None"
+  }
+];

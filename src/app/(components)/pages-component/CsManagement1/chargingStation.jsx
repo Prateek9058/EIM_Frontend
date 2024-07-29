@@ -40,15 +40,12 @@ const buttonData = [
 ];
 const columns = [
   "Charger Station ID",
-  "Charger Status",
+  "Status",
   "Hub Name",
-  "Charger Name",
-  "Host Details",
-  "Protocols",
-  "Uptime",
-  "Make",
-  "Firmware version",
-  "Firmware Update",
+  "In queue",
+  "Currently charging",
+  "Avg. charging time",
+  "Peak hours",
   "Action",
 ];
 const Charging = ({ value }) => {
@@ -96,7 +93,7 @@ const Charging = ({ value }) => {
   const getFormattedData = (data) => {
     console.log("data", data);
     return data?.map((item, index) => ({
-      employeeId :item?.employeeId??"NA",
+      region :item?.region?item?.region:"--",
       status: (
         <Box>
           <Typography
@@ -104,18 +101,16 @@ const Charging = ({ value }) => {
               color: item?.status === "Online" ? "green" : "red",
             }}
           >
-            {item?.status ? item?.status : "NA"}
+            {item?.status ? item?.status : "--"}
           </Typography>
         </Box>
       ),
-      lastName: item?.lastName ?? "N/A",
-      mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
-      mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
-      mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
-      mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "N/A",
-      mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
-      mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
-      jobRole: item?.jobRole ? item?.jobRole : "N/A",
+      lastName: item?.lastName ?? "--",
+      mobileNumber: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
+      mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
+
+      value: item?.value ? item?.value : "--",
       Action: [
         <Grid container justifyContent="center" spacing={2} key={index}>
           <Grid item xs={12}>

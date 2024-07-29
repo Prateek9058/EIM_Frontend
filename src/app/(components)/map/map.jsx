@@ -15,6 +15,7 @@ const Page = ({ iconUrls, buttonData, Height, coordinate }) => {
     width: '100%',
     borderRadius:"16px",
     height: Height ? Height : "364px",
+
   };
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -71,7 +72,7 @@ const Page = ({ iconUrls, buttonData, Height, coordinate }) => {
   }));
 
   return (
-    <Grid container rowGap={2} xs={12} sx={{borderRadius:"16px"}}>
+    <Grid container rowGap={2} xs={12} sx={{borderRadius:"16px",}}>
       {isLoaded &&
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -111,21 +112,21 @@ const Page = ({ iconUrls, buttonData, Height, coordinate }) => {
               )}
               </Marker>
             ))}
-            <Grid container xs={12}>
+            <Grid container xs={12} sx={{position:"relative"}}>
               <Box
                 sx={{
                   position: "absolute",
-                  top: "85%",
-                  left: "25%",
+                  top: 320,
+                  left: "50%",
+                  transform: "translateX(-50%)",
                   display: 'flex',
-                  flexDirection: 'column',
+                  justifyContent: 'center',
                   alignItems: 'center',
-                  '& > *': {
-                    m: 1,
-                  },
+                  width: '100%',
+                  mb: 2, // Optional: Adds margin at the bottom
                 }}>
                 {buttonData &&
-                  <ButtonGroup variant="contained" aria-label="Basic button group" sx={{ bgcolor: 'background.paper',color:"#000" }}>
+                  <ButtonGroup variant="contained" aria-label="Basic button group" >
                     {buttonData.map((button, index) => (
                       <Button
                         key={index}

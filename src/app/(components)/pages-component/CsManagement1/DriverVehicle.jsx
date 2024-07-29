@@ -99,19 +99,19 @@ const Charging = ({ value }) => {
     const getFormattedData = (data) => {
         console.log("data", data)
         return data?.map((item, index) => ({
-            employeeId :item?.employeeId??"NA",
+            Id :item?.Id?item?.Id:"--",
             chargingcycle:( <Chip
                 key={index}
                 color="primary"
                 sx={{ width: "80px" }}
                 label={ item?.chargingcycle }
             />),   
-            lastName: item?.lastName ?? "N/A",
-            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
-            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
-            mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
-            jobRole: item?.jobRole ? item?.jobRole : "N/A",
+            lastName: item?.lastName ?? "--",
+            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "--",
+            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
+            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
+            mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "--",
+            jobRole: item?.jobRole ? item?.jobRole : "--",
             Action: [
                 <Grid container justifyContent="center" spacing={2} key={index}>
                     <Grid item xs={12} >

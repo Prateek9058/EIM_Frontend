@@ -75,10 +75,10 @@ const Table = ({
                 </Box>
             ),
 
-            firstName: item?.firstName ?? "N/A",
-            lastName: item?.lastName ?? "N/A",
-            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            jobRole: item?.jobRole ? item?.jobRole : "N/A",
+            firstName: item?.firstName ?? "--",
+            lastName: item?.lastName ?? "--",
+            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "--",
+            jobRole: item?.jobRole ? item?.jobRole : "--",
         
         }));
     };

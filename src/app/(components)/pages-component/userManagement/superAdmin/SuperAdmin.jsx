@@ -101,12 +101,12 @@ const Table = ({
                     />
                 </Box>
             ),
-            mobileNumber: item?.mobileNumber ?? "N/A",
-            emailId: item?.emailId ?? "N/A",
-            address: item?.address ? item?.address : "N/A",
-            role: item?.role ? item?.role : "N/A",
-            subAdmin: item?.subAdmin ? item?.subAdmin?.userName : "N/A",
-            parent: item?.parent?.userName ? item?.parent?.userName : "N/A",
+            mobileNumber: item?.mobileNumber ?? "--",
+            emailId: item?.emailId ?? "--",
+            address: item?.address ? item?.address : "--",
+            role: item?.role ? item?.role : "--",
+            subAdmin: item?.subAdmin ? item?.subAdmin?.userName : "--",
+            parent: item?.parent?.userName ? item?.parent?.userName : "--",
             Action: [
                 <Grid container justifyContent="center" spacing={2} key={index}>
                     <Grid item xs={4} >

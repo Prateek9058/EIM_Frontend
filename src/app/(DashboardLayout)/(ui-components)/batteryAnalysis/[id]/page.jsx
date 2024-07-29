@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Table from './table'
 import { useSearchParams } from 'next/navigation'
 import axiosInstance from "@/app/api/axiosInstance";
+import { particularBatteryData } from "@/app/(components)/table/rows";
 
 const Page = ({ params }) => {
     const [page, setPage] = React.useState(0);
@@ -21,19 +22,20 @@ const Page = ({ params }) => {
             const response = await axiosInstance(`/battery/getOne/${params?.id}?page=${page + 1
                 }&pageSize=${rowsPerPage}&search=${searchQuery}`)
             console.log("battery", response)
-            setData(response?.data)
+            // setData(response?.data)
 
         } catch (error) {
             console.log(error)
         }
     }
     useEffect(() => {
-        handleEachBattery()
-    }, [page, rowsPerPage, searchQuery, date])
+        // handleEachBattery()
+        setData(particularBatteryData)
+    }, [])
     return (
         <Grid container rowGap={2} sm={12} md={12}>
             <Table
-                data={[]}
+                data={data}
                 params={params}
                 rowsPerPage={rowsPerPage}
                 setRowsPerPage={setRowsPerPage}

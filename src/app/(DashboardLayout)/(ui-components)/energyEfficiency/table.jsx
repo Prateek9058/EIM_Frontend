@@ -54,34 +54,6 @@ const Table = ({
     const handleCancel = () => {
         setOpenDialog(false);
     };
-
-    const getStatus = (str) => {
-        if (str?.toUpperCase() === "ACTIVE")
-            return { status: "ACTIVE", color: "customChip activeGreen" };
-        else return { status: "InActive", color: "customChip activeRed" };
-    };
-    const getStatusInfo = (ele, index) => {
-        if (ele?.toUpperCase() === "ACTIVE") {
-            return [
-                <Chip
-                    key={index}
-                    sx={{ width: "120px" }}
-                    className="customChip activeGreen"
-                    label={ele}
-                    color="primary"
-                />,
-            ];
-        } else {
-            return [
-                <Chip
-                    key={index}
-                    className={getStatus(ele)?.color}
-                    sx={{ width: "120px" }}
-                    label={getStatus(ele)?.status}
-                />,
-            ];
-        }
-    };
     const getFormattedData = (data) => {
         console.log("data", data)
         return data?.map((item, index) => ({
@@ -102,25 +74,15 @@ const Table = ({
                 </Box>
             ),
 
-            status: (
-                <Box>
-                    <Typography
-                        sx={{
-                            color: item?.status === 'charging' ? 'green' : item?.status === 'Parked' ? 'yellow' : 'blue'
-                        }}
-                    >
-                        {item?.status ? item?.status : "NA"}
-                    </Typography>
-                </Box>
-            ),
-            lastName: item?.lastName ?? "N/A",
-            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "N/A",
-            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "N/A",
-            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "N/A",
-            // mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "N/A",
-            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "N/A",
-            mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "N/A",
-            jobRole: item?.jobRole ? item?.jobRole : "N/A",
+            status: item?.status ?? "--",
+            lastName: item?.lastName ?? "--",
+            mobileNumber: item?.mobileNumber ? item?.mobileNumber : "--",
+            mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
+            mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
+            // mobileNumber3: item?.mobileNumber3 ? item?.mobileNumber3 : "--",
+            mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "--",
+            mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "--",
+            jobRole: item?.jobRole ? item?.jobRole : "--",
           
         }));
     };

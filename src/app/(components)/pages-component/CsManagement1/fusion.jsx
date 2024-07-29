@@ -36,7 +36,7 @@ export default function AlertDialog({ open, setOpen,fusionValue }) {
                     <Grid container justifyContent={"flex-end"} mt={1}>
                         <Typography sx={{ color: "#fff" }}>Month/year</Typography>
                     </Grid>
-                 {  fusionValue && fusionValue=='fusion B' && <Grid container sx={{ backgroundColor: "#FFFFFF", p: 2, borderRadius: "16px" }} mt={1} rowGap={1}>
+                 {  fusionValue && fusionValue=='fusion B' && <Grid container sx={{ backgroundColor: "#FFFFFF", p: 2, borderRadius: "16px" ,color:"#000"}} mt={1} rowGap={1}>
                         <Grid container justifyContent={"space-between"} alignItems={"center"}>
                             <Typography sx={{ color: "#FF4848" }} variant='h5'>Your Plan Will Expire Soon</Typography>
                             <Typography sx={{ color: "#161861" }} variant='h6'>Expire Date - 6/6/2024</Typography>

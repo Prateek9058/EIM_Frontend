@@ -7,6 +7,7 @@ import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Dat
 import { CustomDownloadExcel } from "@/app/(components)/mui-components/DownloadExcel/index";
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 // import { CustomDownloadExcel } from "../../mui-components/DownloadExcel";
 
 const Table = ({
@@ -28,6 +29,7 @@ const Table = ({
     ];
     const [open, setOpenDialog] = React.useState(false);
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
+    const router=useRouter()
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -52,6 +54,9 @@ const Table = ({
     const handleCancel = () => {
         setOpenDialog(false);
     };
+    const handleClickTarif=()=>{
+router.push('/tariffManagement/createTariff')
+    }
     const getFormattedData = (data) => {
         console.log("data", data)
         return data?.map((item, index) => ({
@@ -71,10 +76,15 @@ const Table = ({
                     />
                 </Box>
             ),
-            name: item?.name ?? "N/A",
-            regionName: item?.regionName? item?.regionName : "N/A",
-            customer: item?.customer?.userName ? item?.customer?.userName : "N/A",
-            tariff: item?.tariff?.name ? item?.tariff?.name : "N/A",
+            name: item?.name ?? "--",
+            regionName: item?.regionName? item?.regionName : "--",
+            customer: item?.customer?.userName ? item?.customer?.userName : "--",
+            tariff: (
+                <Chip 
+                label={item?.tariff?.name?item?.tariff?.name:"--"}
+                color="primary"
+                onClick={handleClickTarif}/>
+            )
         }));
     };
 

@@ -35,7 +35,7 @@ const Scheduling = () => {
   return (
     <Grid container spacing={2} xs={12} sm={12} md={12} lg={12}>
       <Grid item xs={12} >
-        <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Scheduling"} dropDown={droDownButtons} buttonItem={"Refresh"} tabs={tabs} TabPanelList={TabPanelList} value={value} handleChange={handleChange} />
+        <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Scheduling"} dropDown={droDownButtons}  tabs={tabs} TabPanelList={TabPanelList} value={value} handleChange={handleChange} />
       </Grid>
 
     </Grid>

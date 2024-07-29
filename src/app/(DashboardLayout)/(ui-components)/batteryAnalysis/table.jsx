@@ -82,15 +82,15 @@ const Table = ({
     const getFormattedData = (data) => {
         console.log("data", data);
         return data?.map((item, index) => ({
-            batteryId: item?.batteryId ? item?.batteryId : "N/A",
-            status: item?.status ?? "N/A",
-            temperature: item?.temperature ?? "N/A",
-            voltage: item?.voltage ? item?.voltage : "N/A",
-            batterySoc: item?.batterySoc ? item?.batterySoc : "N/A",
-            batterySoh: item?.batterySoh ? item?.batterySoh : "N/A",
-            chargingCycle: item?.chargingCycle ? item?.chargingCycle : "N/A",
-            avgChargingTime: item?.avgChargingTime ? item?.avgChargingTime : "N/A",
-            batteryLocation: item?.batteryLocation ? item?.batteryLocation : "N/A",
+            batteryId: item?.batteryId ? item?.batteryId : "--",
+            status: item?.status ?? "--",
+            temperature: item?.temperature ?? "--",
+            voltage: item?.voltage ? item?.voltage : "--",
+            batterySoc: item?.batterySoc ? item?.batterySoc : "--",
+            batterySoh: item?.batterySoh ? item?.batterySoh : "--",
+            chargingCycle: item?.chargingCycle ? item?.chargingCycle : "--",
+            avgChargingTime: item?.avgChargingTime ? item?.avgChargingTime : "--",
+            batteryLocation: item?.batteryLocation ? item?.batteryLocation : "--",
             Action: [
                 <Grid container justifyContent="center" spacing={2} key={index} width={"130px"}>
                 <Grid item xs={12} sm={4} md={4}>
