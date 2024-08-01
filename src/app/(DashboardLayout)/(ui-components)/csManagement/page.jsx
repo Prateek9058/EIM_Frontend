@@ -40,7 +40,7 @@ const CsManagement = () => {
       const droDownButtons = [
         { label: "Region", menuItems:  ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"] },
         { label: "Customer", menuItems: ["Customer 1", "Customer 2", "Customer 3"] },
-        { label: "Charging Station", menuItems: ["Charging 1", "Charging 2", "Charging 3"] }
+        { label: "Charging Station", menuItems: ["Charging", "Swapping ",] }
       ]
    
     return (

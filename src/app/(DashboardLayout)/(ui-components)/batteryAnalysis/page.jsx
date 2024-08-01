@@ -19,10 +19,7 @@ import { CustomGrid } from "@/app/(components)/mui-components/CustomGrid";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import axiosInstance from "@/app/api/axiosInstance";
 import AddBattery from "./addBattery";
-import ToastComponent, {
-  notifyError,
-  notifySuccess,
-} from "@/app/(components)/mui-components/Snackbar/index";
+import ToastComponent from "@/app/(components)/mui-components/Snackbar/index";
 
 Chart.register(...registerables);
 const data1 = {
@@ -153,7 +150,7 @@ const Page = () => {
       {data2.map((item, index) => {
         const isLargeCard = index >= 2;
         return (
-          <Grid key={index} item xs={12} sm={6} md={isLargeCard ? 3.6 : 2.4}>
+          <Grid key={index} item xs={12} sm={6} lg={isLargeCard ? 3.6 : 2.4} md={6}>
             <CustomGrid>
               <Grid
                 container
@@ -225,8 +222,8 @@ const Page = () => {
             alignItems={"center"}
           >
             <Typography>
-              <AccessTimeFilledIcon sx={{ verticalAlign: "middle" }} /> Units
-              Consumption/Charge (KWh) Report{" "}
+              <AccessTimeFilledIcon sx={{ verticalAlign: "middle" }} />
+              Consumption/Charge (kwh) 
             </Typography>
             <CommonDatePicker
               getDataFromChildHandler={getDataFromChildHandler}

@@ -148,7 +148,7 @@ const Analysis = () => {
         <Grid container justifyContent={"space-between"} alignItems={"center"}>
           <Typography variant="h4">
             <AccessTimeFilled sx={{ verticalAlign: "middle", p: "3px" }} />{" "}
-            E - Tractor travel (Km)
+            E - Tractor travel (km)
           </Typography>
           <CommonDatePicker getDataFromChildHandler={getDataFromChildHandler} />
         </Grid>
@@ -172,7 +172,7 @@ const Analysis = () => {
               <AccessTimeFilled
                 sx={{ verticalAlign: "middle", p: "3px" }}
               />{" "}
-              E - Tractor average consumption (kWh/Km)
+              E - Tractor average consumption (kwh/km)
             </Typography>
           </Grid>
           <Grid mt={2}>

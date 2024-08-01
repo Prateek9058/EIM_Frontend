@@ -15,6 +15,7 @@ import styled from "@emotion/styled";
 import Table from "./table";
 import LinearProgress from "@mui/material/LinearProgress";
 import { ColoredChip } from "@/app/(components)/mui-components/Chip";
+import MapDetails from "@/app/(components)/map/mapDetails";
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -23,10 +24,10 @@ const CustomGrid = styled(Grid)(({ theme }) => ({
   color: "#fff",
 }));
 const iconUrls = [
-  { icon: "/truck1.svg", color: "blue" },
-  { icon: "/truck2.svg", color: "red" },
-  { icon: "/truck3.svg", color: "green" },
-  { icon: "/truck4.svg", color: "skyblue" },
+  "./truck1.svg",
+  "./truck2.svg",
+  "./truck3.svg",
+  "./truck4.svg",
 ];
 const coordinate = [
   { lat: "28.51079782059423", log: "77.40362813493975" },
@@ -37,10 +38,10 @@ const coordinate = [
   { lat: "28.512937158827324", log: "77.41783963937374" },
 ];
 const buttonData = [
-  { label: "Offline", color: "red" },
-  { label: "Charging", color: "green" },
-  { label: "Trip", color: "blue" },
-  { label: "Parked", color: "skyblue" },
+  { label: "Charging : 3", color: "red" },
+  { label: "Swapping : 0", color: "green" },
+  { label: "Scheduled CS: 6", color: "blue" },
+  { label: "Scheduled SS : 8", color: "skyblue" },
 ];
 const Overview = ({
   value,
@@ -59,9 +60,19 @@ const Overview = ({
   const [distance, setDistance] = React.useState(false);
   const [payload, setPayload] = React.useState(false);
   const [trips, setTrips] = React.useState(false);
-
   const [data2, setData2] = useState(null);
-  const [progress, setProgress] = React.useState(0);
+  const [progress, setProgress] = React.useState(20);
+  const [activeMarker, setActiveMarker] = useState(null);
+  const [icons, setIcons] = useState(null);
+
+  const handleMapData = (index, point) => {
+    console.log("point", index, point);
+    setActiveMarker(index);
+    setIcons(point);
+  };
+  const onClose = () => {
+    setActiveMarker(null);
+  };
 
   const handleDistance = () => {
     setDistance(true);
@@ -72,32 +83,16 @@ const Overview = ({
   const handleTrips = () => {
     setTrips(true);
   };
-
   useEffect(() => {
     setData2(Fleet);
-  }, []);
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 0;
-        }
-        const diff = Math.random() * 10;
-        return Math.min(oldProgress + diff, 100);
-      });
-    }, 5000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  }, [distance, payload, trips]);
   const data1 = [
     {
       content: "20 ",
       value: "E-tractor",
       title: "Distance Travelled (Km)",
       label: "View report",
-      data: "Distance Travelled",
+      data: "Distance travelled",
       handleFunction: handleDistance,
     },
     {
@@ -105,7 +100,7 @@ const Overview = ({
       value: "Vehicle",
       title: "Trip Payload (Ton)",
       label: "View report",
-      data: "Trip Payload",
+      data: "Trip payload",
       handleFunction: handlePayload,
     },
     {
@@ -191,13 +186,36 @@ const Overview = ({
           </CustomGrid>
         </Grid>
       ))}
-      <Grid item xs={12} height={"380px"}>
-        <Map
-          iconUrls={iconUrls}
-          buttonData={buttonData}
-          coordinate={coordinate}
-        />
-      </Grid>
+    {activeMarker && activeMarker !== null ? (
+        <Grid item xs={9} height={"380px"}>
+          <Map
+            handleMapData={handleMapData}
+            iconUrls={iconUrls}
+            activeMarker={activeMarker}
+            setActiveMarker={setActiveMarker}
+            buttonData={buttonData}
+            coordinate={coordinate}
+            onClose={onClose}
+          />
+        </Grid>
+      ) : (
+        <Grid item xs={12} height={"380px"}>
+          <Map
+            handleMapData={handleMapData}
+            iconUrls={iconUrls}
+            activeMarker={activeMarker}
+            setActiveMarker={setActiveMarker}
+            buttonData={buttonData}
+            coordinate={coordinate}
+            onClose={onClose}
+          />
+        </Grid>
+      )}
+      {activeMarker && activeMarker !== null && (
+        <Grid item xs={3} height={"380px"}>
+          <MapDetails icons={icons} onClose={onClose} title={"Fleet Data"}/>
+        </Grid>
+      )}
       <Grid item xs={12}>
         <Table
           data={data}

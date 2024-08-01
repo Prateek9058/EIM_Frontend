@@ -10,7 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import { IoMdLogOut } from "react-icons/io";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 import { ImProfile } from "react-icons/im";
 import ProfilePic from '../../../../../public/Img/profile.svg'
 
@@ -83,7 +82,7 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-        <Avatar sx={{ width: 34, height: 34, backgroundColor: "#24AE6E" }}><Image src={ProfilePic} alt="ProfilePic"/></Avatar> Admin
+        <Avatar sx={{ width: 34, height: 34 }}><Image src={ProfilePic} alt="ProfilePic"/></Avatar> Admin
         </MenuItem>
         <Divider />
         <MenuItem

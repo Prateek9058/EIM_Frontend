@@ -5,6 +5,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Avatar } from '@mui/material';
 import { before } from 'lodash';
+import { CiSearch } from "react-icons/ci";
 import Image from 'next/image';
 
 function sleep(duration) {
@@ -15,8 +16,9 @@ function sleep(duration) {
   });
 }
 
-export default function Asynchronous({icon,place}) {
+export default function Asynchronous({icon,place,data}) {
   const [open, setOpen] = React.useState(false);
+
   const [options, setOptions] = React.useState([]);
   const loading = open && options.length === 0;
 
@@ -28,10 +30,9 @@ export default function Asynchronous({icon,place}) {
     }
 
     (async () => {
-      await sleep(1e3); // For demo purposes.
-
+      await sleep(1e1); 
       if (active) {
-        setOptions([...topFilms]);
+        setOptions([...data]);
       }
     })();
 
@@ -63,21 +64,36 @@ export default function Asynchronous({icon,place}) {
       loading={loading}
       renderInput={(params) => (
         <TextField
-          sx={{
-            '& .MuiInput-underline:before': { borderBottom: 'none' },
-            '& .MuiInput-underline:hover:not(.Mui-disabled):before': { borderBottom: 'none' },
-            '& .MuiInput-underline:after': { borderBottom: 'none' },
-            '& input::placeholder': { color: 'white', fontWeight: 500,opacity:1 },
-            '& input': { color: 'white', },
-          }}
-          variant="standard"
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            background:"transparent",
+            '& fieldset': {
+              borderColor: 'transparent',
+            },
+            '&:hover fieldset': {
+              borderColor: 'transparent', 
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#fff', 
+            },
+          },
+          '& input::placeholder': {
+            color: 'white',
+            fontWeight: 500,
+            opacity: 1,
+          },
+          '& input': {
+            color: 'white',
+          },
+        }}
+          variant="outlined"
           {...params}
           placeholder={place}
           InputProps={{
             ...params.InputProps,
             endAdornment: (
               <React.Fragment>
-                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+               <CiSearch/>
                 {params.InputProps.endAdornment}
               </React.Fragment>
             ),
@@ -99,7 +115,7 @@ export default function Asynchronous({icon,place}) {
 
 // Top films as rated by IMDb users. http://www.imdb.com/chart/top
 const topFilms = [
-  { title: 'The Shawshank Redemption', year: 1994 },
+  { title: 'The Shawshank Redemption'},
   { title: 'The Godfather', year: 1972 },
   { title: 'The Godfather: Part II', year: 1974 },
   { title: 'The Dark Knight', year: 2008 },

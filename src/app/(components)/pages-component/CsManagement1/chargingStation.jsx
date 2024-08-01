@@ -128,13 +128,13 @@ const Charging = ({ value }) => {
   };
   return (
     <Grid container>
-      <Grid item xs={12} height={"380px"}>
+      {/* <Grid item xs={12} height={"380px"}>
         <Map
           iconUrls={iconUrls}
           buttonData={buttonData}
           coordinate={coordinate}
         />
-      </Grid>
+      </Grid> */}
       <Grid container>
         <Grid
           container

@@ -35,17 +35,17 @@ const NavItem = ({ item, level, pathDirect, onClick }) => {
         color: "#000",
       },
       "&.Mui-selected": {
-        color: "#C1FF72",
-        backgroundColor: "#171963",
+        color: theme.palette.secondary.main,
+        backgroundColor: theme.palette.primary.main,
         "&:hover": {
-          backgroundColor: "#171963",
+          backgroundColor: theme.palette.primary.main,
           color: "#fff",
         },
         "&:hover .MuiListItemIcon-root": {
         color: "#fff",
       },
       "& .MuiListItemIcon-root":{
-        color:"#C1FF72"
+        color:theme.palette.secondary.main
       }
       },
     },

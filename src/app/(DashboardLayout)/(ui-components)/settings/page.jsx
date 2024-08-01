@@ -59,40 +59,40 @@ const Settings = () => {
               </Grid>
             </Grid>
             <Grid container rowGap={4} pl={2} mt={4} mb={2}>
-              <Grid item xs={5}>
+              <Grid item  md={5} xs={12} sm={6}>
                 <Typography>Username</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12} sm={6}>
                 <TextField placeholder="Enter name" fullWidth disabled defaultValue={data?.userName}/>
               </Grid>
-              <Grid item xs={5}>
+              <Grid item  md={5} xs={12} sm={6}>
                 <Typography>Phone number</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12} sm={6}>
                 <TextField placeholder="Enter Phone number" fullWidth disabled defaultValue={data?.mobileNumber} />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item  md={5} xs={12} sm={6}>
                 <Typography>Email address</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12} sm={6}>
                 <TextField placeholder="Enter email address" fullWidth disabled defaultValue={data?.emailId}/>
               </Grid>
-              <Grid item xs={5}>
+              <Grid item  md={5} xs={12} sm={6}>
                 <Typography>address</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12} sm={6}>
                 <TextField placeholder="Enter address" fullWidth disabled defaultValue={data?.address}/>
               </Grid>
-              <Grid item xs={5}>
+              <Grid item  md={5} xs={12} sm={6}>
                 <Typography>Role</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12} sm={6}>
                 <TextField placeholder="Enter Role" fullWidth disabled defaultValue={data?.role}/>
               </Grid>
-              <Grid item xs={5}>
+              <Grid item md={5} xs={12} sm={6}>
                 <Typography>Level</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12} sm={6}>
                 <TextField placeholder="Enter level" fullWidth disabled defaultValue={data?.level}/>
               </Grid>
              

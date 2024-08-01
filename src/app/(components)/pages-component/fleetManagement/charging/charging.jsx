@@ -7,17 +7,15 @@ import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkele
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
-import { useRouter } from 'next/navigation';
 import { CustomDownloadExcel } from '../../../mui-components/DownloadExcel'; 
-import { Fleet } from '../../../table/rows';
-import ManagementGrid from '../../../mui-components/Card';
+import MapDetails from "@/app/(components)/map/mapDetails";
 
 const iconUrls = [
-    { icon: '/truck1.svg', color: "blue" },
-    { icon: '/truck2.svg', color: "red" },
-    { icon: '/truck3.svg', color: "green" },
-    { icon: '/truck4.svg', color: "skyblue" },
-];
+    "./truck1.svg",
+    "./truck2.svg",
+    "./truck3.svg",
+    "./truck4.svg",
+  ];
 const coordinate = [
     { lat: "28.51079782059423", log: "77.40362813493975" },
     { lat: "28.510404514720925", log: "77.40712974097106" },
@@ -34,13 +32,6 @@ const buttonData = [
 ];
 const days = ["Today", "Weekly", "Yearly"]
 const region = ["mumbai", "Delhi", "Agra", "banaras", "kolkata"]
-const buttons = [
-    {
-        data: "Fleet (212)", customdownload: "Download Excel",
-        regiondropdown: [{ name: "Region", variant: "outlined", region: region }],
-        dailydropdown: [{ name: "Today", variant: "contained", days: days }]
-    }
-];
 const Charging = ({ value ,data,
     rowsPerPage,
     setRowsPerPage,
@@ -66,6 +57,17 @@ const Charging = ({ value ,data,
     ]
     const [open, setOpenDialog] = React.useState(false);
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
+    const [icons, setIcons] = React.useState(null);
+    const [activeMarker, setActiveMarker] = useState(null);
+
+    const handleMapData = (index, point) => {
+      console.log("point", index, point);
+      setActiveMarker(index);
+      setIcons(point);
+    };
+    const onClose = () => {
+      setActiveMarker(null);
+    };
     useEffect(() => {
         const handler = setTimeout(() => {
             setSearchQuery(debouncedSearchQuery);
@@ -119,10 +121,37 @@ const Charging = ({ value ,data,
         }));
     }
     return (
-        <Grid container >
-            <Grid item xs={12} height={"380px"}>
-                <Map iconUrls={iconUrls} buttonData={buttonData} coordinate={coordinate} />
-            </Grid>
+        <Grid container columnGap={2}>
+             {activeMarker && activeMarker !== null ? (
+        <Grid item xs={8.8} height={"380px"}>
+          <Map
+            handleMapData={handleMapData}
+            iconUrls={iconUrls}
+            activeMarker={activeMarker}
+            setActiveMarker={setActiveMarker}
+            buttonData={buttonData}
+            coordinate={coordinate}
+            onClose={onClose}
+          />
+        </Grid>
+      ) : (
+        <Grid item xs={12} height={"380px"}>
+          <Map
+            handleMapData={handleMapData}
+            iconUrls={iconUrls}
+            activeMarker={activeMarker}
+            setActiveMarker={setActiveMarker}
+            buttonData={buttonData}
+            coordinate={coordinate}
+            onClose={onClose}
+          />
+        </Grid>
+      )}
+      {activeMarker && activeMarker !== null && (
+        <Grid item xs={3} height={"380px"}>
+          <MapDetails icons={icons} onClose={onClose} title={"Charging Data"}/>
+        </Grid>
+      )}
             <Grid container >
                 <Grid
                     container

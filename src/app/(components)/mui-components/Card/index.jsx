@@ -112,7 +112,7 @@ const ManagementGrid = ({
               </Typography>
             )}
           </Grid>
-          <Grid item>
+          <Grid item >
             {buttonItem && (
               <Button variant="contained" size="large">
                 {buttonItem}
@@ -155,6 +155,7 @@ const ManagementGrid = ({
             >
               <Tabs
                 value={value}
+                variant="scrollable"
                 onChange={handleChange}
                 sx={{
                   "& .MuiTabs-indicator": {
@@ -165,6 +166,7 @@ const ManagementGrid = ({
                 {tabs.map((tab, index) => (
                   <Tab
                     key={index}
+                    
                     label={tab.label}
                     {...a11yProps(index)}
                     sx={{
@@ -223,19 +225,21 @@ const ManagementGrid = ({
                       <ButtonGroup
                         aria-label="Basic button group"
                         variant="text"
+                       
+                        
                       >
                         <Button
                           variant={buttonType == item?.name ? "contained" : ""}
                           sx={{
                             borderRadius:
                               buttonLength === 1
-                                ? "10px" // Single button case, rounded corners all around
+                                ? "10px" 
                                 : index === 0 && visibleStart === 0
-                                ? "10px 0 0 10px" // First visible button and it's the first button in the list
+                                ? "10px 0 0 10px" 
                                 : isLastVisibleButton &&
                                   visibleStart + index === buttonLength - 1
-                                ? "0 10px 10px 0" // Last visible button and it's the last button in the list
-                                : "0", // Middle buttons, no rounded corners
+                                ? "0 10px 10px 0"
+                                : "0",
                             borderRight: !isLastVisibleButton
                               ? "1px solid #fff"
                               : "",

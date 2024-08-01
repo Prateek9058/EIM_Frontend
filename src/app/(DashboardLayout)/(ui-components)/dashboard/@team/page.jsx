@@ -93,10 +93,10 @@ const config = {
   }
 };
 const data = [
-  { labels: "Offline CS/SS Station", value: "1895", color: "#A698EB" },
-  { labels: "Online CS/SS Station", value: "60", color: '#1B1A55' },
-  { labels: "Occupied CS/SS Station", value: "120", color: '#ECE9FF' },
-  { labels: "Available CS/SS Station", value: "20", color: '#CBC0FF' },
+  { labels: "Queue in CS", value: "1895", color: "#A698EB" },
+  { labels: "Queue in SS", value: "60", color: '#1B1A55' },
+  { labels: "E-tractor charged", value: "120", color: '#ECE9FF' },
+  { labels: "E-tractor swapped", value: "20", color: '#CBC0FF' },
 ]
 const Badge1 = styled(Badge)(({ color }) => ({
   marginRight: "16px",
@@ -117,7 +117,7 @@ const BalancePage = () => {
         </Grid>
         <Grid container mt={7} mb={2}>
           <Grid container justifyContent={"space-between"}>
-            <Typography variant="h6">All CS/SS Station</Typography>
+            <Typography variant="h6">All CS/SS</Typography>
             <Typography variant="h6">2000</Typography>
           </Grid>
           <List sx={{ width: '100%' }}>

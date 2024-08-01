@@ -30,9 +30,11 @@ import ToastComponent, {
 } from "@/app/(components)/mui-components/Snackbar/index";
 import axiosInstanceImg from "@/app/api/axiosInstanceImg";
 import axiosInstance from "@/app/api/axiosInstance";
+import CommonDialog from "../../mui-components/Dialog";
 
 export default function AddUser({ open, setOpen }) {
   const [progress, setProgress] = useState(0);
+  const [openComman, setOpenComman] = useState(false);
   const [batteryId, setBatteryId] = useState(null);
   const [file, setFile] = useState(null);
   const [battery, setBattery] = useState(null);
@@ -50,6 +52,7 @@ export default function AddUser({ open, setOpen }) {
   };
   const handleClose = () => {
     setOpen(false);
+    setOpenComman(false)
     setFile();
     reset();
     setBatteryId();
@@ -119,14 +122,34 @@ export default function AddUser({ open, setOpen }) {
   const handleCancel = () => {
     setFile();
   };
+  const handleCommanDialog = () => {
+    setOpenComman(true);
+  };
+
+  const handleCommanConfirm = () => {
+    handleClose();
+  };
+  const handleCommanCancel = () => {
+  setOpenComman(false);
+  };
+
   return (
     <React.Fragment>
+      <CommonDialog
+        open={openComman}
+        fullWidth={true}
+        maxWidth={"xs"}
+        title="Cancel"
+        message="Are you sure you want to close this add-tractor?"
+        color="error"
+        onClose={handleCommanCancel}
+        onConfirm={handleCommanConfirm}
+      />
       <Dialog open={open} maxWidth={"sm"} onClose={handleClose}>
-        <ToastComponent />
         <form onSubmit={handleSubmit(submitDetails)}>
           <DialogTitle fullWidth>
             <Grid container justifyContent="flex-end" alignItems={"center"}>
-              <IconButton onClick={handleClose}>
+              <IconButton onClick={handleCommanDialog}>
                 <CloseOutlinedIcon />
               </IconButton>
             </Grid>

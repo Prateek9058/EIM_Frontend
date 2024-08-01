@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import { LuMenu } from "react-icons/lu";
 import Image from "next/image";
 import Logo from '../../../../../public/Img/logo.svg'
+import Notification from "./Notification";
 
 const AppBarStyled = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
@@ -51,7 +52,7 @@ const Header = ({ toggleMobileSidebar }) => {
         <Grid item>
           <Grid container alignItems="center" spacing={2}>
             {/* Uncomment Notification component if needed */}
-            
+              <Grid item><Notification /></Grid>
             <Grid item><Profile /></Grid>
           </Grid>
         </Grid>

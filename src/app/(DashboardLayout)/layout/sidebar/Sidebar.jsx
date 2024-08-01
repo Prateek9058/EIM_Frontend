@@ -1,7 +1,5 @@
 import React from "react";
-import Image from "next/image";
-import { useMediaQuery, Box, Drawer, Grid } from "@mui/material";
-// import Logo from "../../../../../public/Img/logoPsi.png";
+import { useMediaQuery, Box, Drawer } from "@mui/material";
 import SidebarItems from "./SidebarItems";
 
 const Sidebar = ({ isMobileSidebarOpen, onSidebarClose, isSidebarOpen }) => {
@@ -37,17 +35,6 @@ const Sidebar = ({ isMobileSidebarOpen, onSidebarClose, isSidebarOpen }) => {
                         padding: "14px",
                     }}
                 >
-                    {/* <Grid container justifyContent={"center"}    height={60}>
-                        <Image
-                            height={100}
-                            style={{
-                                objectFit: "contain",
-                            }}
-                            width={220}
-                            alt="logo"
-                            src={Logo}
-                        />
-                    </Grid> */}
                     <Box mt={1}>
                         <SidebarItems />
                     </Box>

@@ -5,11 +5,8 @@ import axios from "axios";
 import {
   Box,
   Typography,
-  FormGroup,
-  FormControlLabel,
   Button,
   Stack,
-  Checkbox,
   Divider,
   TextField,
   InputAdornment,
@@ -36,7 +33,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
     color: "#fff",
   },
   "& .MuiInputLabel-root.MuiInputLabel-shrink": {
-    color: "#C0FE72", // Label color when input is filled
+    color: "#C0FE72",
   },
   "&.Mui-focused .MuiInputLabel-root": {
     color: "#fff",
@@ -59,7 +56,7 @@ const AuthLogin = ({ title, subtitle }) => {
   const handleLogin = async (event) => {
     event.preventDefault();
     const body = {
-      userName: username,
+      emailId: username,
       password: password,
     };
     setErrorMessage(null);
@@ -104,11 +101,11 @@ const AuthLogin = ({ title, subtitle }) => {
         <Stack>
           <Box>
             <CustomTextField
-              label="Username"
+              label="Email"
               variant="outlined"
               fullWidth
-              id="username"
-              name="username"
+              id="emailId"
+              name="emailId"
               value={username}
               inputProps={{ shrink: "true" }}
               onChange={(e) => setUsername(e.target.value)}

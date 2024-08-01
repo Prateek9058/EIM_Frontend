@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import  React,{useState} from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -13,18 +13,17 @@ import ToastComponent, {
   notifyError,
   notifySuccess,
 } from "@/app/(components)/mui-components/Snackbar/index";
+import CommonDialog from "@/app/(components)/mui-components/Dialog";
 
 export default function AddUser({ open, setOpen, handleTableData }) {
-  const { register, handleSubmit, formState, reset, setValue, getValues } =
-    useForm();
+  const { register, handleSubmit, formState, reset, getValues } =useForm();
   const formData = getValues();
+  const [openComman, setOpenComman] = useState(false);
   const { errors } = formState;
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
   const handleClose = () => {
     setOpen(false);
     reset();
+    setOpenComman(false)
   };
   const onsubmit = async (formData) => {
     try {
@@ -43,9 +42,25 @@ export default function AddUser({ open, setOpen, handleTableData }) {
       notifyError(error?.response?.data?.message);
     }
   };
+  const handleCommanDialog = () => {
+    setOpenComman(true);
+  };
+
+  const handleCommanConfirm = () => {
+    handleClose();
+  };
   return (
     <React.Fragment>
-      
+       <CommonDialog
+        open={openComman}
+        fullWidth={true}
+        maxWidth={"xs"}
+        title="Cancel"
+        message="Are you sure you want to cancel??"
+        color="error"
+        onClose={handleCommanDialog}
+        onConfirm={handleCommanConfirm}
+      />
       <Dialog open={open} maxWidth={"sm"} onClose={handleClose} fullWidth>
         <form onSubmit={handleSubmit(onsubmit)} noValidate>
           <DialogTitle>
@@ -55,7 +70,7 @@ export default function AddUser({ open, setOpen, handleTableData }) {
               alignItems={"center"}
             >
               <Typography variant="h5">Add New Role</Typography>
-              <IconButton onClick={handleClose}>
+              <IconButton onClick={handleCommanDialog}>
                 <CloseOutlinedIcon />
               </IconButton>
             </Grid>

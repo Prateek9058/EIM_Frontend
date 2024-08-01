@@ -1,13 +1,13 @@
 "use client";
-import { Button, Grid, Typography } from "@mui/material";
+import {  Grid,  } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Overview from "@/app/(components)/pages-component/fleetManagement/overView/Overview";
 import Charging from "@/app/(components)/pages-component/fleetManagement/charging/charging";
 import Trip from "@/app/(components)/pages-component/fleetManagement/Trip";
 import ManagementGrid from "@/app/(components)/mui-components/Card";
 import AddTractor from "@/app/(components)/pages-component/fleetManagement/addTractor";
-
 import axiosInstance from "@/app/api/axiosInstance";
+import ToastComponent from "@/app/(components)/mui-components/Snackbar";
 
 const breadcrumbItems = [
   { label: "Dashboard", link: "/" },
@@ -18,7 +18,7 @@ const droDownButtons = [
   { label: "Customer", menuItems: ["Customer 1", "Customer 2", "Customer 3"] },
 ];
 const Page = () => {
-  const [value, setValue] = useState(0); // Initial active tab index
+  const [value, setValue] = useState(0); 
   const [customer, setCustomer] = useState(null);
   const [open, setOpen] = useState(false);
   const [tableData, setTableData] = useState(null);
@@ -54,7 +54,7 @@ const Page = () => {
     { label: `Overview` },
     { label: "Charging" },
     { label: "Trip" },
-    // { label: "E-Tractor Report" },
+    { label: "E-Tractor Report" },
   ];
   const handleTableData = async () => {
     if (tabsValue !== "Overview") {
@@ -126,13 +126,28 @@ const Page = () => {
           getDataFromChildHandler={getDataFromChildHandler}
         />
       ),
+    },{
+      component: (
+        <Trip
+          value={"4"}
+          data={tableData}
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+          page={page}
+          setPage={setPage}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          loading={loading}
+          getDataFromChildHandler={getDataFromChildHandler}
+        />
+      ),
     },
-    // { component: <Trip value={"3"} tableData={tableData} /> },
   ];
 
   return (
-    <Grid container xs={6} sm={12} xl={12}>
+    <Grid container xs={12} sm={12} md={12}>
       <AddTractor open={open} setOpen={setOpen} />
+      <ToastComponent/>
       <ManagementGrid
         moduleName={"Fleet Management"}
         breadcrumbItems={breadcrumbItems}

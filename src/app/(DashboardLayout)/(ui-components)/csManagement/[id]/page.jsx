@@ -33,7 +33,7 @@ const ChargingId = ({ params }) => {
       ];
       useEffect(()=>{
         setData(Fleet)
-      })
+      },[])
     return (
         <Grid container  sm={12} md={12}>
             <ManagementGrid  breadcrumbItems ={breadcrumbItems }/>

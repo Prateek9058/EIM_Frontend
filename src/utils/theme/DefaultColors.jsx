@@ -48,7 +48,7 @@ const baselightTheme = createTheme({
     action: {
       disabledBackground: "rgba(73,82,88,0.12)",
       hoverOpacity: 0.02,
-      hover: "#f6f9fc",
+      hover: "rgba(24, 36, 111, 1)",
     },
     divider: "#e5eaef",
     background: {
@@ -196,7 +196,7 @@ const baselightTheme = createTheme({
       styleOverrides: {
         paper: {
           backgroundColor: "#639AEA",
-          borderRadius: "16px", // Apply the border radius
+          borderRadius: "16px", 
         },
       },
     },
@@ -210,7 +210,7 @@ const baselightTheme = createTheme({
         },
         option: {
           "&:hover": {
-            backgroundColor: "#171963", 
+            backgroundColor: theme.palette.primary.main, 
             color: theme.palette.secondary.main, 
           },
         },
@@ -248,15 +248,15 @@ const baselightTheme = createTheme({
       styleOverrides: {
         root: {
           "&:hover": {
-            backgroundColor: "#171963", // Hover color when not selected
-            color: theme.palette.secondary.main, // Text color on hover
+            backgroundColor: theme.palette.primary.main, 
+            color: theme.palette.secondary.main, 
           },
           "&.Mui-selected": {
-            backgroundColor: "#171963",
+            backgroundColor: theme.palette.primary.main, 
             color: theme.palette.secondary.main,
           },
           "&.Mui-selected:hover": {
-            backgroundColor: "#171963",
+            backgroundColor: theme.palette.primary.main, 
             color: theme.palette.secondary.main,
           },
         },
@@ -313,10 +313,10 @@ const baselightTheme = createTheme({
             borderColor: theme.palette.primary.main,
           },
           "&.Mui-error fieldset": {
-            borderColor: theme.palette.error.main, // Use theme error color
+            borderColor: theme.palette.error.main, 
           },
           "&:hover fieldset": {
-            borderColor: theme.palette.text.primary, // Use theme primary text color
+            borderColor: theme.palette.text.primary, 
           },
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.grey[300],
@@ -324,15 +324,15 @@ const baselightTheme = createTheme({
           "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.grey[300],
             borderColor: theme.palette.primary.main,
-            // background: "linear-gradient(111.41deg, rgba(139, 153, 173, 0.36) 0%, rgba(255, 255, 255, 0.12) 100%)",
+            
           },
           "& .MuiInputLabel-root": {
             color: "#fff",
             "&.Mui-focused": {
-              color: "red", // Label color when focused
+              color: theme.palette.error, 
             },
             "&.MuiInputLabel-shrink": {
-              color: "#fff", // Label color when shrunk
+              color: "#fff",
             },
           },
         },
@@ -354,7 +354,7 @@ const baselightTheme = createTheme({
         root: {
           color: "#fff",
           "&.Mui-focused": {
-            color: theme.palette.primary.main, // Label color when focused
+            color: theme.palette.primary.main, 
           },
         },
       },
@@ -362,7 +362,7 @@ const baselightTheme = createTheme({
     MuiFormHelperText: {
       styleOverrides: {
         root: {
-          color: theme.palette.text.secondary, // Use theme secondary text color
+          color: theme.palette.text.secondary,
         },
       },
     },

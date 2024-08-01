@@ -6,11 +6,7 @@ import Sidebar from "@/app/(DashboardLayout)/layout/sidebar/Sidebar";
 import PageContainer from "@/app/(components)/container/PageContainer";
 const MainWrapper = styled("div")(() => ({
   background: 'linear-gradient(112.37deg, #589CFF 0%, #013376 116.12%)',
-  // backgroundColor:"red",
-
-  //  paddingLeft: "10px",
   minHeight: "100vh"
-
 }));
 
 const PageWrapper = styled("div")(() => ({

@@ -4,56 +4,46 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { useDropzone } from "react-dropzone";
 import DialogTitle from "@mui/material/DialogTitle";
-import {
-  Typography,
-  Grid,
-  TextField,
-  Divider,
-  IconButton,
-  Box,
-  FormControl,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormHelperText,
-} from "@mui/material";
+import CommonDialog from "@/app/(components)/mui-components/Dialog";
+import { Grid, IconButton, Stepper, Step, StepLabel } from "@mui/material";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
-import LinearProgress from "@mui/material/LinearProgress";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import AddIcon from "@mui/icons-material/Add";
 import AddRole1 from "./AddRole";
-import { useForm } from "react-hook-form";
+import Permission from "./Permissions";
 import axiosInstanceImg from "@/app/api/axiosInstanceImg";
 import ToastComponent, {
   notifyError,
   notifySuccess,
 } from "@/app/(components)/mui-components/Snackbar/index";
 import axiosInstance from "@/app/api/axiosInstance";
+import UserDetails from "./userDetails";
+import { useForm, FormProvider } from "react-hook-form";
 
 export default function AddUser({ open, setOpen, handleTableData }) {
+  const methods = useForm();
+  const { reset, getValues } = methods;
   const [open1, setOpen1] = React.useState(false);
-  const { register, handleSubmit, formState, reset, getValues } = useForm();
-  const formdata2 = getValues();
-  const { errors } = formState;
   const [file, setFile] = useState(null);
   const [manager, setManager] = React.useState(null);
   const [selectManager, setSelectManager] = React.useState(null);
   const [progress, setProgress] = useState(0);
-  const [level, setLevel] = useState(null);
   const [role, setRole] = useState(null);
   const [selectRole, setSelectRole] = useState(null);
   const [subAdmin, setSubAdmin] = useState(null);
   const [selectSubAdmin, setSelectSubAdmin] = useState(null);
+  const [modules, setModules] = React.useState(null);
+  const [openComman, setOpenComman] = React.useState(false);
+  const [customizeModule, setCustomizeModule] = React.useState(null);
+  const steps = ["User Details", "Permission"];
+  const [next, setNext] = useState(0);
 
   const handleSubAdmin = (event) => {
     setSelectSubAdmin(event.target.value);
+    console.log("event submin", event.target.value);
   };
   const handleManager = (event) => {
     setSelectManager(event.target.value);
-    console.log("event", event);
+    console.log("event", event.target.value);
   };
   const handleRole = (event) => {
     setSelectRole(event.target.value);
@@ -63,32 +53,30 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     setFile(acceptedFiles[0]);
     setProgress(0);
   };
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    maxSize: 10485760,
-  });
   const handleClose = () => {
     setOpen(false);
+    setOpenComman(false);
     setFile();
-    reset();
     setManager();
+    setSelectManager()
     setRole();
+    setSubAdmin();
+    setSelectSubAdmin();
     setSelectRole();
+    setNext(0);
+    reset();
+  };
 
-  };
-  const handleOpen = () => {
-    setOpen1(true);
-  };
-  const upLoadFile = async (formdata2) => {
-    // if (!file) {
-    //   notifyError("No file selected");
-    //   return;
-    // }
+  const upLoadFile = async (formdata2,customizeModule) => {
     const formData = new FormData();
-    if(file){
-      formData.append("image", image);
-      }
-    
+    if (!file && selectRole?.toLowerCase() == "sub admin") {
+      notifyError("file is required");
+      return;
+    }
+    if (file) {
+      formData.append("image", file);
+    }
+    // formData.append('modules',customizeModule)
     formData.append("userName", formdata2.userName);
     formData.append("emailId", formdata2.emailId);
     formData.append("mobileNumber", formdata2.mobileNumber);
@@ -97,9 +85,10 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     formData.append("address", formdata2.address);
     formData.append("employeeId", formdata2.employeeId);
     formData.append("parent", formdata2.parent);
-    if(formdata2.subAdmin){
-    formData.append("subAdmin", formdata2.subAdmin);
+    if (formdata2.subAdmin) {
+      formData.append("subAdmin", formdata2.subAdmin);
     }
+    // nextStep();
     try {
       const response = await axiosInstanceImg.post(
         "/user/createUser",
@@ -125,6 +114,13 @@ export default function AddUser({ open, setOpen, handleTableData }) {
       }
     } catch (error) {
       notifyError(error?.response?.data?.message);
+    }
+  };
+  const handleFormSubmission = async (formData2) => {
+    if (next === 0) {
+      nextStep();
+    } else if (next === 1) {
+      await upLoadFile(formData2);
     }
   };
 
@@ -167,20 +163,65 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     }
   };
   const handleLevel = (e) => {
+    console.log("jfgks", e.target.value);
     AddRole(e.target.value);
     AddManager(e.target.value);
     setManager();
     setSelectManager();
     setRole();
     setSelectRole();
-    setFile()
+    setFile();
   };
   useEffect(() => {
     AddSubAdmin();
   }, [open]);
 
+  const nextStep = () => {
+    if (next < 1) setNext((currStep) => currStep + 1);
+  };
+  const previousStep = () => {
+    if (next !== 0) setNext((currStep) => currStep - 1);
+  };
+
+  const getModules = async () => {
+    try {
+      const response = await axiosInstance.get("/module/getModules");
+      if (response.status === 200 || response.status === 201) {
+        console.log("module ", response);
+        setModules(response?.data?.modules);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  React.useEffect(() => {
+    getModules();
+  }, [open]);
+
+
+  console.log("modules",customizeModule)
+  const handleCommanDialog = () => {
+    setOpenComman(true);
+  };
+
+  const handleCommanConfirm = () => {
+    handleClose();
+  };
+  const handleCommanCancel = () => {
+    setOpenComman(false);
+  };
   return (
     <React.Fragment>
+      <CommonDialog
+        open={openComman}
+        fullWidth={true}
+        maxWidth={"xs"}
+        title="Cancel"
+        message="Are you sure you want to close this User?"
+        color="error"
+        onClose={handleCommanCancel}
+        onConfirm={handleCommanConfirm}
+      />
       {open1 && (
         <AddRole1
           open={open1}
@@ -189,293 +230,76 @@ export default function AddUser({ open, setOpen, handleTableData }) {
         />
       )}
       <Dialog open={open} maxWidth={"sm"} onClose={handleClose} fullWidth>
-        <form onSubmit={handleSubmit(upLoadFile)} noValidate>
-          <DialogTitle>
-            <Grid container justifyContent="flex-end">
-              <IconButton onClick={handleClose}>
-                <CloseOutlinedIcon />
-              </IconButton>
-            </Grid>
-          </DialogTitle>
-          <DialogContent>
-            <Grid container rowGap={2}>
-              <Grid container justifyContent={"space-between"}>
-                <Typography variant="h5">Add User</Typography>
-                <Button
-                  variant="outlined"
-                  endIcon={<AddIcon />}
-                  onClick={handleOpen}
-                >
-                  Add New Role
-                </Button>
-              </Grid>
-              { file ? (
-                <Grid
-                  container
-                  direction="column"
-                  sx={{ marginBottom: "16px" }}
-                >
-                  <Typography>File added</Typography>
-                  <Grid
-                    sx={{
-                      background:
-                        "linear-gradient(111.41deg, rgba(139, 153, 173, 0.36) 0%, rgba(255, 255, 255, 0.12) 100%)",
-                      borderRadius: "16px",
-                      padding: 1,
-                    }}
-                  >
-                    <Grid
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="space-between"
-                    >
-                      <Typography sx={{ marginLeft: 5 }} variant="body2">
-                        {file.name}
-                      </Typography>
-                      <Typography variant="body2" sx={{ color: "#fff" }}>
-                        {`${(file?.size / 1024).toFixed(2)} KB`}
-                      </Typography>
-                    </Grid>
-                    <Box display="flex" alignItems="center">
-                      <InsertDriveFileIcon
-                        sx={{ marginRight: 1, color: "#fff" }}
-                      />
-                      <LinearProgress
-                        variant="determinate"
-                        value={progress}
-                        sx={{ flexGrow: 1 }}
-                      />
-                    </Box>
-                  </Grid>
-                  <Typography variant="body2" sx={{ marginTop: "8px" }}>
-                    {progress?.toFixed(2)}% uploaded
-                  </Typography>
+        <DialogTitle sx={{ padding: "5px 24px" }}>
+          <Grid container justifyContent="flex-end">
+            <IconButton onClick={handleCommanDialog}>
+              <CloseOutlinedIcon />
+            </IconButton>
+          </Grid>
+        </DialogTitle>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(handleFormSubmission)} noValidate>
+            <DialogContent sx={{ padding: "1px 24px" }}>
+              <Grid container mb={5} justifyContent={"center"}>
+                <Grid item xs={9}>
+                  <Stepper activeStep={next} alternativeLabel>
+                    {steps.map((label) => (
+                      <Step key={label}>
+                        <StepLabel>{label}</StepLabel>
+                      </Step>
+                    ))}
+                  </Stepper>
                 </Grid>
-              ) : (
-               (selectRole?.toLowerCase() ==='sub admin') && (
-                  <Grid
-                    container
-                    direction="column"
-                    rowGap={2}
-                    justifyContent="center"
-                    alignItems="center"
-                    sx={{
-                      border: `3px dotted #fff`,
-                      padding: 2,
-                      borderRadius: "8px",
-                    }}
-                    {...getRootProps()}
-                  >
-                    <IconButton size="large">
-                      <CloudUploadOutlinedIcon fontSize="large" />
-                    </IconButton>
-                    <Typography variant="h5">
-                      Select a logo file or drag and drop here
-                    </Typography>
-                    <Typography>
-                      xlsx, csv file size no more than 10MB
-                    </Typography>
-                    <input {...getInputProps()} />
-                    <label htmlFor="raised-button-file">
-                      <Button
-                        variant="contained"
-                        component="span"
-                        sx={{ color: "#C0FE72" }}
-                      >
-                        Select File
-                      </Button>
-                    </label>
-                  </Grid>
-                )
+              </Grid>
+              {next === 0 && (
+                <UserDetails
+                  handleTableData={handleTableData}
+                  file={file}
+                  subAdmin={subAdmin}
+                  handleSubAdmin={handleSubAdmin}
+                  selectSubAdmin={selectSubAdmin}
+                  selectRole={selectRole}
+                  manager={manager}
+                  selectManager={selectManager}
+                  role={role}
+                  handleLevel={handleLevel}
+                  handleRole={handleRole}
+                  handleManager={handleManager}
+                  onDrop={onDrop}
+                  progress={progress}
+                />
               )}
-
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <Grid container rowGap={3}>
-                    <TextField
-                      fullWidth
-                      placeholder="Enter Username"
-                      {...register("userName", {
-                        required: "username is required!",
-                      })}
-                      error={!!errors.userName}
-                      helperText={errors.userName?.message}
-                    />
-                    <TextField
-                      fullWidth
-                      placeholder="Enter Mobile number"
-                      {...register("mobileNumber", {
-                        required: "mobile number is required!",
-                        pattern: {
-                          value: /^(0|91)?[6-9][0-9]{9}$/,
-                          message: "Invalid mobile number",
-                        },
-                      })}
-                      error={!!errors.mobileNumber}
-                      helperText={errors.mobileNumber?.message}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid item xs={6}>
-                  <Grid container rowGap={3}>
-                    <TextField
-                      fullWidth
-                      placeholder="Enter Email ID"
-                      {...register("emailId", {
-                        required: "email is required!",
-                        pattern: {
-                          value:
-                            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                          message: "Invalid email format",
-                        },
-                      })}
-                      error={!!errors.emailId}
-                      helperText={errors.emailId?.message}
-                    />
-                    <TextField
-                      fullWidth
-                      placeholder="Enter Address"
-                      {...register("address", {
-                        required: "location is required!",
-                      })}
-                      error={!!errors.address}
-                      helperText={errors.address?.message}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid item xs={6}>
-                  <Grid container rowGap={3}>
-                    <TextField
-                      fullWidth
-                      placeholder="Enter Level"
-                      type="number"
-                      {...register("level", {
-                        required: "level is required!",
-                        min: { value: 1, message: "Level cannot be negative!" },
-                        max: {
-                          value: 6,
-                          message: "level cannot be greater than 6 ",
-                        },
-                        onChange: (e) => {
-                          handleLevel(e);
-                        },
-                      })}
-                      error={!!errors?.level}
-                      helperText={errors?.level?.message}
-                    />
-                    <TextField
-                      fullWidth
-                      placeholder="Enter Employee ID"
-                      {...register("employeeId", {
-                        required: "employeeId is required!",
-                      })}
-                      error={!!errors.employeeId}
-                      helperText={errors.employeeId?.message}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid item xs={6}>
-                  <Grid container rowGap={3}>
-                    <FormControl fullWidth error={!!errors.role}>
-                      <InputLabel id="demo-simple-select-label">
-                        Select Role
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        // inputProps={{shrink:true}}
-                        value={selectRole}
-                        label="Select Role"
-                        {...register("role", {
-                          required: "Role is required!",
-                          onChange: (e) => {
-                            handleRole(e);
-                          },
-                        })}
-                      >
-                        {role &&
-                          role?.map((item, index) => (
-                            <MenuItem key={index} value={item?.name}>
-                              {item?.name}
-                            </MenuItem>
-                          ))}
-                      </Select>
-                      <FormHelperText>
-                        {" "}
-                        {errors.role && errors.role.message}
-                      </FormHelperText>
-                    </FormControl>
-                    <FormControl fullWidth error={!!errors.parent}>
-                      <InputLabel id="parent">Reporting Manager</InputLabel>
-                      <Select
-                        labelId="parent"
-                        id="parent"
-                        value={selectManager}
-                        label="Reporting Manager"
-                        {...register("parent", {
-                          required: "Manager is required!",
-                          onChange: (e) => {
-                            handleManager(e);
-                          },
-                        })}
-                      >
-                        {manager &&
-                          manager?.map((item, index) => (
-                            <MenuItem key={index} value={item?._id}>
-                              {item?.userName}
-                            </MenuItem>
-                          ))}
-                      </Select>
-                      <FormHelperText>
-                        {" "}
-                        {errors?.parent && errors?.parent?.message}
-                      </FormHelperText>
-                    </FormControl>
-                  </Grid>
-                </Grid>
-                <Grid item xs={6}>
-                  <Grid container rowGap={3}>
-                    {selectRole?.toLowerCase() !=='sub admin' &&
-                      <FormControl fullWidth error={!!errors.subAdmin}>
-                        <InputLabel id="demo-simple-select-label">
-                          Select SubAdmin
-                        </InputLabel>
-                        <Select
-                          labelId="subAdmin"
-                          id="subAdmin"
-                          value={selectSubAdmin}
-                          label="subAdmin"
-                          {...register("subAdmin", {
-                            required: "Role is required!",
-                            onChange: (e) => {
-                              handleSubAdmin(e);
-                            },
-                          })}
-                        >
-                          {subAdmin &&
-                            subAdmin?.map((item, index) => (
-                              <MenuItem key={index} value={item?._id}>
-                                {item?.userName}
-                              </MenuItem>
-                            ))}
-                        </Select>
-                        <FormHelperText>
-                          {" "}
-                          {errors.subAdmin && errors.subAdmin.message}
-                        </FormHelperText>
-                      </FormControl>
-                    }
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          </DialogContent>
-          <DialogActions sx={{ justifyContent: "center" }}>
-            <Button size="large" variant="contained" type="submit">
-              Add User
-            </Button>
-          </DialogActions>
-        </form>
+              {next === 1 && (
+                <Permission
+                  setCustomizeModule={setCustomizeModule}
+                  modules={modules}
+                  customizeModule={customizeModule}
+                  setModules={setModules}
+                  upLoadFile={upLoadFile}
+                />
+              )}
+            </DialogContent>
+            <DialogActions sx={{ mr: 2 }}>
+              <Button
+                variant="outlined"
+                size="large"
+                disabled={next === 0}
+                onClick={() => previousStep()}
+              >
+                Back
+              </Button>
+              {next === 0 ? (
+                <Button size="large" variant="contained" type="submit">
+                  Next
+                </Button>
+              ) : (
+                <Button size="large" variant="contained" type="submit">
+                  Submit
+                </Button>
+              )}
+            </DialogActions>
+          </form>
+        </FormProvider>
       </Dialog>
     </React.Fragment>
   );

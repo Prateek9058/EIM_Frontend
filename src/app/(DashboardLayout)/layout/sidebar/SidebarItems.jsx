@@ -5,7 +5,6 @@ import { Box, List, Grid,useMediaQuery } from "@mui/material";
 import NavItem from "./NavItem/index";
 import { uniqueId } from "lodash";
 import { AiOutlineLogout } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
 import { signOut } from "next-auth/react";
 import { RiSettings3Line } from "react-icons/ri";
 
@@ -59,8 +58,6 @@ const SidebarItems = ({ toggleMobileSidebar }) => {
           alignSelf: "flex-end",
           width: "100%",
           bottom: 0,
-        
-      
         }}
       >
         <List

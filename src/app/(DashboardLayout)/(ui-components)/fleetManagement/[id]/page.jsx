@@ -2,7 +2,6 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Table from "./table";
-// import { vehicle, vehicleTrip, vehicleCharging } from '../columndata';
 import { useSearchParams } from "next/navigation";
 import { Fleet } from "@/app/(components)/table/rows";
 

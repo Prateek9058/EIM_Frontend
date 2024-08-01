@@ -93,10 +93,10 @@ const config = {
   },
 };
 const data = [
-  { labels: "Offline CS/SS Station", value: "1895", color: "#B7B597" },
-  { labels: "Online CS/SS Station", value: "60", color: "#DAD3BE" },
-  { labels: "Occupied CS/SS Station", value: "120", color: "#254336" },
-  { labels: "Available CS/SS Station", value: "20", color: "#6B8A7A" },
+  { labels: "Offline SS ", value: "1895", color: "#B7B597" },
+  { labels: "Online SS ", value: "60", color: "#DAD3BE" },
+  { labels: "Occupied SS", value: "120", color: "#254336" },
+  { labels: "Available SS ", value: "20", color: "#6B8A7A" },
 ];
 const Badge1 = styled(Badge)(({ color }) => ({
   marginRight: "16px",
@@ -132,7 +132,7 @@ const BalancePage = () => {
         </Grid>
         <Grid container mt={20} mb={2}>
           <Grid container justifyContent={"space-between"}>
-            <Typography variant="h6">All CS/SS Station</Typography>
+            <Typography variant="h6">All swap station</Typography>
             <Typography variant="h6">2000</Typography>
           </Grid>
           <List sx={{ width: "100%" }}>

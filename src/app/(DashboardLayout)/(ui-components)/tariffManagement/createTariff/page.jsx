@@ -14,13 +14,13 @@ const CustomGrid = styled(Grid)(({ theme }) => ({
 }))
 const TimeRateSection = ({ ratePlaceholder,  }) => (
   <>
-    <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+    <Grid item md={4} sm={4} xs={12} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <TextField type='number' placeholder={ratePlaceholder}  />
     </Grid>
-    <Grid item xs={2} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+    <Grid item md={2} sm={2} xs={12} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Typography>00</Typography>
     </Grid>
-    <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+    <Grid item md={4} sm={4} xs={12} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <Typography>00:00 hr. - 06:00 hr. & 22:00 hr. - 24:00 hr.</Typography>
     </Grid>
   </>
@@ -39,18 +39,18 @@ const CreateTariff = () => {
     <Grid container rowGap={2}>
       <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Create Tariff"} />
       <CustomGrid container rowGap={5} columnGap={5}>
-        <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <Grid item md={4} xs={12} sm={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           <TextField label="Tariff Name" placeholder="Enter Tariff Name" />
         </Grid>
-        <TimeRateSection ratePlaceholder="Rate - (- 1.50 )" />
+        <TimeRateSection ratePlaceholder="Base Rate - (- 1.50 )" />
         <TimeRateSection ratePlaceholder="Rate - (0.00)" />
         <TimeRateSection ratePlaceholder="Rate - (0.00)" />
         <TimeRateSection ratePlaceholder="Rate - (0.00)" />
         <TimeRateSection ratePlaceholder="Rate - (0.00)" />
       </CustomGrid>
       <Grid container justifyContent={"flex-end"} columnGap={2} mr={3}>
-        <Button variant='outlined' onClick={handleBack}>Cancel</Button>
-        <Button variant='contained'>Submit</Button>
+        <Button variant='outlined' onClick={handleBack} size='large'>Cancel</Button>
+        <Button variant='contained' size='large'>Submit</Button>
       </Grid>
 
 

@@ -1,19 +1,19 @@
 "use client";
 import ManagementGrid from "@/app/(components)/mui-components/Card";
 import React, { useState } from "react";
-import {
-  Button,
-  Grid,
-  TextField,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import { Button, Grid, TextField, Typography, IconButton } from "@mui/material";
 import { CustomGrid } from "@/app/(components)/mui-components/CustomGrid";
 import { useForm } from "react-hook-form";
-import { Visibility,VisibilityOff } from "@/app/(components)/mui-components/icons";
+import {
+  Visibility,
+  VisibilityOff,
+} from "@/app/(components)/mui-components/icons";
 import { useRouter } from "next/navigation";
 import axiosInstance from "@/app/api/axiosInstance";
-import ToastComponent,{notifyError,notifySuccess} from "@/app/(components)/mui-components/Snackbar";
+import ToastComponent, {
+  notifyError,
+  notifySuccess,
+} from "@/app/(components)/mui-components/Snackbar";
 
 const breadcrumbItems = [
   { label: "Dashboard", link: "/" },
@@ -24,7 +24,7 @@ const Edit = () => {
   const { register, handleSubmit, formState, getValues } = useForm();
   const { errors } = formState;
   const formData = getValues();
-  const router= useRouter();
+  const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const togglePasswordVisibility = (field) => {
@@ -34,35 +34,38 @@ const Edit = () => {
       setConfirmPasswordVisible((prev) => !prev);
     }
   };
-  const onsubmit = async(formData) => {
+  const onsubmit = async (formData) => {
     console.log("sdljgjakjh", formData);
     try {
-      const res=await axiosInstance.put('/auth/changePassword',formData)
-      if(res.status ===200 || res.status===201)
-      {notifySuccess(res?.data?.message)
-        console.log(res)
+      const res = await axiosInstance.put("/auth/changePassword", formData);
+      if (res.status === 200 || res.status === 201) {
+        notifySuccess(res?.data?.message);
+        console.log(res);
       }
     } catch (error) {
-      console.log(error)
-      notifyError(error?.response?.data?.message)
-      
+      console.log(error);
+      notifyError(error?.response?.data?.message);
     }
   };
   const handleBackClick = () => {
-    router.push('/settings')
+    router.push("/settings");
   };
   return (
-    <Grid container rowGap={2} position={"relative"}>
-      <ToastComponent/>
-      <ManagementGrid moduleName={"Change Password"} breadcrumbItems={breadcrumbItems} />
-      <form onSubmit={handleSubmit(onsubmit)}>
+    <form onSubmit={handleSubmit(onsubmit)}>
+      <Grid container rowGap={2}>
+        <ToastComponent />
+        <ManagementGrid
+          moduleName={"Change Password"}
+          breadcrumbItems={breadcrumbItems}
+        />
+
         <Grid container>
-          <CustomGrid container>
-            <Grid container rowGap={5} mt={4} pl={2} mb={2}>
-              <Grid item xs={5}>
+          <CustomGrid container sx={{ border: "1px solid red" }}>
+            <Grid container rowGap={4} mt={4} pl={2} mb={2}>
+              <Grid item md={5} xs={12} sm={6}>
                 <Typography>Current Password</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12} sm={6}>
                 <TextField
                   placeholder="Enter current password"
                   fullWidth
@@ -74,10 +77,10 @@ const Edit = () => {
                   helperText={errors.currentPassword?.message}
                 />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item md={5} xs={12} sm={6}>
                 <Typography>New Password</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12} sm={6}>
                 <TextField
                   placeholder="Enter new password"
                   fullWidth
@@ -87,11 +90,7 @@ const Edit = () => {
                       <IconButton
                         onClick={() => togglePasswordVisibility("password")}
                       >
-                        {passwordVisible ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
+                        {passwordVisible ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     ),
                   }}
@@ -108,10 +107,10 @@ const Edit = () => {
                   helperText={errors.newPassword?.message}
                 />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item md={5} xs={12} sm={6}>
                 <Typography>Confirm Password</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12} sm={6}>
                 <TextField
                   placeholder="Enter confirm password"
                   fullWidth
@@ -149,7 +148,6 @@ const Edit = () => {
             container
             justifyContent={"flex-end"}
             columnGap={2}
-            mr={2}
             mt={2}
           >
             <Button variant="outlined" size="large" onClick={handleBackClick}>
@@ -160,8 +158,8 @@ const Edit = () => {
             </Button>
           </Grid>
         </Grid>
-      </form>
-    </Grid>
+      </Grid>
+    </form>
   );
 };
 

@@ -38,7 +38,7 @@ const CustomBreadcrumbs = ({ breadcrumbItems }) => {
         pr: "12px",
         pt: "12px",
         position: "fixed",
-        top: { xs: "16px", sm: "20px", md: "18px", lg: "20px" },
+        top: { xs: "7px", sm: "20px", md: "18px", lg: "20px" },
         zIndex: "99",
         width: { xs: "90%", sm: "75%", md: "65%", lg: "60%" },
         marginLeft: isXs ? "50px" : isSm ?"60px" :isMd? "60px": "flex-start"// Align breadcrumbs to the right on small screens
@@ -46,7 +46,7 @@ const CustomBreadcrumbs = ({ breadcrumbItems }) => {
       direction="row"
       alignItems="center"
     >
-      <Breadcrumbs separator=">" aria-label="breadcrumb" sx={{ width: "100%" ,color:"#fff"}}>
+      <Breadcrumbs separator=">" aria-label="breadcrumb" sx={{ width: {xs:"55%",sm:"100%"} ,color:"#fff",}}>
         {breadcrumbItems.map((item, index) => {
           // const Data = item?.icon
           return (
