@@ -33,7 +33,7 @@ const Table = ({
     "Region",
     "E-Tractor ID",
     "Current status",
-    "Total Travelled (km)",
+    "Total travelled (km)",
     "Avg. consumption(kWh/km)",
     "Total units consumed(kWh)",
     "Avg. payload (Ton)",

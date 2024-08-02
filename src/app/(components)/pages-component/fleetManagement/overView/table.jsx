@@ -6,14 +6,17 @@ import {
   Box,
   Tooltip,
   IconButton,
+  Button,
 } from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
+import { notifyError,notifySuccess } from "@/app/(components)/mui-components/Snackbar";
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
-import { CustomDownloadExcel } from "../../../mui-components/DownloadExcel";
-
+import { FaRegFileExcel } from "react-icons/fa";
+import Papa from "papaparse";
+import { saveAs } from "file-saver";
 const Table = ({
   data,
   value,
@@ -24,7 +27,6 @@ const Table = ({
   searchQuery,
   setSearchQuery,
   loading,
-  handleExport,
   getDataFromChildHandler,
 }) => {
   const columns = [
@@ -32,13 +34,13 @@ const Table = ({
     "E-tractor ID",
     "Status",
     "Avg. speed (km/hr.)",
-    "Avg. Payload (Ton)",
+    "Avg. payload (Ton)",
     "Total distance travelled(km)",
-    "Avg. Consumption(kwh/km)",
+    "Avg. consumption(kwh/km)",
     "Breakdown",
     "NumberPlate",
     "Current Soc(%)",
-    "Effective Range(km)",
+    "Effective range(km)",
     "Action",
   ];
   const [open, setOpenDialog] = React.useState(false);
@@ -68,6 +70,71 @@ const Table = ({
   const handleCancel = () => {
     setOpenDialog(false);
   };
+  const handleExport = (data) => {
+    console.log("Exporting data", data);
+
+    if (!Array.isArray(data) || data.length === 0) {
+      notifyError("No data available to export");
+      return;
+    }
+
+    const modifiedData = data?.map((row) => ({
+      region: row?.port?.regionName,
+      fleetId: row?.fleetId,
+      status: row?.status,
+      avgSpeed: `'${row?.avgSpeed}`,
+      jobRole: row?.jobRole,
+      avgPayload: row?.avgPayload,
+      totalDistance: row?.totalDistance,
+      avgConsumption: row?.avgConsumption,
+      breakdown: row?.breakdown,
+      numberPlate: row?.numberPlate,
+      currentSoc: row?.currentSoc,
+      effectiveRange: row?.effectiveRange,
+    }));
+
+    const csvData = [];
+    const tableHeading = "All Fleet Data";
+    csvData.push([[], [], tableHeading, [], []]);
+    csvData.push([]);
+
+    const headerRow = [
+      "Region",
+      "E-tractor ID",
+      "Status",
+      "Avg. speed (km/hr.)",
+      "Avg. payload (Ton)",
+      "Total distance travelled(km)",
+      "Avg. consumption(kwh/km)",
+      "Breakdown",
+      "NumberPlate",
+      "Current Soc(%)",
+      "Effective range(km)",
+    ];
+    csvData.push(headerRow);
+
+    modifiedData.forEach((row) => {
+      const rowData = [
+        row?.region,
+        row?.fleetId,
+        row?.status,
+        `'${row?.avgSpeed}`,
+        row?.avgPayload,
+        row?.totalDistance,
+        row?.avgConsumption,
+        row?.breakdown,
+        row?.numberPlate,
+        row?.currentSoc,
+        row?.effectiveRange,
+      ];
+      csvData.push(rowData);
+    });
+
+    const csvString = Papa.unparse(csvData);
+    const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
+    saveAs(blob, "FleetData.csv");
+    notifySuccess("Download Excel Successfully")
+  };
   const getFormattedData = (data) => {
     console.log("data", data);
     return data?.map((item, index) => ({
@@ -82,7 +149,9 @@ const Table = ({
                   ? "#BFFC72"
                   : item?.status === "parked"
                   ? "#FFC700"
-                  : item?.status === "trip"?"#0F0D15":"#fff",
+                  : item?.status === "trip"
+                  ? "#0F0D15"
+                  : "#fff",
             }}
           >
             {item?.status ? item?.status : "--"}
@@ -132,11 +201,17 @@ const Table = ({
         <Grid item className="customSearch">
           <Grid container>
             <Grid item mr={1}>
-              <CustomDownloadExcel
-                name={"Download Excel"}
-                rows={data}
-                data={"Fleet (121)"}
-              />
+              <Button
+                variant="outlined"
+                sx={{ mr: 1 }}
+                onClick={() => {
+                  handleExport(data?.data);
+                }}
+                startIcon={<FaRegFileExcel />}
+                size="large"
+              >
+                Download Excel
+              </Button>
             </Grid>
             <Grid item mr={1}>
               <CommonDatePicker

@@ -89,7 +89,22 @@ const Page = ({ params }) => {
             loading={loading}
             getDataFromChildHandler={getDataFromChildHandler}
           />
-        ) : (
+        ) : tabValue==='3'?(
+          <Table
+            data={data}
+            params={params}
+            columns={vehicleTrip}
+            deviceData={deviceData}
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+            page={page}
+            setPage={setPage}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            loading={loading}
+            getDataFromChildHandler={getDataFromChildHandler}
+          />
+        ):(
           <Table
             data={data}
             params={params}

@@ -120,12 +120,17 @@ const VehicleScheduling = () => {
                 borderRadius: "10px",
               }}
             >
-              <CardMedia
+            {index%2==0 ?  <CardMedia
                 component="img"
                 alt="green iguana"
                 height="140"
-                image="./Img/card.svg"
-              />
+                image="./Img/station.svg"
+              />:<CardMedia
+              component="img"
+              alt="green iguana"
+              height="140"
+              image="./Img/card.svg"
+            />}
               <CardContent
                 sx={{
                   backgroundColor: index % 2 === 0 ? "#009660" : "#0042C6",

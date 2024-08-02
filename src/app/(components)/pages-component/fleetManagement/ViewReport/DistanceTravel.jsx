@@ -22,7 +22,6 @@ export default function DistanceTravel({ setOpen, open, data1, data }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const days = ["Today", "Weekly", "Yearly"];
 
   return (
     <React.Fragment>

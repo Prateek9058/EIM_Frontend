@@ -12,7 +12,27 @@ import Road from "../../../../../public/Img/road-solid.svg";
 import Image from "next/image";
 import AutoBox from "@/app/(components)/mui-components/Autocomplete/index";
 
+const iconUrls = [
+  {icon:"./truck1.svg",color:"blue"},
+  {icon:"./truck2.svg",color:"red"},
+ { icon:"./truck3.svg",color:"green"},
+ {icon: "./truck4.svg",color:"gray"},
+];
+const coordinate = [
+  { lat: "28.51079782059423", log: "77.40362813493975" },
+  { lat: "28.510404514720925", log: "77.40712974097106" },
+  { lat: "28.512297585971584", log: "77.40356012099012" },
+  { lat: "28.510728275696316", log: "77.40199688895548" },
+  { lat: "28.511107212816803", log: "77.4063730115565" },
+  { lat: "28.512937158827324", log: "77.41783963937374" },
+];
+const buttonData = [
+  { label: "Charging : 3",color:'red' },
+  { label: "Swapping : 4", color: "green" },
+  { label: "Scheduled CS : 3", color: "blue" },
+  { label: "Scheduled SS : 6", color: "gray" },
 
+];
 const MainGrid = styled(Grid)(({ theme }) => ({
   backgroundColor: "#6099EB",
   color: "#fff",
@@ -63,32 +83,12 @@ function ShorterGrid() {
     { label: "Consumption rate", value: "650 kWh/km", icon: Road },
     { label: "Total mileage accumulated", value: "11,121 km", icon: Route },
   ];
-  const iconUrls = [
-    "./truck1.svg",
-    "./truck2.svg",
-    "./truck3.svg",
-    "./truck4.svg",
-  ];
-  const coordinate = [
-    { lat: "28.51079782059423", log: "77.40362813493975" },
-    { lat: "28.510404514720925", log: "77.40712974097106" },
-    { lat: "28.512297585971584", log: "77.40356012099012" },
-    { lat: "28.510728275696316", log: "77.40199688895548" },
-    { lat: "28.511107212816803", log: "77.4063730115565" },
-    { lat: "28.512937158827324", log: "77.41783963937374" },
-  ];
-  const buttonData = [
-    { label: "Charging : 3",color:'red' },
-    { label: "Swapping : 4", color: "green" },
-    { label: "Scheduled CS : 3", color: "blue" },
-    { label: "Scheduled SS : 6", color: "gray" },
- 
-  ];
+
   const [activeMarker, setActiveMarker] = useState(null);
   const [icons, setIcons] = useState(null);
 
-  const handleMapData = (index, point) => {
-    console.log("point", index, point);
+  const handleMapData = (index, point,color) => {
+    console.log("point", index, point,color);
     setActiveMarker(index);
     setIcons(point);
   };
@@ -149,7 +149,7 @@ function ShorterGrid() {
         </Grid>
       ))}
       {activeMarker && activeMarker !== null ? (
-        <Grid item xs={9} height={"380px"}>
+        <Grid item xl={9} xs={12}md={8} height={"380px"}>
           <Map
             handleMapData={handleMapData}
             iconUrls={iconUrls}
@@ -174,7 +174,7 @@ function ShorterGrid() {
         </Grid>
       )}
       {activeMarker && activeMarker !== null && (
-        <Grid item xs={3} height={"380px"}>
+        <Grid item xl={3}  xs={12} md={4} height={"380px"}>
           <MapDetails icons={icons} onClose={onClose}/>
         </Grid>
       )}

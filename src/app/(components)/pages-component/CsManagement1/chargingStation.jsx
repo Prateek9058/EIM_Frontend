@@ -1,13 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Map from "../../map/map";
 import {
   Grid,
   Typography,
   Box,
-  Button,
-  Chip,
   Tooltip,
+  Button,
   IconButton,
 } from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
@@ -15,35 +13,19 @@ import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkele
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
-import { CustomDownloadExcel } from "../../mui-components/DownloadExcel";
+import { FaRegFileExcel } from "react-icons/fa";
+import Papa from "papaparse";
+import { saveAs } from "file-saver";
 import { ChargingStationRow } from "../../table/rows";
+import { notifyError,notifySuccess } from "../../mui-components/Snackbar";
 
-const iconUrls = [
-  { icon: "/truck1.svg", color: "blue" },
-  { icon: "/truck2.svg", color: "red" },
-  { icon: "/truck3.svg", color: "green" },
-  { icon: "/truck4.svg", color: "skyblue" },
-];
-const coordinate = [
-  { lat: "28.51079782059423", log: "77.40362813493975" },
-  { lat: "28.510404514720925", log: "77.40712974097106" },
-  { lat: "28.512297585971584", log: "77.40356012099012" },
-  { lat: "28.510728275696316", log: "77.40199688895548" },
-  { lat: "28.511107212816803", log: "77.4063730115565" },
-  { lat: "28.512937158827324", log: "77.41783963937374" },
-];
-const buttonData = [
-  { label: "Offline", color: "red" },
-  { label: "Charging", color: "green" },
-  { label: "Trip", color: "blue" },
-  { label: "Parked", color: "skyblue" },
-];
 const columns = [
-  "Charger Station ID",
+  "Charger station ID",
   "Status",
   "Hub Name",
   "In queue",
   "Currently charging",
+  "Total charged",
   "Avg. charging time",
   "Peak hours",
   "Action",
@@ -89,6 +71,61 @@ const Charging = ({ value }) => {
   useEffect(() => {
     setData(ChargingStationRow);
   }, []);
+  const handleExport = (data) => {
+    console.log("Exporting data", data);
+
+    if (!Array.isArray(data) || data.length === 0) {
+      notifyError("No data available to export");
+      return;
+    }
+
+    const modifiedData = data?.map((row) => ({
+      region: row?.region,
+      status: row?.status,
+      hubname: row?.trip,
+      avgSpeed: row?.avgSpeed,
+      avgPayload: row?.avgPayload,
+      maxPayload: row?.maxPayload,
+      distance: row?.distance,
+      value: row?.value,
+    }));
+
+    const csvData = [];
+    const tableHeading = "All CS charging Data";
+    csvData.push([[], [], tableHeading, [], []]);
+    csvData.push([]);
+
+    const headerRow = [
+      "Charger station ID",
+      "Status",
+      "Hub Name",
+      "In queue",
+      "Currently charging",
+      "Total charged",
+      "Avg. charging time",
+      "Peak hours",
+      "Action",
+    ];
+    csvData.push(headerRow);
+
+    modifiedData.forEach((row) => {
+      const rowData = [
+      row?.region,
+       row?.status,
+        row?.trip,
+      row?.avgSpeed,
+     row?.avgPayload,
+      row?.maxPayload,
+       row?.distance,
+         row?.value,
+      ];
+      csvData.push(rowData);
+    });
+    const csvString = Papa.unparse(csvData);
+    const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
+    saveAs(blob, "CSChargingData.csv");
+    notifySuccess("Download Excel Succefully")
+  };
 
   const getFormattedData = (data) => {
     console.log("data", data);
@@ -108,6 +145,7 @@ const Charging = ({ value }) => {
       lastName: item?.lastName ?? "--",
       mobileNumber: item?.mobileNumber ? item?.mobileNumber : "--",
       mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
+      mobileNumber3: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
       mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
 
       value: item?.value ? item?.value : "--",
@@ -128,13 +166,6 @@ const Charging = ({ value }) => {
   };
   return (
     <Grid container>
-      {/* <Grid item xs={12} height={"380px"}>
-        <Map
-          iconUrls={iconUrls}
-          buttonData={buttonData}
-          coordinate={coordinate}
-        />
-      </Grid> */}
       <Grid container>
         <Grid
           container
@@ -153,23 +184,23 @@ const Charging = ({ value }) => {
           <Grid item className="customSearch">
             <Grid container>
               <Grid item mr={1}>
-                <CustomDownloadExcel
-                  name={"Download Excel"}
-                  rows={data}
-                  data={"Fleet (121)"}
-                />
+              <Button
+                  variant="outlined"
+                  sx={{ mr: 1 }}
+                  onClick={() => {
+                    handleExport(data);
+                  }}
+                  startIcon={<FaRegFileExcel />}
+                  size="large"
+                >
+                  Download Excel
+                </Button>
               </Grid>
               <Grid item mr={1}>
                 <CommonDatePicker
                   getDataFromChildHandler={getDataFromChildHandler}
                 />
               </Grid>
-              {/* <CustomTextField
-                            type="search"
-                            placeholder="Search empId / Name"
-                            value={debouncedSearchQuery}
-                            onChange={handleSearchChange}
-                        /> */}
             </Grid>
           </Grid>
         </Grid>

@@ -2,6 +2,7 @@
 import {
   Grid,
   IconButton,
+  Box,
   Badge,
   Typography,
   ButtonGroup,
@@ -17,7 +18,6 @@ import {
 } from "@react-google-maps/api";
 import axios from "axios";
 import styled from "@emotion/styled";
-import Box from "@mui/material/Box";
 
 const center = {
   lat: 28.5355161,
@@ -71,7 +71,9 @@ const Page = ({
     if (activeButton !== null) {
       const filtered = snap.filter((point, index) => {
         const color1 = iconUrls[index % iconUrls.length].color;
+        console.log("k.fgkjdsan.gk",iconUrls[index % iconUrls.length].color)
         return color1 === buttonData[activeButton].color;
+     
       });
 
       setFilteredMarkers(filtered);
@@ -79,8 +81,9 @@ const Page = ({
       setFilteredMarkers(snap);
     }
   }, [activeButton, snap]);
-  const handleButtonClick = (buttonData) => {
-    setActiveButton(buttonData);
+  const handleButtonClick = (buttonData,label) => {
+    console.log(buttonData,label)
+    setActiveButton(label);
     setActiveMarker(null);
   };
 
@@ -112,7 +115,8 @@ const Page = ({
           <div>
             {filteredMarkers &&
               filteredMarkers.map((point, index) => {
-              const icon = iconUrls[index % iconUrls.length];
+                const icon = iconUrls[index % iconUrls.length].icon;
+                const color = buttonData[index % iconUrls.length].color;
                 return (
                   <Marker
                     key={index}
@@ -120,19 +124,45 @@ const Page = ({
                       lat: point.location.latitude,
                       lng: point.location.longitude,
                     }}
-                    onClick={() => handleMapData(index, icon)}
+                    onClick={() => handleMapData(index, icon,color)}
                     icon={{
-                      url: iconUrls && iconUrls[index % iconUrls.length],
+                      url: iconUrls && iconUrls[index % iconUrls.length].icon,
                       anchor: new google.maps.Point(17, 46),
                       scaledSize: new google.maps.Size(80, 80),
                     }}
                   >
                     {activeMarker === index && (
                       <InfoWindow onCloseClick={onClose}>
-                        <Grid container rowGap={1} sx={{ color: "#000" }}>
-                          <Typography>Payload</Typography>
-                          <Typography ml={10}>20 Ton</Typography>
-                        </Grid>
+                        <Box
+                          sx={{
+                            padding: 2,
+                            backgroundColor: "#fff",
+                            borderRadius: "8px",
+                            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+                          }}
+                        >
+                          <Grid
+                            container
+                            spacing={2}
+                            direction="column"
+                            sx={{ color: "#000" }}
+                          >
+                            <Grid item>
+                              <Typography
+                                variant="h6"
+                                component="div"
+                                sx={{ fontWeight: "bold" }}
+                              >
+                                Payload
+                              </Typography>
+                            </Grid>
+                            <Grid item>
+                              <Typography variant="body1" component="div">
+                                20 Ton
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                        </Box>
                       </InfoWindow>
                     )}
                   </Marker>
@@ -188,7 +218,7 @@ const Page = ({
                                 }
                               />
                             }
-                            onClick={() => handleButtonClick(index)}
+                            onClick={() => handleButtonClick(index,button.color)}
                           >
                             {button.label}
                           </Button>

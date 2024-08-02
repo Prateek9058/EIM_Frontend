@@ -4,10 +4,12 @@ import React, { useEffect, useState } from "react";
 import Overview from "@/app/(components)/pages-component/fleetManagement/overView/Overview";
 import Charging from "@/app/(components)/pages-component/fleetManagement/charging/charging";
 import Trip from "@/app/(components)/pages-component/fleetManagement/Trip";
+import Etractor from "@/app/(components)/pages-component/fleetManagement/Etractor";
 import ManagementGrid from "@/app/(components)/mui-components/Card";
 import AddTractor from "@/app/(components)/pages-component/fleetManagement/addTractor";
 import axiosInstance from "@/app/api/axiosInstance";
 import ToastComponent from "@/app/(components)/mui-components/Snackbar";
+
 
 const breadcrumbItems = [
   { label: "Dashboard", link: "/" },
@@ -128,7 +130,7 @@ const Page = () => {
       ),
     },{
       component: (
-        <Trip
+        <Etractor
           value={"4"}
           data={tableData}
           rowsPerPage={rowsPerPage}

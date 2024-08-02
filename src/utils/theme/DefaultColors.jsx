@@ -185,7 +185,7 @@ const baselightTheme = createTheme({
           "&.Mui-selected": {
             fontWeight: 500,
             fontSize: "16px",
-            color: "#fff",
+            color: "#C0FE72",
             borderRadius: "0px",
             backgroundColor: "#18246F",
           },

@@ -1,18 +1,24 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Map from "../../../map/map";
-import { Grid, Typography, Button, Tooltip, IconButton } from "@mui/material";
+import Map from "../../map/map";
+import {
+  Grid,
+  Typography,
+  Chip,
+  Tooltip,
+  Button,
+  IconButton,
+} from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
-import { GrMapLocation } from "react-icons/gr";
 import MapDetails from "@/app/(components)/map/mapDetails";
 import { FaRegFileExcel } from "react-icons/fa";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
-import { notifyError ,notifySuccess} from "@/app/(components)/mui-components/Snackbar";
+import {notifyError,notifySuccess} from "../../mui-components/Snackbar";
 
 const iconUrls = [
   "./truck1.svg",
@@ -35,17 +41,28 @@ const buttonData = [
   { label: "Parked", color: "skyblue" },
 ];
 const columns = [
-  "Region",
   "E-tractor ID",
-  "Current SoC (%)",
-  "Current SoH (%)",
-  "Current units charged (kw)",
-  "Current status",
-  "Estimated charging time(hr.)",
+  "Status",
+  "Current SoC(%)",
+  "Current SoH(%)",
   "Charging cycle",
   "Swapping cycle",
-  "Total units charged(kw)",
-  "Avg. charging Time",
+  "Trip cycle",
+  "SoC estimated time",
+  "Avg. charging time",
+  "Total units consumed(kwh)",
+  "Avg. speed(km/hr)",
+  "Avg. payload(Ton)",
+  "Max. payload(Ton)",
+  "Total tues",
+  "Tues handled(40F)",
+  "Tues handled(20F)",
+  "Tues each trip",
+  "avg. consumption(kw/km)",
+  "Breakdown",
+  "Effective range(km)",
+  "Total distance travelled(km)",
+  "Current status",
   "Action",
 ];
 const Charging = ({
@@ -62,8 +79,8 @@ const Charging = ({
 }) => {
   const [open, setOpenDialog] = React.useState(false);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
-  const [icons, setIcons] = React.useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
+  const [icons, setIcons] = useState(null);
 
   const handleMapData = (index, point) => {
     console.log("point", index, point);
@@ -73,6 +90,7 @@ const Charging = ({
   const onClose = () => {
     setActiveMarker(null);
   };
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setSearchQuery(debouncedSearchQuery);
@@ -108,34 +126,36 @@ const Charging = ({
     const modifiedData = data?.map((row) => ({
       region: row?.port?.regionName,
       fleetId: row?.fleetId,
-      currentSoc: row?.currentSoc,
-      currentSoh: row?.currentSoh,
-      currentUnit: row?.currentUnit,
-      status: row?.status,
-      estimatedCharging: row?.estimatedCharging,
-      chargingCycle: row?.chargingCycle,
-      swappingCycle: row?.swappingCycle,
-      totalUnits: row?.totalUnits,
-      avgCharging: row?.avgCharging,
+      trip: row?.trip,
+      avgSpeed: row?.avgSpeed,
+      avgPayload: row?.avgPayload,
+      maxPayload: row?.maxPayload,
+      distance: row?.distance,
+      breakdown: row?.breakdown,
+      totalUnit: row?.totalUnit,
+      totalHandle: row?.totalHandle,
+      mobileNumber8: row?.mobileNumber,
+      jobRole: row?.jobRole,
     }));
 
     const csvData = [];
-    const tableHeading = "All Fleet Charging Data";
+    const tableHeading = "All Fleet Etractor Data";
     csvData.push([[], [], tableHeading, [], []]);
     csvData.push([]);
 
     const headerRow = [
       "Region",
       "E-tractor ID",
-      "Current SoC (%)",
-      "Current SoH (%)",
-      "Current units charged (kw)",
-      "Current status",
-      "Estimated charging time(hr.)",
-      "Charging cycle",
-      "Swapping cycle",
-      "Total units charged(kw)",
-      "Avg. charging Time",
+      "Trips",
+      "Avg. speed(km/hr)",
+      "Avg. payload(Ton)",
+      "Max. payload(Ton)",
+      "Distance travelled(km)",
+      "Avg. breakdown",
+      "Total Teus",
+      "Tues handled(40F)",
+      "Tues handled(20F)",
+      "Tues each trip",
     ];
     csvData.push(headerRow);
 
@@ -143,61 +163,66 @@ const Charging = ({
       const rowData = [
         row?.port?.regionName,
         row?.fleetId,
-        row?.currentSoc,
-        row?.currentSoh,
-        row?.currentUnit,
-        row?.status,
-        row?.estimatedCharging,
-        row?.chargingCycle,
-        row?.swappingCycle,
-        row?.totalUnits,
-        row?.avgCharging,
+        row?.trip,
+        row?.avgSpeed,
+        row?.avgPayload,
+        row?.maxPayload,
+        row?.distance,
+        row?.breakdown,
+        row?.totalUnit,
+        row?.totalHandle,
+        row?.mobileNumber,
+        row?.jobRole,
       ];
       csvData.push(rowData);
     });
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
-    saveAs(blob, "FleetChargingData.csv");
+    saveAs(blob, "FleetEtractorData.csv");
     notifySuccess("Download Excel Successfully")
   };
-
   const getFormattedData = (data) => {
+    console.log("data", data);
     return data?.map((item, index) => ({
       region: item?.port ? item?.port?.regionName : "--",
       fleetId: item?.fleetId ?? "--",
-      currentSoc: item?.currentSoc ?? "--",
-      currentSoh: item?.currentSoh ?? "--",
-      currentUnit: item?.currentUnit ? item?.currentUnit : "--",
-      status: item?.status ? item?.status : "--",
-      estimatedCharging: item?.estimatedCharging
-        ? item?.estimatedCharging
-        : "--",
-      chargingCycle: item?.chargingCycle ? item?.chargingCycle : "--",
-      swappingCycle: item?.swappingCycle ? item?.swappingCycle : "--",
-      totalUnits: item?.totalUnits ? item?.totalUnits : "--",
-      avgCharging: item?.avgCharging ? item?.avgCharging : "--",
-      Action: [
-        <Grid
-          container
-          justifyContent="center"
-          spacing={2}
+      trip: (
+        <Chip
           key={index}
-          width={100}
-        >
-          <Grid item xs={6}>
+          color="primary"
+          sx={{ width: "50px" }}
+          label={item?.trip ?? "NA"}
+        />
+      ),
+      avgSpeed: item?.avgSpeed ? item?.avgSpeed : "--",
+      avgPayload: item?.avgPayload ? item?.avgPayload : "--",
+      maxPayload: item?.maxPayload ? item?.maxPayload : "--",
+      distance: item?.distance ? item?.distance : "--",
+      breakdown: item?.breakdown ? item?.breakdown : "--",
+      totalUnit: item?.totalUnit ? item?.totalUnit : "--",
+      totalHandle: item?.totalHandle ? item?.totalHandle : "--",
+      mobileNumber8: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber9: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber7: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber6: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber4: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber3: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber11: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber1: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber2: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber12: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumber13: item?.mobileNumber ? item?.mobileNumber : "--",
+      mobileNumbe14: item?.mobileNumber ? item?.mobileNumber : "--",
+      jobRole: item?.jobRole ? item?.jobRole : "--",
+      Action: [
+        <Grid container justifyContent="center" spacing={2} key={index}>
+          <Grid item xs={12}>
             <Tooltip title="View">
               <Link href={`/fleetManagement/123?tab=${value}`}>
                 <IconButton size="small">
                   <IoEyeOutline color="rgba(14, 1, 71, 1)" />
                 </IconButton>
               </Link>
-            </Tooltip>
-          </Grid>
-          <Grid item xs={6}>
-            <Tooltip title="map">
-              <IconButton size="small">
-                <GrMapLocation color="rgba(14, 1, 71, 1)" />
-              </IconButton>
             </Tooltip>
           </Grid>
         </Grid>,
@@ -233,7 +258,11 @@ const Charging = ({
       )}
       {activeMarker && activeMarker !== null && (
         <Grid item md={3} xs={12} height={"380px"}>
-          <MapDetails icons={icons} onClose={onClose} title={"Charging Data"} />
+          <MapDetails
+            icons={icons}
+            onClose={onClose}
+            title={"E-tractor current status"}
+          />
         </Grid>
       )}
       <Grid container>
@@ -254,7 +283,7 @@ const Charging = ({
           <Grid item className="customSearch">
             <Grid container>
               <Grid item mr={1}>
-                <Button
+              <Button
                   variant="outlined"
                   sx={{ mr: 1 }}
                   onClick={() => {

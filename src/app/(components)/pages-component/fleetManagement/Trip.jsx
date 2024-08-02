@@ -1,20 +1,18 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Map from "../../map/map";
-import {
-  Grid,
-  Typography,
-  Chip,
-  Tooltip,
-  IconButton,
-} from "@mui/material";
+import { Grid, Typography, Chip, Tooltip, IconButton,Button} from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
-import { CustomDownloadExcel } from "../../mui-components/DownloadExcel";
 import MapDetails from "@/app/(components)/map/mapDetails";
+import { GrMapLocation } from "react-icons/gr";
+import { FaRegFileExcel } from "react-icons/fa";
+import Papa from "papaparse";
+import { saveAs } from "file-saver";
+import { notifyError,notifySuccess } from "../../mui-components/Snackbar";
 
 const iconUrls = [
   "./truck1.svg",
@@ -40,15 +38,15 @@ const columns = [
   "Region",
   "E-tractor ID",
   "Trips",
-  "Avg. Speed",
-  "Avg. Payload",
-  "Max. Payload",
-  "Distance Traveled",
-  "Avg. Breakdown",
-  "Total Tevs",
-  "Tves Handle 40F",
-  "Tves Handle 20F",
-  "Tves Each Trip",
+  "Avg. speed(km/hr)",
+  "Avg. payload(Ton)",
+  "Max. payload(Ton)",
+  "Distance travelled(km)",
+  "Avg. breakdown",
+  "Total Teus",
+  "Tues handled(40F)",
+  "Tues handled(20F)",
+  "Tues each trip",
   "Action",
 ];
 const Charging = ({
@@ -61,7 +59,6 @@ const Charging = ({
   searchQuery,
   setSearchQuery,
   loading,
-  handleExport,
   getDataFromChildHandler,
 }) => {
   const [open, setOpenDialog] = React.useState(false);
@@ -102,6 +99,73 @@ const Charging = ({
   const handleCancel = () => {
     setOpenDialog(false);
   };
+  const handleExport = (data) => {
+    console.log("Exporting data", data);
+
+    if (!Array.isArray(data) || data.length === 0) {
+      notifyError("No data available to export");
+      return;
+    }
+
+    const modifiedData = data?.map((row) => ({
+      region: row?.port?.regionName,
+      fleetId: row?.fleetId,
+      trip: row?.trip,
+      avgSpeed: row?.avgSpeed,
+      avgPayload: row?.avgPayload,
+      maxPayload: row?.maxPayload,
+      distance: row?.distance,
+      breakdown: row?.breakdown,
+      totalUnit: row?.totalUnit,
+      totalHandle: row?.totalHandle,
+      mobileNumber8: row?.mobileNumber,
+      jobRole: row?.jobRole,
+    }));
+
+    const csvData = [];
+    const tableHeading = "All Fleet Trip Data";
+    csvData.push([[], [], tableHeading, [], []]);
+    csvData.push([]);
+
+    const headerRow = [
+      "Region",
+      "E-tractor ID",
+      "Trips",
+      "Avg. speed(km/hr)",
+      "Avg. payload(Ton)",
+      "Max. payload(Ton)",
+      "Distance travelled(km)",
+      "Avg. breakdown",
+      "Total Teus",
+      "Tues handled(40F)",
+      "Tues handled(20F)",
+      "Tues each trip",
+    ];
+    csvData.push(headerRow);
+
+    modifiedData.forEach((row) => {
+      const rowData = [
+        row?.port?.regionName,
+        row?.fleetId,
+        row?.trip,
+        row?.avgSpeed,
+        row?.avgPayload,
+        row?.maxPayload,
+        row?.distance,
+        row?.breakdown,
+        row?.totalUnit,
+        row?.totalHandle,
+        row?.mobileNumber,
+        row?.jobRole,
+      ];
+      csvData.push(rowData);
+    });
+    const csvString = Papa.unparse(csvData);
+    const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
+    saveAs(blob, "FleetTripData.csv");
+    notifySuccess("Download Excel Successfully")
+  };
+
   const getFormattedData = (data) => {
     console.log("data", data);
     return data?.map((item, index) => ({
@@ -126,13 +190,20 @@ const Charging = ({
       jobRole: item?.jobRole ? item?.jobRole : "--",
       Action: [
         <Grid container justifyContent="center" spacing={2} key={index}>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <Tooltip title="View">
               <Link href={`/fleetManagement/123?tab=${value}`}>
                 <IconButton size="small">
                   <IoEyeOutline color="rgba(14, 1, 71, 1)" />
                 </IconButton>
               </Link>
+            </Tooltip>
+          </Grid>
+          <Grid item xs={6}>
+            <Tooltip title="Map">
+              <IconButton size="small">
+                <GrMapLocation color="rgba(14, 1, 71, 1)" />
+              </IconButton>
             </Tooltip>
           </Grid>
         </Grid>,
@@ -142,7 +213,7 @@ const Charging = ({
   return (
     <Grid container columnGap={2}>
       {activeMarker && activeMarker !== null ? (
-        <Grid item xs={8.8} height={"380px"}>
+        <Grid item md={8.8} xs={12} height={"380px"}>
           <Map
             handleMapData={handleMapData}
             iconUrls={iconUrls}
@@ -167,7 +238,7 @@ const Charging = ({
         </Grid>
       )}
       {activeMarker && activeMarker !== null && (
-        <Grid item xs={3} height={"380px"}>
+        <Grid item md={3} xs={12} height={"380px"}>
           <MapDetails
             icons={icons}
             onClose={onClose}
@@ -193,11 +264,17 @@ const Charging = ({
           <Grid item className="customSearch">
             <Grid container>
               <Grid item mr={1}>
-                <CustomDownloadExcel
-                  name={"Download Excel"}
-                  rows={data}
-                  data={"Fleet (121)"}
-                />
+                <Button
+                  variant="outlined"
+                  sx={{ mr: 1 }}
+                  onClick={() => {
+                    handleExport(data?.data);
+                  }}
+                  startIcon={<FaRegFileExcel />}
+                  size="large"
+                >
+                  Download Excel
+                </Button>
               </Grid>
               <Grid item mr={1}>
                 <CommonDatePicker

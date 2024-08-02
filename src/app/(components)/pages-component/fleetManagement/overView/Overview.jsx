@@ -17,6 +17,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { ColoredChip } from "@/app/(components)/mui-components/Chip";
 import MapDetails from "@/app/(components)/map/mapDetails";
 
+
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   backgroundColor: "#6099EB",
@@ -54,7 +55,6 @@ const Overview = ({
   setSearchQuery,
   loading,
   params,
-  handleExport,
   getDataFromChildHandler,
 }) => {
   const [distance, setDistance] = React.useState(false);
@@ -187,7 +187,7 @@ const Overview = ({
         </Grid>
       ))}
     {activeMarker && activeMarker !== null ? (
-        <Grid item xs={9} height={"380px"}>
+        <Grid item xs={12} md={9} sm={8} height={"380px"}>
           <Map
             handleMapData={handleMapData}
             iconUrls={iconUrls}
@@ -212,7 +212,7 @@ const Overview = ({
         </Grid>
       )}
       {activeMarker && activeMarker !== null && (
-        <Grid item xs={3} height={"380px"}>
+        <Grid item md={3} xs={12} sm={4} height={"380px"} >
           <MapDetails icons={icons} onClose={onClose} title={"Fleet Data"}/>
         </Grid>
       )}

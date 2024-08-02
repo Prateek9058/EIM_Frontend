@@ -1,15 +1,23 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Grid,
-  Typography,
-  Chip
-} from "@mui/material";
+import { Grid, Typography, Button } from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
-import { CustomDownloadExcel } from "@/app/(components)/mui-components/DownloadExcel/index";
+import Papa from "papaparse";
+import { saveAs } from "file-saver";
+import { FaRegFileExcel } from "react-icons/fa";
+import ToastComponent,{notifyError,notifySuccess} from "@/app/(components)/mui-components/Snackbar";
 
+const columns = [
+  "Tariff ID",
+  "Tariff name ID",
+  "Base Rate",
+  "00:00 hr. - 06:00 hr. & 22:00 hr. - 24:00 hr.",
+  "06:00 hr. - 09:00 hr. & 12:00 hr. - 18:00 hr.",
+  "09:00 hr. -12:00 hr",
+  "18:00 hr. - 22:00 hr.",
+];
 const Table = ({
   data,
   deviceData,
@@ -21,18 +29,8 @@ const Table = ({
   searchQuery,
   setSearchQuery,
   loading,
-  handleExport,
   getDataFromChildHandler,
 }) => {
-  const columns = [
-    "Tariff ID",
-    "Tariff name ID",
-    "Base Rate",
-    "00:00 hr. - 06:00 hr. & 22:00 hr. - 24:00 hr.",
-    "06:00 hr. - 09:00 hr. & 12:00 hr. - 18:00 hr.",
-    "09:00 hr. -12:00 hr",
-    "18:00 hr. - 22:00 hr.",
-  ];
   const [open, setOpenDialog] = React.useState(false);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
@@ -57,6 +55,58 @@ const Table = ({
     handleCancel();
   };
 
+  const handleExport = (data) => {
+    console.log("Exporting data", data);
+
+    if (!Array.isArray(data) || data.length === 0) {
+      notifyError("No data available to export");
+      return;
+    }
+
+    const modifiedData = data?.map((row) => ({
+      employeeId: row?.employeeId,
+      status: row?.status,
+      lastName: row?.lastName,
+      mobileNumber: row?.mobileNumber ,
+      mobileNumber1: row?.mobileNumber1,
+      mobileNumber2: row?.mobileNumber2,
+      mobileNumber3: row?.mobileNumber3 ,
+    }));
+
+    const csvData = [];
+    const tableHeading = "All Tariff Data";
+    csvData.push([[], [], tableHeading, [], []]);
+    csvData.push([]);
+
+    const headerRow = [
+      "Tariff ID",
+      "Tariff name ID",
+      "Base Rate",
+      "00:00 hr. - 06:00 hr. & 22:00 hr. - 24:00 hr.",
+      "06:00 hr. - 09:00 hr. & 12:00 hr. - 18:00 hr.",
+      "09:00 hr. -12:00 hr",
+      "18:00 hr. - 22:00 hr.",
+    ];
+    csvData.push(headerRow);
+
+    modifiedData.forEach((row) => {
+      const rowData = [
+        row?.employeeId,
+        row?.status,
+        row?.lastName,
+        row?.mobileNumber,
+        row?.mobileNumber1,
+        row?.mobileNumber2,
+        row?.mobileNumber3,
+      ];
+      csvData.push(rowData);
+    });
+    const csvString = Papa.unparse(csvData);
+    const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
+    saveAs(blob, "TariffData.csv");
+    notifySuccess("Download Excel Succefully")
+  };
+
   const handleCancel = () => {
     setOpenDialog(false);
   };
@@ -75,6 +125,7 @@ const Table = ({
 
   return (
     <Grid container>
+      <ToastComponent/>
       <Grid
         container
         justifyContent="space-between"
@@ -92,23 +143,23 @@ const Table = ({
         <Grid item className="customSearch">
           <Grid container>
             <Grid item mr={1}>
-              <CustomDownloadExcel
-                name={"Download Excel"}
-                rows={data}
-                data={"Fleet (121)"}
-              />
+            <Button
+                variant="outlined"
+                sx={{ mr: 1 }}
+                onClick={() => {
+                  handleExport(data);
+                }}
+                startIcon={<FaRegFileExcel />}
+                size="large"
+              >
+                Download Excel
+              </Button>
             </Grid>
             <Grid item mr={1}>
               <CommonDatePicker
                 getDataFromChildHandler={getDataFromChildHandler}
               />
             </Grid>
-            {/* <CustomTextField
-                            type="search"
-                            placeholder="Search empId / Name"
-                            value={debouncedSearchQuery}
-                            onChange={handleSearchChange}
-                        /> */}
           </Grid>
         </Grid>
       </Grid>
