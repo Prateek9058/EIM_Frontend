@@ -13,10 +13,10 @@ import Image from "next/image";
 import AutoBox from "@/app/(components)/mui-components/Autocomplete/index";
 
 const iconUrls = [
-  {icon:"./truck1.svg",color:"blue"},
-  {icon:"./truck2.svg",color:"red"},
- { icon:"./truck3.svg",color:"green"},
- {icon: "./truck4.svg",color:"gray"},
+ "./truck1.svg",
+  "./truck2.svg",
+  "./truck3.svg",
+  "./truck4.svg",
 ];
 const coordinate = [
   { lat: "28.51079782059423", log: "77.40362813493975" },
