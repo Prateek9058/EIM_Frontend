@@ -18,7 +18,7 @@ const Menuitems1= [
   },
   {
     id: uniqueId(),
-    title: "Logout",
+    title: "Log out",
     icon: AiOutlineLogout,
     href: "/login",
   },

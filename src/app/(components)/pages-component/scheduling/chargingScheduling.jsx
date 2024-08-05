@@ -124,7 +124,7 @@ const VehicleScheduling = () => {
                 component="img"
                 alt="green iguana"
                 height="140"
-                image="./Img/station.svg"
+                image="./Img/Station.svg"
               />:<CardMedia
               component="img"
               alt="green iguana"

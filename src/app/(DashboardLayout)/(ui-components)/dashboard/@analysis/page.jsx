@@ -172,7 +172,7 @@ const Analysis = () => {
               <AccessTimeFilled
                 sx={{ verticalAlign: "middle", p: "3px" }}
               />{" "}
-              E - Tractor average consumption (kwh/km)
+              E - Tractor average consumption (kWh/km)
             </Typography>
           </Grid>
           <Grid mt={2}>

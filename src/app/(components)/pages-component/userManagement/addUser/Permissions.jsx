@@ -26,6 +26,7 @@ export default function Permission({ modules, setModules, upLoadFile,setCustomiz
   React.useEffect(() => {
     setCustomizeModule(modules);
   }, [open]);
+  
 
   const handleChange = (panel) => (event, isExpanded) => {
     console.log("panel", panel);

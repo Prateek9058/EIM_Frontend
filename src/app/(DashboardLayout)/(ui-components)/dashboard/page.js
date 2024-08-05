@@ -59,12 +59,12 @@ function ShorterGrid() {
       value: 1250,
       icon: IdCard,
       data1: [
-        { title: "customer1" },
-        { title: "customer2" },
-        { title: "customer3" },
-        { title: "customer4" },
-        { title: "customer5" },
-        { title: "customer6" },
+        { title: "customer 1" },
+        { title: "customer 2" },
+        { title: "customer 3" },
+        { title: "customer 4" },
+        { title: "customer 5" },
+        { title: "customer 6" },
       ],
     },
     {

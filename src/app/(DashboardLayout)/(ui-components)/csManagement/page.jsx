@@ -23,9 +23,9 @@ const CsManagement = () => {
     }
     const tabs = [
         { label: "Overview", },
-        { label: "Charging Station", },
+        { label: "Charging station", },
         { label: "E - Tractor", },
-        { label: "Revenue Management",  },
+        { label: "Revenue management",  },
     ]
     const TabPanelList = [
         { component:  <Overview value="1"/>},

@@ -22,11 +22,35 @@ import AddBattery from "./addBattery";
 import ToastComponent from "@/app/(components)/mui-components/Snackbar/index";
 
 Chart.register(...registerables);
-const data1 = {
+const avg_battery = {
   labels: ["60% - 100%", "60% - 40%", "40% - 0%"],
   datasets: [
     {
-      label: "My First Datasetsss",
+      label: "Average SoH",
+      data: [1895, 60, 120],
+      backgroundColor: ["#3849E3", "#9FFF25", "#FF5191"],
+      borderColor: "transparent",
+      hoverOffset: 10,
+    },
+  ],
+};
+const battery_temp = {
+  labels: ["High temp.", "Normal"],
+  datasets: [
+    {
+      label: "Battery temperature",
+      data: [185, 100],
+      backgroundColor: ["#3849E3", "#9FFF25"],
+      borderColor: "transparent",
+      hoverOffset: 10,
+    },
+  ],
+};
+const avg_battery_charge = {
+  labels: ["10 - 40 times", "40 - 70 times", "70 - 100 times"],
+  datasets: [
+    {
+      label: "Average battery cycle",
       data: [1895, 60, 120],
       backgroundColor: ["#3849E3", "#9FFF25", "#FF5191"],
       borderColor: "transparent",
@@ -65,7 +89,7 @@ const options = {
 };
 const config = {
   type: "line",
-  data: data1,
+  data: avg_battery_charge,
   options: {
     ...options,
   },
@@ -197,10 +221,10 @@ const Page = () => {
                 {index === 1
                   ? "Average battery SoH"
                   : index === 2
-                  ? "Battery Temperature"
-                  : "Avg. Battery Charge Cycle"}
+                  ? "Battery temperature"
+                  : "Avg. battery charge cycle"}
               </Typography>
-              <CustomDropdown buttonname="This Week" menuitems={menuItems} />
+              <CustomDropdown buttonname="This week" menuitems={menuItems} />
             </Grid>
             <Grid
               container
@@ -209,7 +233,7 @@ const Page = () => {
               mt={5}
               mb={3}
             >
-              <Doughnut data={data1} options={config.options} />
+              <Doughnut data={index === 1?avg_battery:index===2?battery_temp:avg_battery_charge} options={config.options} />
             </Grid>
           </CustomGrid>
         </Grid>
@@ -221,9 +245,9 @@ const Page = () => {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Typography>
-              <AccessTimeFilledIcon sx={{ verticalAlign: "middle" }} />
-              Consumption/Charge (kwh) 
+            <Typography variant="h5">
+              <AccessTimeFilledIcon sx={{ verticalAlign: "middle",mr:"3px" ,p:"3px"}} />
+               Consumption/charge (kWh) 
             </Typography>
             <CommonDatePicker
               getDataFromChildHandler={getDataFromChildHandler}

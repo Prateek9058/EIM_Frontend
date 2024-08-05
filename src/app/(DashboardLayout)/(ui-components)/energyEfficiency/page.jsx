@@ -35,7 +35,7 @@ const EnergyEfficiency = () => {
     {
       content: "20 Vehicle",
       value: "2",
-      title: "CS/SS Status",
+      title: "CS/SS status",
       label: "View report",
       data: "Trip Payload",
     },
@@ -48,7 +48,7 @@ const EnergyEfficiency = () => {
     },
   ];
   const CSstatus = [
-    { label: "charging", data: "20 Vehicle", color: "#00BE2A" },
+    { label: "Charging", data: "20 Vehicle", color: "#00BE2A" },
     { label: "Offline", data: "3 Vehicle", color: "#FF7474" },
     { label: "Unavailable", data: "20 Vehicle", color: "#8B99AD" },
   ];

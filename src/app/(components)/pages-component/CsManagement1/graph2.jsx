@@ -7,7 +7,7 @@ Chart.register(...registerables);
 const data = {
     labels: Array.from({length: 20}, (_, i) => (i + 1).toString()), // Labels from 1 to 50
     datasets: [{
-        label: 'Dense Heartbeat Dataset',
+        label: 'Charging station',
         data: Array.from({length: 230}, () => Math.floor(Math.random() * 20)), // 50 random data points
         backgroundColor: 'rgba(247, 187, 187, .2)', // Fill color for the area chart
         borderColor: '#C0FE72',

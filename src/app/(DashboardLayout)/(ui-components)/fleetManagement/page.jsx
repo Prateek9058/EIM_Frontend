@@ -53,10 +53,10 @@ const Page = () => {
   }, [value, page, rowsPerPage, searchQuery, date]);
 
   const tabs = [
-    { label: `Overview` },
+    { label: `Overview ` },
     { label: "Charging" },
     { label: "Trip" },
-    { label: "E-Tractor Report" },
+    { label: "E-tractor ID report" },
   ];
   const handleTableData = async () => {
     if (tabsValue !== "Overview") {

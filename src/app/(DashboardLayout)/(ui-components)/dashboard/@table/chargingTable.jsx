@@ -32,7 +32,7 @@ const Table = ({
     "Station ID",
     "CS status",
     "Charging queue",
-    "Unit consumed(kw)",
+    "Unit consumed(kW)",
   ];
   const [open, setOpenDialog] = React.useState(false);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);

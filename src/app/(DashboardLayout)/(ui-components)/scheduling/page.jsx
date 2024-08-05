@@ -8,7 +8,7 @@ import ManagementGrid from "@/app/(components)/mui-components/Card";
 const Scheduling = () => {
   const tabs = [
     { label: "E-Tractor", value: "1", content: <VehicleScheduling /> },
-    { label: "CS/SS Station", value: "2", content: <ChargingScheduling /> },
+    { label: "CS/SS station", value: "2", content: <ChargingScheduling /> },
   ];
   const TabPanelList = [
     { component: <VehicleScheduling /> },

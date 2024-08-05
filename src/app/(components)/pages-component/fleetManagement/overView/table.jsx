@@ -17,6 +17,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { FaRegFileExcel } from "react-icons/fa";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
+import { CustomDropdown } from "@/app/(components)/mui-components/DropdownButton";
 const Table = ({
   data,
   value,
@@ -36,9 +37,8 @@ const Table = ({
     "Avg. speed (km/hr.)",
     "Avg. payload (Ton)",
     "Total distance travelled(km)",
-    "Avg. consumption(kwh/km)",
+    "Avg. consumption(kWh/km)",
     "Breakdown",
-    "NumberPlate",
     "Current Soc(%)",
     "Effective range(km)",
     "Action",
@@ -88,7 +88,6 @@ const Table = ({
       totalDistance: row?.totalDistance,
       avgConsumption: row?.avgConsumption,
       breakdown: row?.breakdown,
-      numberPlate: row?.numberPlate,
       currentSoc: row?.currentSoc,
       effectiveRange: row?.effectiveRange,
     }));
@@ -107,7 +106,6 @@ const Table = ({
       "Total distance travelled(km)",
       "Avg. consumption(kwh/km)",
       "Breakdown",
-      "NumberPlate",
       "Current Soc(%)",
       "Effective range(km)",
     ];
@@ -123,7 +121,6 @@ const Table = ({
         row?.totalDistance,
         row?.avgConsumption,
         row?.breakdown,
-        row?.numberPlate,
         row?.currentSoc,
         row?.effectiveRange,
       ];
@@ -163,7 +160,6 @@ const Table = ({
       totalDistance: item?.totalDistance ? item?.totalDistance : "--",
       avgConsumption: item?.avgConsumption ? item?.avgConsumption : "--",
       breakdown: item?.breakdown ? item?.breakdown : "--",
-      numberPlate: item?.numberPlate ? item?.numberPlate : "--",
       currentSoc: item?.currentSoc ? item?.currentSoc : "--",
       effectiveRange: item?.effectiveRange ? item?.effectiveRange : "--",
       Action: [
@@ -181,7 +177,7 @@ const Table = ({
       ],
     }));
   };
-
+  const menuItems= ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"]
   return (
     <Grid container>
       <Grid
@@ -200,10 +196,10 @@ const Table = ({
         </Grid>
         <Grid item className="customSearch">
           <Grid container>
-            <Grid item mr={1}>
+            <Grid item >
               <Button
                 variant="outlined"
-                sx={{ mr: 1 }}
+              
                 onClick={() => {
                   handleExport(data?.data);
                 }}
@@ -212,6 +208,14 @@ const Table = ({
               >
                 Download Excel
               </Button>
+            </Grid>
+            <Grid item mr={1}>
+            <CustomDropdown
+                  variant="outlined"
+                  size="large"
+                  buttonname={'Region'}
+                  menuitems={menuItems}
+                />
             </Grid>
             <Grid item mr={1}>
               <CommonDatePicker

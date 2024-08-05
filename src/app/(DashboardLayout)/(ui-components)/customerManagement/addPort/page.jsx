@@ -90,7 +90,7 @@ const AddPort = () => {
           sm={6}
           sx={{ display: "flex", flexDirection: "column", gap: 4 }}
         >
-          <TextField label="Location Name" placeholder="Enter Location" />
+          <TextField label="Location name" placeholder="Enter location name" />
         </Grid>
         <Grid item xs={12} height="380px">
         <Map
@@ -108,11 +108,11 @@ const AddPort = () => {
           sm={6}
           sx={{ display: "flex", flexDirection: "column", gap: 4 }}
         >
-          <TextField type="text" placeholder="Enter Location name" />
+          <TextField type="text" placeholder="Enter location name" />
         </Grid>
         <Grid container rowGap={3} columnGap={5}>
-          <FieldSection placeholder="Region Name (Auto-fill)" />
-          <FieldSection placeholder="Location Name (Auto-fill)" />
+          <FieldSection placeholder="Region name (Auto-fill)" />
+          <FieldSection placeholder="Location name (Auto-fill)" />
           <Grid
             item
             md={2}
@@ -133,8 +133,8 @@ const AddPort = () => {
           >
             <TextField placeholder="District (Auto-fill)" />
           </Grid>
-          <AutoCompleteSection label="Select User" options={user} />
-          <AutoCompleteSection label="Select Tariff" options={Region} />
+          <AutoCompleteSection label="Select user" options={user} />
+          <AutoCompleteSection label="Select tariff" options={Region} />
           <Grid
             item
             md={2}

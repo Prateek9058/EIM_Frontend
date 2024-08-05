@@ -158,6 +158,7 @@ const ManagementGrid = ({
                 variant="scrollable"
                 onChange={handleChange}
                 sx={{
+               
                   "& .MuiTabs-indicator": {
                     backgroundColor: "transparent",
                   },

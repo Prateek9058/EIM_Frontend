@@ -58,7 +58,7 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     setOpenComman(false);
     setFile();
     setManager();
-    setSelectManager()
+    setSelectManager();
     setRole();
     setSubAdmin();
     setSelectSubAdmin();
@@ -67,7 +67,8 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     reset();
   };
 
-  const upLoadFile = async (formdata2,customizeModule) => {
+  const upLoadFile = async (formdata2) => {
+    // console.log("customize,", customizeModule);
     const formData = new FormData();
     if (!file && selectRole?.toLowerCase() == "sub admin") {
       notifyError("file is required");
@@ -76,7 +77,7 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     if (file) {
       formData.append("image", file);
     }
-    // formData.append('modules',customizeModule)
+    // formData.append("modules", customizeModule);
     formData.append("userName", formdata2.userName);
     formData.append("emailId", formdata2.emailId);
     formData.append("mobileNumber", formdata2.mobileNumber);
@@ -88,7 +89,6 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     if (formdata2.subAdmin) {
       formData.append("subAdmin", formdata2.subAdmin);
     }
-    // nextStep();
     try {
       const response = await axiosInstanceImg.post(
         "/user/createUser",
@@ -198,8 +198,6 @@ export default function AddUser({ open, setOpen, handleTableData }) {
     getModules();
   }, [open]);
 
-
-  console.log("modules",customizeModule)
   const handleCommanDialog = () => {
     setOpenComman(true);
   };
@@ -238,7 +236,10 @@ export default function AddUser({ open, setOpen, handleTableData }) {
           </Grid>
         </DialogTitle>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(handleFormSubmission)} noValidate>
+          <form
+            onSubmit={methods.handleSubmit(handleFormSubmission)}
+            noValidate
+          >
             <DialogContent sx={{ padding: "1px 24px" }}>
               <Grid container mb={5} justifyContent={"center"}>
                 <Grid item xs={9}>

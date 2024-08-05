@@ -52,8 +52,7 @@ const Read = () => {
             </Avatar>
             <Box flexGrow={1}>
               <Typography variant="body1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-                laboriosam necessitatibus vero magni. Ratione, nisi.
+              Ashwin Bose is requesting for battery charging , Current battery : 52%
               </Typography>
               <Box mt={1}>
                 <Button variant="contained" sx={{ mr: 2 }}>
@@ -67,6 +66,34 @@ const Read = () => {
             </Typography>
           </Box>
           <Divider />
+          <Box display="flex" alignItems="center" p={2}>
+            <Avatar
+              sx={{
+                height: 45,
+                width: 45,
+                mr: 2,
+                backgroundColor: "#fff",
+                color: "gray",
+              }}
+            >
+              M
+            </Avatar>
+            <Box flexGrow={1}>
+              <Typography variant="body1">
+              Rajat Singh is requesting for battery swapping , Current battery : 12%
+              </Typography>
+              <Box mt={1}>
+                <Button variant="contained" sx={{ mr: 2 }}>
+                  Accept
+                </Button>
+                <Button variant="outlined">Decline</Button>
+              </Box>
+            </Box>
+            <Typography variant="body1" color="secondary">
+              2m ago
+            </Typography>
+          </Box>
+         
         </Box>
       </Box>
     </Grid>

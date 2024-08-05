@@ -90,7 +90,7 @@ const Overview = ({
     {
       content: "20 ",
       value: "E-tractor",
-      title: "Distance Travelled (Km)",
+      title: "Distance Travelled (km)",
       label: "View report",
       data: "Distance travelled",
       handleFunction: handleDistance,
@@ -106,7 +106,7 @@ const Overview = ({
     {
       content: "20 ",
       value: "Vehicle",
-      title: "Trips (Units Consumed)",
+      title: "Trips (Units consumed)",
       label: "View report",
       data: "Trips",
       handleFunction: handleTrips,
@@ -118,19 +118,19 @@ const Overview = ({
       <DistanceTravel
         open={distance}
         setOpen={setDistance}
-        data1="Distance Travelled (Km)"
+        data1="Distance travelled (Km)"
         data={data2}
       />
       <DistanceTravel
         open={payload}
         setOpen={setPayload}
-        data1="Trip Payload"
+        data1="Trip payload(Ton)"
         data={data2}
       />
       <DistanceTravel
         open={trips}
         setOpen={setTrips}
-        data1="Trips"
+        data1="Trips (Units consumed)"
         data={data2}
       />
       {data1.map((item, index) => (

@@ -95,8 +95,8 @@ const config = {
 const data = [
   { labels: "Queue in CS", value: "1895", color: "#A698EB" },
   { labels: "Queue in SS", value: "60", color: '#1B1A55' },
-  { labels: "E-tractor charged", value: "120", color: '#ECE9FF' },
-  { labels: "E-tractor swapped", value: "20", color: '#CBC0FF' },
+  { labels: "E-tractor Charged", value: "120", color: '#ECE9FF' },
+  { labels: "E-tractor Swapped", value: "20", color: '#CBC0FF' },
 ]
 const Badge1 = styled(Badge)(({ color }) => ({
   marginRight: "16px",

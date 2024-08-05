@@ -139,6 +139,7 @@ const baselightTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          textTransform:"none",
           boxShadow: "none",
           borderRadius: "8px",
         },
@@ -179,6 +180,7 @@ const baselightTheme = createTheme({
     MuiTab: {
       styleOverrides: {
         root: {
+          textTransform:"none",
           "& .MuiButtonBase-root": {
             borderRadius: "0px",
           },

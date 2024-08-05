@@ -14,7 +14,11 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axiosInstance from "@/app/api/axiosInstance";
-import ToastComponent,{notifyError,notifySuccess} from "../mui-components/Snackbar";
+import ToastComponent, {
+  notifyError,
+  notifySuccess,
+} from "../mui-components/Snackbar";
+import { useForm } from "react-hook-form";
 
 import styled from "@emotion/styled";
 const CustomTextField = styled(TextField)(({ theme }) => ({
@@ -48,67 +52,61 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const AuthLogin = ({ title, subtitle }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleLogin = async (event) => {
+  const { register, handleSubmit, formState, reset, getValues } = useForm();
+  const { errors } = formState;
+  const formData=getValues()
+  console.log("formdaa",formData)
+ 
+  const handleLogin = async (formdata) => {
     event.preventDefault();
-    const body = {
-      emailId: username,
-      password: password,
-    };
-    setErrorMessage(null);
-    if (!username || !password) {
-      setErrorMessage("Please provide both the username and password.");
-      return;
-    }
     try {
-      const response = await axiosInstance.post("/auth/login", body);
+      const response = await axiosInstance.post("/auth/login", formdata);
       if (response.status) {
         signIn("credentials", {
-          username: username,
-          password: password,
+          emailId: formData.emailId,
+          password: formData.password,
           callbackUrl: `/`,
           redirect: true,
         });
-        console.log("login",response)
-        if(response.status==201 || response.status ==200){
-          notifySuccess(response?.data?.message)
-     
+        console.log("login", response);
+        if (response.status == 201 || response.status == 200) {
+          notifySuccess(response?.data?.message);
         }
         localStorage.setItem("token", response?.data?.access_Token);
       }
     } catch (error) {
-      setErrorMessage(error?.response?.data?.message);
-      notifyError(error?.response?.data?.message)
+      notifyError(error?.response?.data?.message);
     }
   };
-
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
   const handleMouseDownPassword = (event) => event.preventDefault();
 
   return (
     <>
-    <ToastComponent/>
+      <ToastComponent />
       {title ? (
         <Typography fontWeight={"700"} variant="h2" mb={1}>
           {title}
         </Typography>
       ) : null}
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit(handleLogin)}>
         <Stack>
           <Box>
             <CustomTextField
+              type="text"
               label="Email"
               variant="outlined"
               fullWidth
               id="emailId"
               name="emailId"
-              value={username}
               inputProps={{ shrink: "true" }}
-              onChange={(e) => setUsername(e.target.value)}
+              {...register("emailId", { required: "email is required!",pattern:{
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message:"enter valid email!"
+              } })}
+              error={!!errors.emailId}
+              helperText={errors.emailId?.message}
             />
           </Box>
           <Box mt={"25px"}>
@@ -118,8 +116,7 @@ const AuthLogin = ({ title, subtitle }) => {
               variant="outlined"
               fullWidth
               name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...register("password", { required: "password is required!", })}
               InputProps={{
                 shrink: true,
                 endAdornment: (
@@ -138,6 +135,8 @@ const AuthLogin = ({ title, subtitle }) => {
                   </InputAdornment>
                 ),
               }}
+              error={!!errors.password}
+              helperText={errors.password?.message}
             />
           </Box>
           <Stack
@@ -146,10 +145,9 @@ const AuthLogin = ({ title, subtitle }) => {
             alignItems="center"
             my={2}
           >
-            <Typography>Forget Password</Typography>
+            <Typography>Forgot Password</Typography>
           </Stack>
         </Stack>
-        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <Box>
           <Button
             color="secondary"

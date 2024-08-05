@@ -13,6 +13,7 @@ import { FaRegFileExcel } from "react-icons/fa";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
 import { notifyError ,notifySuccess} from "@/app/(components)/mui-components/Snackbar";
+import { CustomDropdown } from "@/app/(components)/mui-components/DropdownButton";
 
 const iconUrls = [
   "./truck1.svg",
@@ -39,12 +40,12 @@ const columns = [
   "E-tractor ID",
   "Current SoC (%)",
   "Current SoH (%)",
-  "Current units charged (kw)",
+  "Current units charged (kW)",
   "Current status",
   "Estimated charging time(hr.)",
   "Charging cycle",
   "Swapping cycle",
-  "Total units charged(kw)",
+  "Total units charged(kW)",
   "Avg. charging Time",
   "Action",
 ];
@@ -204,6 +205,7 @@ const Charging = ({
       ],
     }));
   };
+  const menuItems= ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"]
   return (
     <Grid container columnGap={2}>
       {activeMarker && activeMarker !== null ? (
@@ -253,10 +255,10 @@ const Charging = ({
           </Grid>
           <Grid item className="customSearch">
             <Grid container>
-              <Grid item mr={1}>
+              <Grid item >
                 <Button
                   variant="outlined"
-                  sx={{ mr: 1 }}
+          
                   onClick={() => {
                     handleExport(data?.data);
                   }}
@@ -266,6 +268,14 @@ const Charging = ({
                   Download Excel
                 </Button>
               </Grid>
+              <Grid item mr={1}>
+            <CustomDropdown
+                  variant="outlined"
+                  size="large"
+                  buttonname={'Region'}
+                  menuitems={menuItems}
+                />
+            </Grid>
               <Grid item mr={1}>
                 <CommonDatePicker
                   getDataFromChildHandler={getDataFromChildHandler}

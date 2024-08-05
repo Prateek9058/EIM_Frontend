@@ -32,7 +32,7 @@ const Login = () => {
                   Log In
                 </Typography>
                 <Typography>
-                  Please Login In to continue to your Account
+                  Please Log In to continue to your account
                 </Typography>
               </Stack>
               <Stack />
@@ -54,17 +54,17 @@ const Login = () => {
             <Grid
               sx={{
                 position: "absolute",
-                bottom: { xs: 10, md: 20 }, // Adjust as needed for responsiveness
+                bottom: { xs: 10, md: 20 }, 
                 left: "50%",
                 transform: "translateX(-50%)",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                width: { xs: "80%", sm: "60%", md: "40%" }, // Responsive width
+                width: { xs: "80%", sm: "60%", md: "40%" },
                 background:
                   "linear-gradient(127.07deg, #589CFF -26.97%, #013376 71.52%)",
                 borderRadius: "8px",
-                padding: "16px", // Responsive padding
+                padding: "16px", 
               }}
             >
               <Image src={logo} alt="Logo" layout="responsive" height={60} />
