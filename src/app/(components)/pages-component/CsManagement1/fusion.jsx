@@ -29,7 +29,7 @@ export default function AlertDialog({ open, setOpen,fusionValue }) {
                         </Grid>
                         <Grid container alignItems={"center"}>
                             <LiaCoinsSolid color='#fff' size={"25px"} />   <Typography ml={2} variant='h5' color={"#fff"}> <span style={{ color: "#161861", fontWeight: 700 }}>Above 4800 kWh,</span>Pay As You Charge
-                                <br /><span style={{ color: "#161861", fontWeight: 700 }} > @ $ 15/kwh</span></Typography>
+                                <br /><span style={{ color: "#161861", fontWeight: 700 }} > @ $ 15/kWh</span></Typography>
                         </Grid>
                     </Grid>
                     <Divider />

@@ -179,7 +179,7 @@ const Charging = ({ value }) => {
           }}
         >
           <Grid item>
-            <Typography variant="h3">Revenue Management</Typography>
+            <Typography variant="h3">Revenue Management Report</Typography>
           </Grid>
           <Grid item className="customSearch">
             <Grid container>

@@ -280,7 +280,7 @@ const Charging = ({
           }}
         >
           <Grid item>
-            <Typography variant="h3">Fleet ({data?.totalDocuments})</Typography>
+            <Typography variant="h3">FLEET ({data?.totalDocuments})</Typography>
           </Grid>
           <Grid item className="customSearch">
             <Grid container>

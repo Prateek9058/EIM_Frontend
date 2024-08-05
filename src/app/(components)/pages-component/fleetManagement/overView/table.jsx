@@ -39,7 +39,7 @@ const Table = ({
     "Total distance travelled(km)",
     "Avg. consumption(kWh/km)",
     "Breakdown",
-    "Current Soc(%)",
+    "Current SoC(%)",
     "Effective range(km)",
     "Action",
   ];
@@ -106,7 +106,7 @@ const Table = ({
       "Total distance travelled(km)",
       "Avg. consumption(kwh/km)",
       "Breakdown",
-      "Current Soc(%)",
+      "Current SoC(%)",
       "Effective range(km)",
     ];
     csvData.push(headerRow);
@@ -192,7 +192,7 @@ const Table = ({
         }}
       >
         <Grid item>
-          <Typography variant="h3">Fleet ({data?.totalDocuments})</Typography>
+          <Typography variant="h3">FLEET ({data?.totalDocuments})</Typography>
         </Grid>
         <Grid item className="customSearch">
           <Grid container>

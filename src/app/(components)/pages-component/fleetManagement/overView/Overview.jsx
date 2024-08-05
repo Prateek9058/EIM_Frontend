@@ -90,7 +90,7 @@ const Overview = ({
     {
       content: "20 ",
       value: "E-tractor",
-      title: "Distance Travelled (km)",
+      title: "Distance travelled (km)",
       label: "View report",
       data: "Distance travelled",
       handleFunction: handleDistance,
@@ -98,7 +98,7 @@ const Overview = ({
     {
       content: "20 ",
       value: "Vehicle",
-      title: "Trip Payload (Ton)",
+      title: "Trip payload (Ton)",
       label: "View report",
       data: "Trip payload",
       handleFunction: handlePayload,

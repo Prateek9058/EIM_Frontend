@@ -140,21 +140,24 @@ const Page = ({
               })}
             <Grid container xs={12} sx={{ position: "relative" }}>
               {buttonData && (
-                <Grid
-                  container
-                  sx={{
-                    padding: "8px",
-                    position: "absolute",
-                    backgroundColor: "#161861",
-                    top: 315,
-                    transform: "translateX(-50%)",
-                    left: "50%",
-                  }}
-                >
+                // <Grid
+                //   container
+                //   sx={{
+                //     padding: "8px",
+                //     position: "absolute",
+                //     backgroundColor: "#161861",
+                //     top: 315,
+                //     transform: "translateX(-50%)",
+                //     left: "50%",
+                //   }}
+                // >
                   <Box
                     sx={{
+                      position: "absolute",
                       left: "50%",
+                      top: 322,
                       display: "flex",
+                      transform: "translateX(-50%)",
                       justifyContent: "center",
                       alignItems: "center",
                       width: "100%",
@@ -165,7 +168,7 @@ const Page = ({
                       <ButtonGroup aria-label="Basic button group">
                         {buttonData.map((button, index) => (
                           <Button
-                            variant="outlined"
+                            variant="contained"
                             key={index}
                             sx={{
                               ".MuiButton-outlined": {
@@ -173,8 +176,8 @@ const Page = ({
                                 color: "#fff",
                               },
                               "&:hover": {
-                                border: "1px solid #C0FE72",
-                                backgroundColor: "rgba(0, 0, 0, 0.08)",
+                                // border: "1px solid #C0FE72",
+                                // backgroundColor: "rgba(0, 0, 0, 0.08)",
                                 color: "#C0FE72",
                               },
                             }}
@@ -196,7 +199,7 @@ const Page = ({
                       </ButtonGroup>
                     )}
                   </Box>
-                </Grid>
+                // </Grid>
               )}
             </Grid>
           </div>

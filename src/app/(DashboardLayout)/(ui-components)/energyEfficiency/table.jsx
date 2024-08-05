@@ -24,7 +24,7 @@ const Table = ({
   const columns = [
     "CS/SS Station ID",
     "Region",
-    "Charging status",
+    "Charger status",
     "Queue",
     "Max. capacity(kW)",
     "Current charging load(kW)",

@@ -40,7 +40,7 @@ const CreateTariff = () => {
       <ManagementGrid breadcrumbItems={breadcrumbItems} moduleName={"Create Tariff"} />
       <CustomGrid container rowGap={5} columnGap={5}>
         <Grid item md={4} xs={12} sm={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <TextField label="Tariff Name" placeholder="Enter Tariff Name" />
+          <TextField label="Tariff name" placeholder="Enter Tariff name" />
         </Grid>
         <TimeRateSection ratePlaceholder="Base Rate - (- 1.50 )" />
         <TimeRateSection ratePlaceholder="Rate - (0.00)" />

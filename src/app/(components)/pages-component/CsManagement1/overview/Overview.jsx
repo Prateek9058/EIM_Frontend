@@ -26,7 +26,7 @@ const cardsData = [
     batteryStatus: ["#C0FE72", "#C0FE72", "#C0FE72", "#FE7272"],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore laborum",
-    distance: "2 Km",
+    distance: "2 km",
     queueCharging: "3 Queue in charging",
     queueSwapping: "3 Queue in swapping",
   },
@@ -36,7 +36,7 @@ const cardsData = [
     ssIdentity: "CS Identity (Technical Issue)",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore laborum",
-    distance: "5 Km",
+    distance: "5 km",
     queueCharging: "2 Queue in charging",
     queueSwapping: "4 Queue in swapping",
   },
@@ -47,7 +47,7 @@ const cardsData = [
     batteryStatus: ["#C0FE72", "#FE7272", "#FE7272", "#FE7272"],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore laborum",
-    distance: "1 Km",
+    distance: "1 km",
     queueCharging: "1 Queue in charging",
     queueSwapping: "2 Queue in swapping",
   },
@@ -70,7 +70,10 @@ const Overview = () => {
     <Grid container>
       <CustomGrid>
         <Grid item xs={12} md={6} p={2}>
+          <Grid mb={2}>
           <CustomTextField fullWidth type="search" placeholder="Search" />
+          </Grid>
+         
           <Divider />
           {cardsData?.map((card, index) => (
             <Grid item xs={12} key={index}>

@@ -29,7 +29,7 @@ const cardData = [
       "Battery Analysis",
       "Fleet Management",
     ],
-    chip: "Best Seller",
+    chip: "Bestseller",
   },
   {
     title: "Premium Plan",

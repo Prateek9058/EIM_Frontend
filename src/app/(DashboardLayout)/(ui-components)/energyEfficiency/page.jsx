@@ -65,7 +65,7 @@ const EnergyEfficiency = () => {
       menuItems: ["Location 1", "Location 2", "Location 3"],
     },
     {
-      label: "Charging Station",
+      label: "Charging station",
       menuItems: ["Charging 1", "Charging 2", "Charging 3"],
     },
   ];
