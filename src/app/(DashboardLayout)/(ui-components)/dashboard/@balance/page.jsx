@@ -94,11 +94,15 @@ const config = {
     ...options,
   },
 };
+// "rgba(255, 99, 132, 0.7)",
+// "rgba(255, 159, 64, 0.7)",
+// "rgba(255, 205, 86, 0.7)",
+// "rgba(75, 192, 192, 0.7)",
 const data = [
-  { labels: "Offline CS ", value: "1895", color: "#C1FE72" },
-  { labels: "Online CS", value: "60", color: "#577B8D" },
-  { labels: "Occupied CS", value: "120", color: "#240750" },
-  { labels: "Available CS", value: "20", color: "green" },
+  { labels: "Offline CS ", value: "1895", color: "rgba(255, 99, 132, 0.7)" },
+  { labels: "Online CS", value: "60", color: "rgba(255, 159, 64, 0.7)" },
+  { labels: "Occupied CS", value: "120", color: "rgba(255, 205, 86, 0.7)" },
+  { labels: "Available CS", value: "20", color: "rgba(75, 192, 192, 0.7)" },
 ];
 const Badge1 = styled(Badge)(({ color }) => ({
   marginRight: "16px",
