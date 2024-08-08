@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import styled from "@emotion/styled";
 import Badge from "@mui/material/Badge";
 import Image from "next/image";
-import Station from "../../../../../../public/Img/Station.svg";
+import Station from "../../../../../../public/not-charging.svg";
 
 // import {CustomGrid} from '@/components/CustomGrid/index'
 const CustomGrid = styled(Grid)(({ theme }) => ({
@@ -119,7 +119,6 @@ const BalancePage = () => {
           <Doughnut data={data1} options={config.options} />
           <Box
             sx={{
-              padding: "0px 25px 0px 25px",
               borderRadius: "16px",
               background:
                 "linear-gradient(111.41deg, rgba(139, 153, 173, 0.36) 0%, rgba(255, 255, 255, 0.12) 100%)",
