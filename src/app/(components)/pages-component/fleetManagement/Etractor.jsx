@@ -18,7 +18,7 @@ import MapDetails from "@/app/(components)/map/mapDetails";
 import { FaRegFileExcel } from "react-icons/fa";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
-import {notifyError,notifySuccess} from "../../mui-components/Snackbar";
+import { notifyError, notifySuccess } from "../../mui-components/Snackbar";
 import { CustomDropdown } from "@/app/(components)/mui-components/DropdownButton";
 
 const iconUrls = [
@@ -42,6 +42,7 @@ const buttonData = [
   { label: "Parked", color: "skyblue" },
 ];
 const columns = [
+  "Total distance travelled(km)",
   "E-tractor ID",
   "Status",
   "Current SoC(%)",
@@ -49,7 +50,6 @@ const columns = [
   "Charging cycle",
   "Swapping cycle",
   "Trip cycle",
-  "SoC estimated time",
   "Avg. charging time",
   "Total units consumed(kwh)",
   "Avg. speed(km/hr)",
@@ -59,10 +59,9 @@ const columns = [
   "Tues handled(40F)",
   "Tues handled(20F)",
   "Tues each trip",
-  "avg. consumption(kw/km)",
+  "avg. consumption(kWh/km)",
   "Breakdown",
   "Effective range(km)",
-  "Total distance travelled(km)",
   "Current status",
   "Action",
 ];
@@ -100,18 +99,6 @@ const Charging = ({
       clearTimeout(handler);
     };
   }, [debouncedSearchQuery, setSearchQuery]);
-
-  const handleSearchChange = (event) => {
-    setDebouncedSearchQuery(event.target.value);
-  };
-
-  const handleOpenDialog = () => {
-    setOpenDialog(true);
-  };
-
-  const handleConfirm = () => {
-    handleCancel();
-  };
 
   const handleCancel = () => {
     setOpenDialog(false);
@@ -180,10 +167,9 @@ const Charging = ({
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "FleetEtractorData.csv");
-    notifySuccess("Download Excel Successfully")
+    notifySuccess("Download Excel Successfully");
   };
   const getFormattedData = (data) => {
-    console.log("data", data);
     return data?.map((item, index) => ({
       region: item?.port ? item?.port?.regionName : "--",
       fleetId: item?.fleetId ?? "--",
@@ -230,7 +216,7 @@ const Charging = ({
       ],
     }));
   };
-  const menuItems= ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"]
+  const menuItems = ["Mumbai", "Delhi", "Agra", "Punjab", "Kolkata"];
   return (
     <Grid container columnGap={2}>
       {activeMarker && activeMarker !== null ? (
@@ -285,9 +271,8 @@ const Charging = ({
           <Grid item className="customSearch">
             <Grid container>
               <Grid item>
-              <Button
+                <Button
                   variant="outlined"
-               
                   onClick={() => {
                     handleExport(data?.data);
                   }}
@@ -297,14 +282,14 @@ const Charging = ({
                   Download Excel
                 </Button>
               </Grid>
-              <Grid item mr={1}>
-            <CustomDropdown
+              <Grid item ml={1} mr={1}>
+                <CustomDropdown
                   variant="outlined"
                   size="large"
-                  buttonname={'Region'}
+                  buttonname={"Region"}
                   menuitems={menuItems}
                 />
-            </Grid>
+              </Grid>
               <Grid item mr={1}>
                 <CommonDatePicker
                   getDataFromChildHandler={getDataFromChildHandler}

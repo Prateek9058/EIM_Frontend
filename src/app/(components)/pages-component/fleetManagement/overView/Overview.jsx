@@ -6,7 +6,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import TimerIcon from "@mui/icons-material/Timer";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import Map from "@/app/(components)/map/map";
 import DistanceTravel from "../ViewReport/DistanceTravel";
 import { CustomDropdown } from "../../../mui-components/DropdownButton/index";
@@ -14,9 +13,7 @@ import { Fleet } from "../../../table/rows";
 import styled from "@emotion/styled";
 import Table from "./table";
 import LinearProgress from "@mui/material/LinearProgress";
-import { ColoredChip } from "@/app/(components)/mui-components/Chip";
 import MapDetails from "@/app/(components)/map/mapDetails";
-
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -90,7 +87,10 @@ const Overview = ({
     {
       content: "20 ",
       value: "E-tractor",
-      title: "Distance travelled (km)",
+      titleParts: [
+        { text: "Distance travelled " },
+        { text: "(km)", style: { fontSize: "13px", fontWeight: 600 } },
+      ],
       label: "View report",
       data: "Distance travelled",
       handleFunction: handleDistance,
@@ -98,7 +98,10 @@ const Overview = ({
     {
       content: "20 ",
       value: "Vehicle",
-      title: "Trip payload (Ton)",
+      titleParts: [
+        { text: "Trip payload " },
+        { text: "(Ton)", style: { fontSize: "13px", fontWeight: 600 } },
+      ],
       label: "View report",
       data: "Trip payload",
       handleFunction: handlePayload,
@@ -106,13 +109,21 @@ const Overview = ({
     {
       content: "20 ",
       value: "Vehicle",
-      title: "Trips (Units consumed)",
+      titleParts: [
+        { text: "Trips " },
+        {
+          text: "(Units consumed kWh)",
+          style: { fontSize: "13px", fontWeight: 600 },
+        },
+      ],
       label: "View report",
       data: "Trips",
       handleFunction: handleTrips,
     },
   ];
-  const days = ["Today", "Weekly", "Yearly"];
+
+  const days = ["Today", "Weekly", "Monthly", "Yearly"];
+
   return (
     <Grid container spacing={2}>
       <DistanceTravel
@@ -134,7 +145,7 @@ const Overview = ({
         data={data2}
       />
       {data1.map((item, index) => (
-        <Grid key={index} item xl={4} md={4} sm={12} xs={12}>
+        <Grid key={index} item xl={4} lg={4} md={4} sm={12} xs={12}>
           <CustomGrid>
             <Grid
               container
@@ -142,8 +153,12 @@ const Overview = ({
               alignItems={"center"}
             >
               <Typography variant="h6">
-                <TimerIcon sx={{ verticalAlign: "middle", p: "3px" }} />{" "}
-                {item.title}
+                <TimerIcon sx={{ verticalAlign: "middle", p: "3px" }} />
+                {item.titleParts?.map((part, idx) => (
+                  <span key={idx} style={part?.style}>
+                    {part?.text}
+                  </span>
+                ))}
               </Typography>
               <CustomDropdown
                 variant="contained"
@@ -153,16 +168,10 @@ const Overview = ({
               />
             </Grid>
             <Typography variant="h4" color={"primary"}>
-              {item.content}{" "}
+              {item.content}
               <span style={{ fontSize: "15px", fontWeight: 600 }}>
                 E-Tractor
-              </span>{" "}
-              <ColoredChip
-                label="16.8 %"
-                variant="filled"
-                size="small"
-                icon={<ArrowOutwardIcon color="secondary" />}
-              />
+              </span>
             </Typography>
             <Graph />
             <LinearProgress
@@ -186,7 +195,7 @@ const Overview = ({
           </CustomGrid>
         </Grid>
       ))}
-    {activeMarker && activeMarker !== null ? (
+      {activeMarker && activeMarker !== null ? (
         <Grid item xs={12} md={9} sm={8} height={"380px"}>
           <Map
             handleMapData={handleMapData}
@@ -212,8 +221,8 @@ const Overview = ({
         </Grid>
       )}
       {activeMarker && activeMarker !== null && (
-        <Grid item md={3} xs={12} sm={4} height={"380px"} >
-          <MapDetails icons={icons} onClose={onClose} title={"Fleet Data"}/>
+        <Grid item md={3} xs={12} sm={4} height={"380px"}>
+          <MapDetails icons={icons} onClose={onClose} title={"Fleet Data"} />
         </Grid>
       )}
       <Grid item xs={12}>

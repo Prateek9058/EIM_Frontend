@@ -1,6 +1,6 @@
 "use client";
 import { Grid, IconButton, Typography } from "@mui/material";
-import React ,{useState}from "react";
+import React, { useState } from "react";
 import Map from "@/app/(components)/map/map";
 import { Card, Divider, Avatar } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
@@ -26,13 +26,12 @@ const iconUrls = [
   "./truck4.svg",
 ];
 const buttonData = [
-    { label: "Offline",color:'red' },
-    { label: "CS available", color: "green" },
-    { label: "SS available", color: "blue" },
-    { label: "SS scheduled", color: "skyblue" },
-    { label: "CS scheduled", color: "gray" },
- 
-  ];
+  { label: "Offline", color: "red" },
+  { label: "CS available", color: "green" },
+  { label: "SS available", color: "blue" },
+  { label: "SS scheduled", color: "skyblue" },
+  { label: "CS scheduled", color: "gray" },
+];
 const VehicleScheduling = () => {
   const [activeMarker, setActiveMarker] = useState(null);
   const [icons, setIcons] = useState(null);
@@ -120,17 +119,21 @@ const VehicleScheduling = () => {
                 borderRadius: "10px",
               }}
             >
-            {index%2==0 ?  <CardMedia
-                component="img"
-                alt="green iguana"
-                height="140"
-                image="./Img/Station.svg"
-              />:<CardMedia
-              component="img"
-              alt="green iguana"
-              height="140"
-              image="./Img/card.svg"
-            />}
+              {index % 2 == 0 ? (
+                <CardMedia
+                  component="img"
+                  alt="green iguana"
+                  height="140"
+                  image="./available.svg"
+                />
+              ) : (
+                <CardMedia
+                  component="img"
+                  alt="green iguana"
+                  height="140"
+                  image="./not-charging.svg"
+                />
+              )}
               <CardContent
                 sx={{
                   backgroundColor: index % 2 === 0 ? "#009660" : "#0042C6",

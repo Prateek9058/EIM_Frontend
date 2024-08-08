@@ -1,19 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { Grid, Typography, Avatar, Stack, IconButton } from "@mui/material";
-import Map from "@/app/(components)/map/map";
-import MapDetails from "@/app/(components)/map/mapDetails";
+import { Grid, Typography, Avatar } from "@mui/material";
 import { styled } from "@mui/system";
-import IdCard from "../../../../../public/Img/id-card-solid.svg";
-import Truck from "../../../../../public/Img/truck-moving-solid.svg";
-import MapImg from "../../../../../public/Img/map.svg";
-import Route from "../../../../../public/Img/route-solid.svg";
-import Road from "../../../../../public/Img/road-solid.svg";
 import Image from "next/image";
 import AutoBox from "@/app/(components)/mui-components/Autocomplete/index";
+import Map from "@/app/(components)/map/map";
+import MapDetails from "@/app/(components)/map/mapDetails";
 
 const iconUrls = [
- "./truck1.svg",
+  "./truck1.svg",
   "./truck2.svg",
   "./truck3.svg",
   "./truck4.svg",
@@ -27,24 +22,25 @@ const coordinate = [
   { lat: "28.512937158827324", log: "77.41783963937374" },
 ];
 const buttonData = [
-  { label: "Charging : 3",color:'red' },
+  { label: "Charging : 3", color: "red" },
   { label: "Swapping : 4", color: "green" },
   { label: "Scheduled CS : 3", color: "blue" },
   { label: "Scheduled SS : 6", color: "gray" },
-
 ];
+
 const MainGrid = styled(Grid)(({ theme }) => ({
   backgroundColor: "#6099EB",
   color: "#fff",
   borderRadius: "16px",
   padding: theme.spacing(1),
 }));
+
 function ShorterGrid() {
   const data = [
     {
       label: "Region",
       value: "All",
-      icon: MapImg,
+      icon: "/Img/map.svg",
       data1: [
         { title: "Mumbai" },
         { title: "Delhi" },
@@ -57,7 +53,7 @@ function ShorterGrid() {
     {
       label: "Customer",
       value: 1250,
-      icon: IdCard,
+      icon: "/Img/id-card-solid.svg",
       data1: [
         { title: "customer 1" },
         { title: "customer 2" },
@@ -70,7 +66,7 @@ function ShorterGrid() {
     {
       label: "Fleet",
       value: 150,
-      icon: Truck,
+      icon: "/Img/truck-moving-solid.svg",
       data1: [
         { title: "fleet" },
         { title: "56" },
@@ -80,27 +76,52 @@ function ShorterGrid() {
         { title: "3" },
       ],
     },
-    { label: "Consumption rate", value: "650 kWh/km", icon: Road },
-    { label: "Total mileage accumulated", value: "11,121 km", icon: Route },
+    {
+      label: "Consumption rate",
+      value: "650 kWh/km",
+      icon: "/Img/road-solid.svg",
+    },
+    {
+      label: "Total mileage accumulated",
+      value: "11,121 km",
+      icon: "/Img/route-solid.svg",
+    },
   ];
 
   const [activeMarker, setActiveMarker] = useState(null);
   const [icons, setIcons] = useState(null);
 
-  const handleMapData = (index, point,color) => {
-    console.log("point", index, point,color);
+  const handleMapData = (index, point, color) => {
+    console.log("point", index, point, color);
     setActiveMarker(index);
     setIcons(point);
   };
+
   const onClose = () => {
     setActiveMarker(null);
   };
+
+  const formatValue = (value) => {
+    // Split the value into number and unit parts
+    return (
+      <>
+        <span style={{ fontSize: "23px", fontWeight: "bold" }}>
+          {value.split(" ")[0]}
+        </span>
+        <span style={{ fontSize: "15px", fontWeight: "normal" }}>
+          {" "}
+          {value.split(" ")[1]}
+        </span>
+      </>
+    );
+  };
+
   return (
-    <Grid spacing={2} container>
+    <Grid container spacing={2}>
       {data.map((item, index) => (
-        <Grid key={index} item xs={12} sm={6} md={2.4} lg={2.4}>
+        <Grid key={index} item xs={12} sm={6} md={4} lg={2.4}>
           <MainGrid>
-            <Grid container rowGap={2}>
+            <Grid container>
               {index < 3 && (
                 <AutoBox
                   icon={item?.icon}
@@ -108,8 +129,13 @@ function ShorterGrid() {
                   data={item?.data1}
                 />
               )}
+              {index < 3 && (
+                <Typography variant="h3" sx={{ pl: 8, fontWeight: "bold" }}>
+                  {item?.value}
+                </Typography>
+              )}
               {index >= 3 && (
-                <Grid container alignItems="center">
+                <Grid container alignItems="center" sx={{ pt: 1.2, pl: 1 }}>
                   <Grid item xs={2}>
                     <Avatar
                       sx={{
@@ -118,7 +144,14 @@ function ShorterGrid() {
                         backgroundColor: "rgba(193, 255, 114, 0.13)",
                       }}
                     >
-                      {item.icon && <Image src={item.icon} alt={item.label} />}
+                      {item.icon && (
+                        <Image
+                          width={30}
+                          height={30}
+                          src={item.icon}
+                          alt={item.label}
+                        />
+                      )}
                     </Avatar>
                   </Grid>
                   <Grid item xs={10}>
@@ -128,20 +161,15 @@ function ShorterGrid() {
                   </Grid>
                 </Grid>
               )}
-              {index < 3 && (
-                <Typography variant="h3" sx={{ pl: 7 }}>
-                  {item?.value}
-                </Typography>
-              )}
               {index >= 3 && (
                 <Typography
-                  variant="h3"
+                  variant="h4"
                   sx={{
-                    pl: { xs: 7, sm: 7, md: 1, lg: 3 },
-                    mt: { sm: 1, md: 2, lg: 2 },
+                    pl: { xs: 7, sm: 7, md: 7, lg: 7 },
+                    mt: { sm: 1, md: 2, lg: 1 },
                   }}
                 >
-                  {item?.value}
+                  {formatValue(item?.value)}
                 </Typography>
               )}
             </Grid>
@@ -149,7 +177,7 @@ function ShorterGrid() {
         </Grid>
       ))}
       {activeMarker && activeMarker !== null ? (
-        <Grid item xl={9} xs={12}md={8} height={"380px"}>
+        <Grid item xl={9} xs={12} md={8} height={"380px"}>
           <Map
             handleMapData={handleMapData}
             iconUrls={iconUrls}
@@ -174,11 +202,12 @@ function ShorterGrid() {
         </Grid>
       )}
       {activeMarker && activeMarker !== null && (
-        <Grid item xl={3}  xs={12} md={4} height={"380px"}>
-          <MapDetails icons={icons} onClose={onClose}/>
+        <Grid item xl={3} xs={12} md={4} height={"380px"}>
+          <MapDetails icons={icons} onClose={onClose} />
         </Grid>
       )}
     </Grid>
   );
 }
+
 export default ShorterGrid;

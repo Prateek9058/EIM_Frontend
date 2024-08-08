@@ -17,16 +17,16 @@ import { FaRegFileExcel } from "react-icons/fa";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
 import { ChargingStationRow } from "../../table/rows";
-import { notifyError,notifySuccess } from "../../mui-components/Snackbar";
+import { notifyError, notifySuccess } from "../../mui-components/Snackbar";
 
 const columns = [
   "Charger station ID",
   "Status",
   "Hub Name",
-  "In queue",
+  "Truck In queue",
   "Currently charging",
   "Total charged",
-  "Avg. charging time",
+  "Avg. charging time(hr)",
   "Peak hours",
   "Action",
 ];
@@ -110,27 +110,27 @@ const Charging = ({ value }) => {
 
     modifiedData.forEach((row) => {
       const rowData = [
-      row?.region,
-       row?.status,
+        row?.region,
+        row?.status,
         row?.trip,
-      row?.avgSpeed,
-     row?.avgPayload,
-      row?.maxPayload,
-       row?.distance,
-         row?.value,
+        row?.avgSpeed,
+        row?.avgPayload,
+        row?.maxPayload,
+        row?.distance,
+        row?.value,
       ];
       csvData.push(rowData);
     });
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "CSChargingData.csv");
-    notifySuccess("Download Excel Succefully")
+    notifySuccess("Download Excel Succefully");
   };
 
   const getFormattedData = (data) => {
     console.log("data", data);
     return data?.map((item, index) => ({
-      region :item?.region?item?.region:"--",
+      region: item?.region ? item?.region : "--",
       status: (
         <Box>
           <Typography
@@ -184,7 +184,7 @@ const Charging = ({ value }) => {
           <Grid item className="customSearch">
             <Grid container>
               <Grid item mr={1}>
-              <Button
+                <Button
                   variant="outlined"
                   sx={{ mr: 1 }}
                   onClick={() => {

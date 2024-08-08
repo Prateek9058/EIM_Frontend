@@ -1,6 +1,6 @@
 "use client";
 import { Grid, Typography } from "@mui/material";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Map from "@/app/(components)/map/map";
 import { Card, Divider, Avatar } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
@@ -26,13 +26,12 @@ const iconUrls = [
   "./truck4.svg",
 ];
 const buttonData = [
-    { label: "All" },
-    { label: "Charging : 3",color:'red' },
-    { label: "Swapping : 4", color: "green" },
-    { label: "Scheduled Swapping : 3", color: "blue" },
-    { label: "Scheduled Charging : 6", color: "gray" },
- 
-  ];
+  { label: "All" },
+  { label: "Charging : 3", color: "red" },
+  { label: "Swapping : 4", color: "green" },
+  { label: "Scheduled Swapping : 3", color: "blue" },
+  { label: "Scheduled Charging : 6", color: "gray" },
+];
 const VehicleScheduling = () => {
   const [activeMarker, setActiveMarker] = useState(null);
   const [icons, setIcons] = useState(null);
@@ -120,12 +119,21 @@ const VehicleScheduling = () => {
                 borderRadius: "10px",
               }}
             >
-              <CardMedia
-                component="img"
-                alt="green iguana"
-                height="140"
-                image="./Img/card.svg"
-              />
+              {index % 2 == 0 ? (
+                <CardMedia
+                  component="img"
+                  alt="green iguana"
+                  height="140"
+                  image="./not-charging.svg"
+                />
+              ) : (
+                <CardMedia
+                  component="img"
+                  alt="green iguana"
+                  height="140"
+                  image="./on-charging.svg"
+                />
+              )}
               <CardContent
                 sx={{
                   backgroundColor: index % 2 === 0 ? "#009660" : "#0179BD",

@@ -33,11 +33,11 @@ const Table = ({
     "Region",
     "E-Tractor ID",
     "Current status",
-    "Total travelled (km)",
+    "Total Distance Traveled (km)",
     "Avg. consumption(kWh/km)",
     "Total units consumed(kWh)",
     "Avg. payload (Ton)",
-    "Action",
+    // "Action",
   ];
   const [open, setOpenDialog] = React.useState(false);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
@@ -70,15 +70,20 @@ const Table = ({
   const getFormattedData = (data) => {
     console.log("data", data);
     return data?.map((item, index) => ({
-      region:item?.region ??"NA",
+      region: item?.region ?? "NA",
       id: item?.id ?? "--",
       status: (
         <Box>
           <Typography
             sx={{
               color:
-                item?.status === "Charging"? "#BFFC72": item?.status === "Parked"? "#FFC700":item?.status === "Trip"?"#1A2773"
-                  : "#FF0000"
+                item?.status === "Charging"
+                  ? "#BFFC72"
+                  : item?.status === "Parked"
+                  ? "#FFC700"
+                  : item?.status === "Trip"
+                  ? "#1A2773"
+                  : "#FF0000",
             }}
           >
             {item?.status ? item?.status : "NA"}
@@ -89,18 +94,17 @@ const Table = ({
       avgconsumption: item?.avgconsumption ? item?.avgconsumption : "--",
       mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
       mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
-      Action: [
-        <Grid container justifyContent="center" spacing={2} key={index}>
-          <Grid item xs={12}>
-            <Tooltip title="View">
-                <IconButton size="small">
-                  <GrMapLocation color="#C0FE72" />
-                </IconButton>
-            </Tooltip>
-          </Grid>
-        </Grid>,
-      ],
-
+      // Action: [
+      //   <Grid container justifyContent="center" spacing={2} key={index}>
+      //     <Grid item xs={12}>
+      //       <Tooltip title="View">
+      //         <IconButton size="small">
+      //           <GrMapLocation color="#C0FE72" />
+      //         </IconButton>
+      //       </Tooltip>
+      //     </Grid>
+      //   </Grid>,
+      // ],
     }));
   };
 
@@ -123,7 +127,11 @@ const Table = ({
         <Grid item className="customSearch">
           <Grid container>
             <Grid item mr={1}>
-   {     button &&      <Button variant="contained" onClick={handleView}>{button}</Button>}
+              {button && (
+                <Button variant="contained" onClick={handleView}>
+                  {button}
+                </Button>
+              )}
             </Grid>
             {/* <Grid item mr={1}>
               <CommonDatePicker

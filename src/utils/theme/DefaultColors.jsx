@@ -139,7 +139,7 @@ const baselightTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform:"none",
+          textTransform: "none",
           boxShadow: "none",
           borderRadius: "8px",
         },
@@ -150,12 +150,6 @@ const baselightTheme = createTheme({
             border: "1px solid rgba(0, 0, 0, 0.23)",
             backgroundColor: "rgba(0, 0, 0, 0.04)",
             color: "rgba(24, 36, 111, 1)",
-          },
-        },
-        text: {
-          color: "rgba(192, 254, 114, 1)",
-          "&:hover": {
-            color: "#fff",
           },
         },
       },
@@ -180,7 +174,7 @@ const baselightTheme = createTheme({
     MuiTab: {
       styleOverrides: {
         root: {
-          textTransform:"none",
+          textTransform: "none",
           "& .MuiButtonBase-root": {
             borderRadius: "0px",
           },
@@ -198,22 +192,22 @@ const baselightTheme = createTheme({
       styleOverrides: {
         paper: {
           backgroundColor: "#639AEA",
-          borderRadius: "16px", 
+          borderRadius: "16px",
         },
       },
     },
     MuiAutocomplete: {
       styleOverrides: {
         paper: {
-          background: "linear-gradient(112.37deg, #589CFF 0%, #013376 116.12%)", 
+          background: "linear-gradient(112.37deg, #589CFF 0%, #013376 116.12%)",
         },
         popper: {
-          zIndex: 1300, 
+          zIndex: 1300,
         },
         option: {
           "&:hover": {
-            backgroundColor: theme.palette.primary.main, 
-            color: theme.palette.secondary.main, 
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.secondary.main,
           },
         },
       },
@@ -250,15 +244,15 @@ const baselightTheme = createTheme({
       styleOverrides: {
         root: {
           "&:hover": {
-            backgroundColor: theme.palette.primary.main, 
-            color: theme.palette.secondary.main, 
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.secondary.main,
           },
           "&.Mui-selected": {
-            backgroundColor: theme.palette.primary.main, 
+            backgroundColor: theme.palette.primary.main,
             color: theme.palette.secondary.main,
           },
           "&.Mui-selected:hover": {
-            backgroundColor: theme.palette.primary.main, 
+            backgroundColor: theme.palette.primary.main,
             color: theme.palette.secondary.main,
           },
         },
@@ -315,10 +309,10 @@ const baselightTheme = createTheme({
             borderColor: theme.palette.primary.main,
           },
           "&.Mui-error fieldset": {
-            borderColor: theme.palette.error.main, 
+            borderColor: theme.palette.error.main,
           },
           "&:hover fieldset": {
-            borderColor: theme.palette.text.primary, 
+            borderColor: theme.palette.text.primary,
           },
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.grey[300],
@@ -326,12 +320,11 @@ const baselightTheme = createTheme({
           "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.grey[300],
             borderColor: theme.palette.primary.main,
-            
           },
           "& .MuiInputLabel-root": {
             color: "#fff",
             "&.Mui-focused": {
-              color: theme.palette.error, 
+              color: theme.palette.error,
             },
             "&.MuiInputLabel-shrink": {
               color: "#fff",
@@ -356,7 +349,7 @@ const baselightTheme = createTheme({
         root: {
           color: "#fff",
           "&.Mui-focused": {
-            color: theme.palette.primary.main, 
+            color: theme.palette.primary.main,
           },
         },
       },

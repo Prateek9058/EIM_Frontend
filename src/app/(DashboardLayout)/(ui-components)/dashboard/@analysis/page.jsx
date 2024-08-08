@@ -3,13 +3,9 @@ import React, { useState } from "react";
 import { Typography, Grid } from "@mui/material";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-import {AccessTimeFilled} from '@/app/(components)/mui-components/icons/index';
-import Chip from "@mui/material/Chip";
-import {ArrowOutward} from '@/app/(components)/mui-components/icons/index'
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import { AccessTimeFilled } from "@/app/(components)/mui-components/icons/index";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import styled from "@emotion/styled";
-import {TransparentChip} from '@/app/(components)/mui-components/Chip/index'
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -44,18 +40,14 @@ function getGradient1(ctx, chartArea) {
   }
   return gradient1;
 }
+
 const data = {
   labels: [
-    "12am",
-    "2am",
-    "4am",
-    "8am",
-    "10am",
-    "1pm",
-    "4pm",
-    "6pm",
-    "8pm",
-    "10pm",
+    "25 July 2024",
+    "28 July 2024",
+    "30 July 2024",
+    "5 August 2024",
+    "9 August 2024",
   ],
   datasets: [
     {
@@ -96,15 +88,33 @@ const options = {
   scales: {
     y: {
       beginAtZero: true,
+      title: {
+        color: "white",
+        font: {
+          family: "Arial",
+          weight: "bold",
+        },
+      },
       ticks: {
-        color: "white", // Color of y-axis labels
+        color: "white",
+        callback: function (value) {
+          return value + " km";
+        },
       },
     },
     x: {
       beginAtZero: true,
       display: true,
+      title: {
+        color: "white",
+        font: {
+          size: 16,
+          family: "Arial",
+          weight: "bold",
+        },
+      },
       ticks: {
-        color: "white", // Color of x-axis labels
+        color: "white",
       },
     },
   },
@@ -122,7 +132,7 @@ const options = {
       },
     },
     tooltip: {
-      enabled: true, // Hide tooltips
+      enabled: true,
     },
   },
   interaction: {
@@ -130,6 +140,7 @@ const options = {
     intersect: false,
   },
 };
+
 const config = {
   type: "line",
   data: data,
@@ -147,21 +158,13 @@ const Analysis = () => {
       <Grid container>
         <Grid container justifyContent={"space-between"} alignItems={"center"}>
           <Typography variant="h4">
-            <AccessTimeFilled sx={{ verticalAlign: "middle", p: "3px" }} />{" "}
-            E - Tractor travel (km)
+            <AccessTimeFilled sx={{ verticalAlign: "middle", p: "3px" }} /> E -
+            Tractor travel (km)
           </Typography>
           <CommonDatePicker getDataFromChildHandler={getDataFromChildHandler} />
         </Grid>
         <Grid mt={2}>
-          <Typography variant="h3">
-            257{" "}
-            <TransparentChip
-              label="16.8 %"
-              variant="filled"
-              size="small"
-              icon={<ArrowOutward/>}
-            />
-          </Typography>
+          <Typography variant="h3">257 </Typography>
         </Grid>
       </Grid>
       <Line data={data} options={config.options} width={1000} />
@@ -169,22 +172,12 @@ const Analysis = () => {
         <Grid container>
           <Grid container justifyContent={"space-between"}>
             <Typography variant="h3">
-              <AccessTimeFilled
-                sx={{ verticalAlign: "middle", p: "3px" }}
-              />{" "}
-              E - Tractor average consumption (kWh/km)
+              <AccessTimeFilled sx={{ verticalAlign: "middle", p: "3px" }} /> E
+              - Tractor average consumption (kWh/km)
             </Typography>
           </Grid>
           <Grid mt={2}>
-            <Typography variant="h3">
-              257{" "}
-              <TransparentChip
-              label="16.8 %"
-              variant="filled"
-              size="small"
-              icon={<ArrowOutward/>}
-            />
-            </Typography>
+            <Typography variant="h3">257 </Typography>
           </Grid>
         </Grid>
         <Line data={data} options={config.options} width={1000} />

@@ -1,10 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Grid, IconButton } from "@mui/material";
-import { rows,RevenueManagementData,E_tractorData } from "@/app/(components)/table/rows";
-import Table from './table'
-import SwappingTable from './swappingTable'
-import ChargingTable from './chargingTable'
+import {
+  rows,
+  RevenueManagementData,
+  E_tractorData,
+} from "@/app/(components)/table/rows";
+import Table from "./table";
+import SwappingTable from "./swappingTable";
+import ChargingTable from "./chargingTable";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
@@ -17,21 +21,20 @@ const Page = () => {
   const [data, setData] = useState(null);
   const [Swappingdata, setSwappingdata] = useState(null);
   const [Chargingdata, setChargingdata] = useState(null);
-  const router=useRouter();
+  const router = useRouter();
 
   const getDataFromChildHandler = (date, dataArr) => {
     setDate(date);
   };
 
-  useEffect(()=>{
-    setData(rows)
-    setSwappingdata(RevenueManagementData)
-    setChargingdata(E_tractorData)
-
-  },[])
-  const handleView=()=>{
-    router.push('/fleetManagement')
-  }
+  useEffect(() => {
+    setData(rows);
+    setSwappingdata(RevenueManagementData);
+    setChargingdata(E_tractorData);
+  }, []);
+  const handleView = () => {
+    router.push("/fleetManagement");
+  };
   return (
     <Grid container rowGap={2}>
       <Table

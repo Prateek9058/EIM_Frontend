@@ -11,7 +11,10 @@ import {
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
-import { notifyError,notifySuccess } from "@/app/(components)/mui-components/Snackbar";
+import {
+  notifyError,
+  notifySuccess,
+} from "@/app/(components)/mui-components/Snackbar";
 import Link from "next/link";
 import { IoEyeOutline } from "react-icons/io5";
 import { FaRegFileExcel } from "react-icons/fa";
@@ -34,7 +37,7 @@ const Table = ({
     "Region",
     "E-tractor ID",
     "Status",
-    "Avg. speed (km/hr.)",
+    "Avg. speed (km/hr)",
     "Avg. payload (Ton)",
     "Total distance travelled(km)",
     "Avg. consumption(kWh/km)",
@@ -130,7 +133,7 @@ const Table = ({
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "FleetData.csv");
-    notifySuccess("Download Excel Successfully")
+    notifySuccess("Download Excel Successfully");
   };
   const getFormattedData = (data) => {
     console.log("data", data);
@@ -177,7 +180,7 @@ const Table = ({
       ],
     }));
   };
-  const menuItems= ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"]
+  const menuItems = ["Mumbai", "Delhi", "Agra", "Punjab", "Kolkata"];
   return (
     <Grid container>
       <Grid
@@ -196,10 +199,9 @@ const Table = ({
         </Grid>
         <Grid item className="customSearch">
           <Grid container>
-            <Grid item >
+            <Grid item>
               <Button
                 variant="outlined"
-              
                 onClick={() => {
                   handleExport(data?.data);
                 }}
@@ -210,12 +212,12 @@ const Table = ({
               </Button>
             </Grid>
             <Grid item mr={1}>
-            <CustomDropdown
-                  variant="outlined"
-                  size="large"
-                  buttonname={'Region'}
-                  menuitems={menuItems}
-                />
+              <CustomDropdown
+                variant="outlined"
+                size="large"
+                buttonname={"Region"}
+                menuitems={menuItems}
+              />
             </Grid>
             <Grid item mr={1}>
               <CommonDatePicker

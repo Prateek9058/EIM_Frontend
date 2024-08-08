@@ -5,7 +5,6 @@ import Breadcrumbs from "@/app/(components)/mui-components/Breadcrumbs/index";
 import { Tabs, Tab, Button, IconButton } from "@mui/material";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { CustomDropdown } from "../DropdownButton";
-import CustomButtonGroup from "@/app/(components)/mui-components/ButtonGroup/index";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 function TabPanel(props) {
@@ -112,7 +111,7 @@ const ManagementGrid = ({
               </Typography>
             )}
           </Grid>
-          <Grid item >
+          <Grid item>
             {buttonItem && (
               <Button variant="contained" size="large">
                 {buttonItem}
@@ -137,6 +136,7 @@ const ManagementGrid = ({
                   key={index}
                   variant="contained"
                   size="large"
+                  sx={{ ml: 2 }}
                   buttonname={button.label}
                   menuitems={button.menuItems}
                 />
@@ -158,7 +158,6 @@ const ManagementGrid = ({
                 variant="scrollable"
                 onChange={handleChange}
                 sx={{
-               
                   "& .MuiTabs-indicator": {
                     backgroundColor: "transparent",
                   },
@@ -167,7 +166,6 @@ const ManagementGrid = ({
                 {tabs.map((tab, index) => (
                   <Tab
                     key={index}
-                    
                     label={tab.label}
                     {...a11yProps(index)}
                     sx={{
@@ -226,17 +224,15 @@ const ManagementGrid = ({
                       <ButtonGroup
                         aria-label="Basic button group"
                         variant="text"
-                       
-                        
                       >
                         <Button
                           variant={buttonType == item?.name ? "contained" : ""}
                           sx={{
                             borderRadius:
                               buttonLength === 1
-                                ? "10px" 
+                                ? "10px"
                                 : index === 0 && visibleStart === 0
-                                ? "10px 0 0 10px" 
+                                ? "10px 0 0 10px"
                                 : isLastVisibleButton &&
                                   visibleStart + index === buttonLength - 1
                                 ? "0 10px 10px 0"

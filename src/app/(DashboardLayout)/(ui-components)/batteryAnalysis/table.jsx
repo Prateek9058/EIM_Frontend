@@ -12,22 +12,25 @@ import { EyeIcon } from "@/app/(components)/mui-components/icons/index";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
 import { FaRegFileExcel } from "react-icons/fa";
-import ToastComponent,{notifyError,notifySuccess} from "@/app/(components)/mui-components/Snackbar";
+import ToastComponent, {
+  notifyError,
+  notifySuccess,
+} from "@/app/(components)/mui-components/Snackbar";
 
 const columns = [
-    "Battery ID",
-    "Status",
-    "Temperature(°C)",
-    "Voltage(V)",
-    "Battery SoC(%)",
-    "Battery SoH(%)",
-    "Error",
-    "Charging cycle",
-    "Units consumed(kW)",
-    "Avg. charging time",
-    "Battery Location",
-    "Action",
-  ];
+  "Battery ID",
+  "Status",
+  "Temperature(°C)",
+  "Voltage(V)",
+  "Battery SoC(%)",
+  "Battery SoH(%)",
+  "Error",
+  "Charging cycle",
+  "Units consumed(kWh)",
+  "Avg. charging time(hr)",
+  "Battery Location",
+  "Action",
+];
 const Table = ({
   data,
   rowsPerPage,
@@ -40,7 +43,6 @@ const Table = ({
   loading,
   getDataFromChildHandler,
 }) => {
-
   const [open, setOpenDialog] = React.useState(false);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
@@ -101,17 +103,17 @@ const Table = ({
     csvData.push([]);
 
     const headerRow = [
-        "Battery ID",
-        "Status",
-        "Temperature(°C)",
-        "Voltage(V)",
-        "Battery SoC(%)",
-        "Battery SoH(%)",
-        "Error",
-        "Charging cycle",
-        "Units Consumed(kW)",
-        "Avg. Charging time",
-        "Battery Location",
+      "Battery ID",
+      "Status",
+      "Temperature(°C)",
+      "Voltage(V)",
+      "Battery SoC(%)",
+      "Battery SoH(%)",
+      "Error",
+      "Charging cycle",
+      "Units Consumed(kW)",
+      "Avg. Charging time",
+      "Battery Location",
       "Alerts",
     ];
     csvData.push(headerRow);
@@ -133,7 +135,7 @@ const Table = ({
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "BatteryAnalysis.csv");
-    notifySuccess("Download Excel Succefully")
+    notifySuccess("Download Excel Succefully");
   };
   const getFormattedData = (data) => {
     console.log("data", data);
@@ -189,7 +191,7 @@ const Table = ({
   };
   return (
     <Grid container>
-      <ToastComponent/>
+      <ToastComponent />
       <Grid
         container
         justifyContent="space-between"

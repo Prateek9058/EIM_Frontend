@@ -112,7 +112,7 @@ const data2 = [
     chargingValue: 1000,
   },
 ];
-const menuItems = ["Today", "Weekly", "Yearly"];
+const menuItems = ["Today", "Weekly", "Monthly", "Yearly"];
 const Page = () => {
   const [page, setPage] = React.useState(0);
   const [loading, setLoading] = useState(false);
@@ -125,7 +125,10 @@ const Page = () => {
     setDate(date);
   };
   const droDownButtons = [
-    { label: "Region", menuItems:  ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"] },
+    {
+      label: "Region",
+      menuItems: ["Mumbai", "Delhi", "Agra", "Punjab", "Kolkata"],
+    },
     {
       label: "Customer",
       menuItems: ["Customer 1", "Customer 2", "Customer 3"],
@@ -138,9 +141,9 @@ const Page = () => {
   const handleEfficiencyData = async (value) => {
     try {
       const res = await axiosInstance.get(
-        `/battery/getAll?page=${
-          page + 1
-        }&pageSize=${rowsPerPage}&search=${value??""}`
+        `/battery/getAll?page=${page + 1}&pageSize=${rowsPerPage}&search=${
+          value ?? ""
+        }`
       );
       console.log("res", res);
       setData(res?.data);
@@ -149,7 +152,7 @@ const Page = () => {
     }
   };
   useEffect(() => {
-      handleEfficiencyData();
+    handleEfficiencyData();
   }, [page, rowsPerPage, date]);
   const handleOpen = () => {
     setOpen(true);
@@ -174,7 +177,14 @@ const Page = () => {
       {data2.map((item, index) => {
         const isLargeCard = index >= 2;
         return (
-          <Grid key={index} item xs={12} sm={6} lg={isLargeCard ? 3.6 : 2.4} md={6}>
+          <Grid
+            key={index}
+            item
+            xs={12}
+            sm={6}
+            lg={isLargeCard ? 3.6 : 2.4}
+            md={6}
+          >
             <CustomGrid>
               <Grid
                 container
@@ -233,7 +243,16 @@ const Page = () => {
               mt={5}
               mb={3}
             >
-              <Doughnut data={index === 1?avg_battery:index===2?battery_temp:avg_battery_charge} options={config.options} />
+              <Doughnut
+                data={
+                  index === 1
+                    ? avg_battery
+                    : index === 2
+                    ? battery_temp
+                    : avg_battery_charge
+                }
+                options={config.options}
+              />
             </Grid>
           </CustomGrid>
         </Grid>
@@ -246,8 +265,10 @@ const Page = () => {
             alignItems={"center"}
           >
             <Typography variant="h5">
-              <AccessTimeFilledIcon sx={{ verticalAlign: "middle",mr:"3px" ,p:"3px"}} />
-               Consumption/charge (kWh) 
+              <AccessTimeFilledIcon
+                sx={{ verticalAlign: "middle", mr: "3px", p: "3px" }}
+              />
+              Consumption/charge (kWh)
             </Typography>
             <CommonDatePicker
               getDataFromChildHandler={getDataFromChildHandler}

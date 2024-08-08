@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Typography,IconButton ,Stack} from "@mui/material";
+import { Grid, Typography, IconButton, Stack } from "@mui/material";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import styled from "@emotion/styled";
 import { IoMdClose } from "react-icons/io";
@@ -9,9 +9,8 @@ const MainGrid = styled(Grid)(({ theme }) => ({
   backgroundColor: "#6099EB",
   color: "#fff",
   borderRadius: "16px",
-
 }));
-const MapDetails = ({ title ,icons,onClose}) => {
+const MapDetails = ({ title, icons, onClose }) => {
   const [date, setDate] = useState(null);
 
   const getDataFromChildHandler = (date, dataArr) => {
@@ -20,23 +19,35 @@ const MapDetails = ({ title ,icons,onClose}) => {
   return (
     <MainGrid container rowGap={1}>
       <Grid container justifyContent={"space-between"}>
-        {title?<Grid container sx={{backgroundColor:"#161861",p:1,borderRadius:"16px 16px 0 0"}}alignItems={"center"} justifyContent={"space-between"}>
+        {title ? (
+          <Grid
+            container
+            sx={{
+              backgroundColor: "#161861",
+              p: 1,
+              borderRadius: "16px 16px 0 0",
+            }}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
             <Typography variant="h5">{title}</Typography>
             <IconButton onClick={onClose}>
-            <IoMdClose color="secondary" />
-          </IconButton>
-        </Grid>:<Grid container justifyContent={"space-between"}p={1}>
-         <CommonDatePicker
-           getDataFromChildHandler={getDataFromChildHandler}
-         /> <Grid item>
-         <IconButton onClick={onClose}>
-             <IoMdClose color="#fff" />
-           </IconButton>
-         </Grid>
-       
-     </Grid>}
-        
-       
+              <IoMdClose color="secondary" />
+            </IconButton>
+          </Grid>
+        ) : (
+          <Grid container justifyContent={"space-between"} p={1}>
+            <CommonDatePicker
+              getDataFromChildHandler={getDataFromChildHandler}
+            />{" "}
+            <Grid item>
+              <IconButton onClick={onClose}>
+                <IoMdClose color="#fff" />
+              </IconButton>
+            </Grid>
+          </Grid>
+        )}
+
         <Stack rowGap={2} mt={1} p={1}>
           <Typography>Payload</Typography>
           <Typography>SoC</Typography>

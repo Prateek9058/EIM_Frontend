@@ -117,12 +117,12 @@ const Table = ({
               <IconButton
                 onClick={handleClose}
                 sx={{
+                  backgroundColor: "#18246F",
+                  borderRadius: "8px",
+                  "&:hover": {
                     backgroundColor: "#18246F",
-                    borderRadius: "8px",
-                    '&:hover': {
-                      backgroundColor: "#18246F",
-                    },
-                  }}
+                  },
+                }}
               >
                 <IoClose color="#fff" />
               </IconButton>

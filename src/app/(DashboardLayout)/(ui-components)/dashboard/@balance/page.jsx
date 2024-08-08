@@ -25,7 +25,7 @@ const data1 = {
     {
       label: "My First Datasetsss",
       data: [1895, 60, 120, 20],
-      backgroundColor: ["#CB8055", "#577B8D", "#240750", "#57A6A1"],
+      backgroundColor: ["#C1FE72", "#577B8D", "#240750", "#57A6A1"],
       hoverOffset: 15,
       borderColor: "transparent",
     },
@@ -35,7 +35,7 @@ const options = {
   animations: {
     animateScale: true,
   },
-  maintainAspectRatio: false, 
+  maintainAspectRatio: false,
   responsive: true,
   plugins: {
     legend: {
@@ -75,7 +75,7 @@ const options = {
       },
     },
     tooltip: {
-      enabled: true, 
+      enabled: true,
     },
   },
   interaction: {

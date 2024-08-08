@@ -79,37 +79,44 @@ const Table = ({
       chargingcycle: item?.chargingcycle ?? "--",
 
       Action: [
-        <Grid container justifyContent="center" spacing={2} key={index} >
-          <Grid item xs={6} md={3} >
-            <Tooltip title={"charged"}>
-              <IconButton size="small">
-                <PiCarBattery color= {"#C0FE72"}/>
-              </IconButton>
-            </Tooltip>
-          </Grid>
-          <Grid item xs={6} md={3} >
+        <Grid container justifyContent="center" spacing={2} key={index}>
+          {" "}
+          <Grid item xs={6} md={3}>
             <Tooltip title={"discharged"}>
-              <IconButton size="small">
-                <PiCarBattery color={"#FF0000"} />
-              </IconButton>
+              <Button
+                size="small"
+                color="error"
+                startIcon={<PiCarBattery color={"#FF0000"} />}
+              >
+                24%
+              </Button>
             </Tooltip>
           </Grid>
-          <Grid item xs={6} md={3} >
-            <Tooltip title={"discharged"}>
-              <IconButton size="small">
-                <PiCarBattery color={"#FF0000"} />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-          <Grid item xs={6} md={3} >
+          <Grid item xs={6} md={3}>
             <Tooltip title={"charging"}>
-              <IconButton size="small">
-                <PiCarBattery color={"#FFC300"} />
-              </IconButton>
+              <Button
+                variant="text"
+                color="warning"
+                size="small"
+                startIcon={<PiCarBattery color={"#FFC300"} />}
+              >
+                40%
+              </Button>
             </Tooltip>
           </Grid>
-      
-      </Grid>
+          <Grid item xs={6} md={3}>
+            <Tooltip title={"charged"}>
+              <Button
+                variant="text"
+                color="secondary"
+                size="small"
+                startIcon={<PiCarBattery color={"#C0FE72"} />}
+              >
+                80%
+              </Button>
+            </Tooltip>
+          </Grid>
+        </Grid>,
       ],
     }));
   };

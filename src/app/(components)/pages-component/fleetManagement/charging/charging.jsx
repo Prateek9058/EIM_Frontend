@@ -12,7 +12,10 @@ import MapDetails from "@/app/(components)/map/mapDetails";
 import { FaRegFileExcel } from "react-icons/fa";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
-import { notifyError ,notifySuccess} from "@/app/(components)/mui-components/Snackbar";
+import {
+  notifyError,
+  notifySuccess,
+} from "@/app/(components)/mui-components/Snackbar";
 import { CustomDropdown } from "@/app/(components)/mui-components/DropdownButton";
 
 const iconUrls = [
@@ -40,12 +43,12 @@ const columns = [
   "E-tractor ID",
   "Current SoC (%)",
   "Current SoH (%)",
-  "Current units charged (kW)",
+  "Current units charged (kWh)",
   "Current status",
-  "Estimated charging time(hr.)",
+  "Estimated charging time(hr)",
   "Charging cycle",
   "Swapping cycle",
-  "Total units charged(kW)",
+  "Total units charged(kWh)",
   "Avg. charging Time",
   "Action",
 ];
@@ -130,12 +133,12 @@ const Charging = ({
       "E-tractor ID",
       "Current SoC (%)",
       "Current SoH (%)",
-      "Current units charged (kw)",
+      "Current units charged (kWh)",
       "Current status",
-      "Estimated charging time(hr.)",
+      "Estimated charging time(hr)",
       "Charging cycle",
       "Swapping cycle",
-      "Total units charged(kw)",
+      "Total units charged(kWh)",
       "Avg. charging Time",
     ];
     csvData.push(headerRow);
@@ -159,7 +162,7 @@ const Charging = ({
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "FleetChargingData.csv");
-    notifySuccess("Download Excel Successfully")
+    notifySuccess("Download Excel Successfully");
   };
 
   const getFormattedData = (data) => {
@@ -205,7 +208,7 @@ const Charging = ({
       ],
     }));
   };
-  const menuItems= ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"]
+  const menuItems = ["Mumbai", "Delhi", "Agra", "Punjab", "Kolkata"];
   return (
     <Grid container columnGap={2}>
       {activeMarker && activeMarker !== null ? (
@@ -255,10 +258,9 @@ const Charging = ({
           </Grid>
           <Grid item className="customSearch">
             <Grid container>
-              <Grid item >
+              <Grid item>
                 <Button
                   variant="outlined"
-          
                   onClick={() => {
                     handleExport(data?.data);
                   }}
@@ -269,13 +271,13 @@ const Charging = ({
                 </Button>
               </Grid>
               <Grid item mr={1}>
-            <CustomDropdown
+                <CustomDropdown
                   variant="outlined"
                   size="large"
-                  buttonname={'Region'}
+                  buttonname={"Region"}
                   menuitems={menuItems}
                 />
-            </Grid>
+              </Grid>
               <Grid item mr={1}>
                 <CommonDatePicker
                   getDataFromChildHandler={getDataFromChildHandler}

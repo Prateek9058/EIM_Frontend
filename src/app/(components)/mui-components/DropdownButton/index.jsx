@@ -48,7 +48,6 @@ const StyledMenu = styled((props) => (
 }));
 export const CustomDropdown = (props) => {
   const { menuitems, buttonname } = props;
-  const [value, setValue] = React.useState("1");
   const [selectedItem, setSelectedItem] = React.useState(buttonname);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -71,7 +70,6 @@ export const CustomDropdown = (props) => {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           {...props}
-          sx={{ ml: 1 }}
           variant={props.variant}
           onClick={handleClick}
           endIcon={<KeyboardArrowDownIcon color="secondary" />}

@@ -1,5 +1,5 @@
 "use client";
-import {  Grid,  } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Overview from "@/app/(components)/pages-component/fleetManagement/overView/Overview";
 import Charging from "@/app/(components)/pages-component/fleetManagement/charging/charging";
@@ -10,17 +10,19 @@ import AddTractor from "@/app/(components)/pages-component/fleetManagement/addTr
 import axiosInstance from "@/app/api/axiosInstance";
 import ToastComponent from "@/app/(components)/mui-components/Snackbar";
 
-
 const breadcrumbItems = [
   { label: "Dashboard", link: "/" },
   { label: "Fleet-Management", link: "/fleetManagement" },
 ];
 const droDownButtons = [
-  { label: "Region", menuItems: ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"] },
+  {
+    label: "Region",
+    menuItems: ["Mumbai", "Delhi", "Agra", "Punjab", "Kolkata"],
+  },
   { label: "Customer", menuItems: ["Customer 1", "Customer 2", "Customer 3"] },
 ];
 const Page = () => {
-  const [value, setValue] = useState(0); 
+  const [value, setValue] = useState(0);
   const [customer, setCustomer] = useState(null);
   const [open, setOpen] = useState(false);
   const [tableData, setTableData] = useState(null);
@@ -39,15 +41,6 @@ const Page = () => {
     setValue(newValue);
     setTabsValue(tabs[newValue].label);
   };
-  const handleCustomer = async () => {
-    try {
-      const response = await axiosInstance.get("/fleet/getCustomers");
-      setCustomer(response?.data?.data);
-      console.log("customer", response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
     handleTableData();
   }, [value, page, rowsPerPage, searchQuery, date]);
@@ -56,7 +49,7 @@ const Page = () => {
     { label: `Overview ` },
     { label: "Charging" },
     { label: "Trip" },
-    { label: "E-tractor ID report" },
+    { label: "E-tractor" },
   ];
   const handleTableData = async () => {
     if (tabsValue !== "Overview") {
@@ -128,7 +121,8 @@ const Page = () => {
           getDataFromChildHandler={getDataFromChildHandler}
         />
       ),
-    },{
+    },
+    {
       component: (
         <Etractor
           value={"4"}
@@ -149,7 +143,7 @@ const Page = () => {
   return (
     <Grid container xs={12} sm={12} md={12}>
       <AddTractor open={open} setOpen={setOpen} />
-      <ToastComponent/>
+      <ToastComponent />
       <ManagementGrid
         moduleName={"Fleet Management"}
         breadcrumbItems={breadcrumbItems}

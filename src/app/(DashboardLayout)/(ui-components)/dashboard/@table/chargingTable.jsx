@@ -1,23 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Grid,
-  Typography,
-  Box,
-  Button,
-  Chip,
-  Tooltip,
-  IconButton,
-} from "@mui/material";
+import { Grid, Typography, Box, Button } from "@mui/material";
 import CustomTable from "../index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
-import { PiCarBattery } from "react-icons/pi";
 const Table = ({
   data,
   heading,
   handleView,
   button,
-  value,
   rowsPerPage,
   setRowsPerPage,
   page,
@@ -25,14 +15,12 @@ const Table = ({
   searchQuery,
   setSearchQuery,
   loading,
-  handleExport,
-  getDataFromChildHandler,
 }) => {
   const columns = [
     "Station ID",
     "CS status",
     "Charging queue",
-    "Unit consumed(kW)",
+    "Unit consumed(kWh)",
   ];
   const [open, setOpenDialog] = React.useState(false);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
@@ -45,18 +33,6 @@ const Table = ({
       clearTimeout(handler);
     };
   }, [debouncedSearchQuery, setSearchQuery]);
-
-  const handleSearchChange = (event) => {
-    setDebouncedSearchQuery(event.target.value);
-  };
-
-  const handleOpenDialog = () => {
-    setOpenDialog(true);
-  };
-
-  const handleConfirm = () => {
-    handleCancel();
-  };
 
   const handleCancel = () => {
     setOpenDialog(false);
@@ -86,7 +62,6 @@ const Table = ({
       ),
       chargingcycle: item?.chargingcycle ?? "--",
       avgSpeed: item?.avgSpeed ?? "--",
-
     }));
   };
 
