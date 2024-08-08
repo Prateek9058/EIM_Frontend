@@ -1,5 +1,5 @@
 "use client";
-import { Button, Grid, Typography, Divider } from "@mui/material";
+import { Button, Grid, Typography, Badge } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Graph from "@/app/(components)/pages-component/fleetManagement/vehicle/graph";
 import List from "@mui/material/List";
@@ -14,6 +14,7 @@ import styled from "@emotion/styled";
 import Table from "./table";
 import LinearProgress from "@mui/material/LinearProgress";
 import MapDetails from "@/app/(components)/map/mapDetails";
+import { PiDotBold } from "react-icons/pi";
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -41,6 +42,15 @@ const buttonData = [
   { label: "Scheduled CS: 6", color: "blue" },
   { label: "Scheduled SS : 8", color: "skyblue" },
 ];
+const Badge1 = styled(Badge)(({ color }) => ({
+  "& .MuiBadge-badge": {
+    backgroundColor: color,
+    width: "10px",
+    height: "10px",
+    borderRadius: "50%",
+  },
+  marginLeft: "10 px",
+}));
 const Overview = ({
   value,
   data,
@@ -63,7 +73,6 @@ const Overview = ({
   const [icons, setIcons] = useState(null);
 
   const handleMapData = (index, point) => {
-    console.log("point", index, point);
     setActiveMarker(index);
     setIcons(point);
   };
@@ -184,12 +193,17 @@ const Overview = ({
                 disableGutters
                 key={index}
                 secondaryAction={
-                  <Button variant="text" onClick={item.handleFunction}>
+                  <Button
+                    variant="text"
+                    color="secondary"
+                    onClick={item.handleFunction}
+                  >
                     {item.label}
                   </Button>
                 }
               >
-                <ListItemText primary={item.data} />
+                <Badge1 color="secondary" variant="dot" />
+                <ListItemText primary={item.data} sx={{ marginLeft: "10px" }} />
               </ListItem>
             </List>
           </CustomGrid>

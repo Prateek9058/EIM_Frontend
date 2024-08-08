@@ -17,7 +17,7 @@ import Papa from "papaparse";
 import { saveAs } from "file-saver";
 import { FaRegFileExcel } from "react-icons/fa";
 import { E_tractorData } from "../../table/rows";
-import { notifyError,notifySuccess } from "../../mui-components/Snackbar";
+import { notifyError, notifySuccess } from "../../mui-components/Snackbar";
 
 const Charging = ({ value }) => {
   const [page, setPage] = React.useState(0);
@@ -39,7 +39,7 @@ const Charging = ({ value }) => {
     "End SoC(%)",
     "Current SoC(%)",
     "Charged SoC(%)",
-    "Units consumed",
+    "Units consumed (kWh)",
     "Action",
   ];
   const [open, setOpenDialog] = React.useState(false);
@@ -94,34 +94,34 @@ const Charging = ({ value }) => {
     csvData.push([]);
 
     const headerRow = [
-        "E-Tractor ID",
-        "Charging cycle",
-        "Charging time",
-        "Start SoC(%)",
-        "End SoC(%)",
-        "Current SoC(%)",
-        "Charged SoC(%)",
-        "Units consumed",
+      "E-Tractor ID",
+      "Charging cycle",
+      "Charging time",
+      "Start SoC(%)",
+      "End SoC(%)",
+      "Current SoC(%)",
+      "Charged SoC(%)",
+      "Units consumed",
     ];
     csvData.push(headerRow);
 
     modifiedData.forEach((row) => {
       const rowData = [
-     row?.Id,
-     row?.chargingcycle,
-      row?.trip,
-       row?.avgSpeed,
-         row?.avgPayload,
-     row?.maxPayload,
+        row?.Id,
+        row?.chargingcycle,
+        row?.trip,
+        row?.avgSpeed,
+        row?.avgPayload,
+        row?.maxPayload,
         row?.distance,
-       row?.value,
+        row?.value,
       ];
       csvData.push(rowData);
     });
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "CS-EtractorData.csv");
-    notifySuccess("Download Excel Succefully")
+    notifySuccess("Download Excel Succefully");
   };
 
   useEffect(() => {

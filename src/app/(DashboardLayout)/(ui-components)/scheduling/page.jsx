@@ -14,7 +14,7 @@ const Scheduling = () => {
     { component: <VehicleScheduling /> },
     { component: <ChargingScheduling /> },
   ];
-  const [value, setValue] = useState(0); 
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

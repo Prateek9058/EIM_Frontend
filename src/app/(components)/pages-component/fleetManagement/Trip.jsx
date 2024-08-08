@@ -1,7 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Map from "../../map/map";
-import { Grid, Typography, Chip, Tooltip, IconButton,Button} from "@mui/material";
+import {
+  Grid,
+  Typography,
+  Chip,
+  Tooltip,
+  IconButton,
+  Button,
+} from "@mui/material";
 import CustomTable from "@/app/(components)/mui-components/Table/customTable/index";
 import TableSkeleton from "@/app/(components)/mui-components/Skeleton/tableSkeleton";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
@@ -12,7 +19,7 @@ import { GrMapLocation } from "react-icons/gr";
 import { FaRegFileExcel } from "react-icons/fa";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
-import { notifyError,notifySuccess } from "../../mui-components/Snackbar";
+import { notifyError, notifySuccess } from "../../mui-components/Snackbar";
 import { CustomDropdown } from "@/app/(components)/mui-components/DropdownButton";
 
 const iconUrls = [
@@ -30,11 +37,14 @@ const coordinate = [
   { lat: "28.512937158827324", log: "77.41783963937374" },
 ];
 const buttonData = [
-  { label: "Offline", color: "red" },
-  { label: "Charging", color: "green" },
-  { label: "Trip", color: "blue" },
-  { label: "Parked", color: "skyblue" },
+  { label: "All : 200" },
+  { label: "Charging : 0", color: "blue" },
+  { label: "Swapping: 10", color: "green" },
+  { label: "Online : 20", color: "skyblue" },
+  { label: "Offline : 0", color: "red" },
+  { label: "In Trip : 20", color: "#161821" },
 ];
+
 const columns = [
   "Region",
   "E-tractor ID",
@@ -45,9 +55,9 @@ const columns = [
   "Distance travelled(km)",
   "Avg. breakdown",
   "Total Teus",
-  "Tues handled(40F)",
-  "Tues handled(20F)",
-  "Tues each trip",
+  "Teus handled(40F)",
+  "Teus handled(20F)",
+  "Teus each trip",
   "Action",
 ];
 const Charging = ({
@@ -164,7 +174,7 @@ const Charging = ({
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "FleetTripData.csv");
-    notifySuccess("Download Excel Successfully")
+    notifySuccess("Download Excel Successfully");
   };
 
   const getFormattedData = (data) => {
@@ -211,7 +221,7 @@ const Charging = ({
       ],
     }));
   };
-  const menuItems= ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"]
+  const menuItems = ["Mumbai", "Delhi", "Agra", "Punjab", "Kolkata"];
   return (
     <Grid container columnGap={2}>
       {activeMarker && activeMarker !== null ? (
@@ -265,10 +275,9 @@ const Charging = ({
           </Grid>
           <Grid item className="customSearch">
             <Grid container>
-              <Grid item >
+              <Grid item>
                 <Button
                   variant="outlined"
-      
                   onClick={() => {
                     handleExport(data?.data);
                   }}
@@ -279,13 +288,13 @@ const Charging = ({
                 </Button>
               </Grid>
               <Grid item mr={1}>
-            <CustomDropdown
+                <CustomDropdown
                   variant="outlined"
                   size="large"
-                  buttonname={'Region'}
+                  buttonname={"Region"}
                   menuitems={menuItems}
                 />
-            </Grid>
+              </Grid>
               <Grid item mr={1}>
                 <CommonDatePicker
                   getDataFromChildHandler={getDataFromChildHandler}

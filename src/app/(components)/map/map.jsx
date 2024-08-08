@@ -90,7 +90,6 @@ const Page = ({
       backgroundColor: color,
     },
   }));
-  console.log("esjghslk", activeMarker);
   return (
     <Grid container rowGap={2} xs={12} sx={{ borderRadius: "16px" }}>
       {isLoaded && (
@@ -112,7 +111,7 @@ const Page = ({
           <div>
             {filteredMarkers &&
               filteredMarkers.map((point, index) => {
-              const icon = iconUrls[index % iconUrls.length];
+                const icon = iconUrls[index % iconUrls.length];
                 return (
                   <Marker
                     key={index}
@@ -151,54 +150,52 @@ const Page = ({
                 //     left: "50%",
                 //   }}
                 // >
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      left: "50%",
-                      top: 322,
-                      display: "flex",
-                      transform: "translateX(-50%)",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "100%",
-                      mb: 0,
-                    }}
-                  >
-                    {buttonData && (
-                      <ButtonGroup aria-label="Basic button group">
-                        {buttonData.map((button, index) => (
-                          <Button
-                            variant="contained"
-                            key={index}
-                            sx={{
-                              ".MuiButton-outlined": {
-                                border: "1px solid #fff",
-                                color: "#fff",
-                              },
-                              "&:hover": {
-                                // border: "1px solid #C0FE72",
-                                // backgroundColor: "rgba(0, 0, 0, 0.08)",
-                                color: "#C0FE72",
-                              },
-                            }}
-                            startIcon={
-                              <Badge1
-                                variant="dot"
-                                color={
-                                  activeButton === index
-                                    ? "black"
-                                    : button.color
-                                }
-                              />
-                            }
-                            onClick={() => handleButtonClick(index)}
-                          >
-                            {button.label}
-                          </Button>
-                        ))}
-                      </ButtonGroup>
-                    )}
-                  </Box>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    left: "50%",
+                    top: 322,
+                    display: "flex",
+                    transform: "translateX(-50%)",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    mb: 0,
+                  }}
+                >
+                  {buttonData && (
+                    <ButtonGroup aria-label="Basic button group">
+                      {buttonData.map((button, index) => (
+                        <Button
+                          variant="contained"
+                          key={index}
+                          sx={{
+                            ".MuiButton-outlined": {
+                              border: "1px solid #fff",
+                              color: "#fff",
+                            },
+                            "&:hover": {
+                              // border: "1px solid #C0FE72",
+                              // backgroundColor: "rgba(0, 0, 0, 0.08)",
+                              color: "#C0FE72",
+                            },
+                          }}
+                          startIcon={
+                            <Badge1
+                              variant="dot"
+                              color={
+                                activeButton === index ? "black" : button.color
+                              }
+                            />
+                          }
+                          onClick={() => handleButtonClick(index)}
+                        >
+                          {button.label}
+                        </Button>
+                      ))}
+                    </ButtonGroup>
+                  )}
+                </Box>
                 // </Grid>
               )}
             </Grid>

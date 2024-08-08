@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import styled from "@emotion/styled";
 import Badge from "@mui/material/Badge";
 import Image from "next/image";
-import Station from "../../../../../../public/available.svg";
+import Station from "../../../../../../public/not-charging.svg";
 
 // import {CustomGrid} from '@/components/CustomGrid/index'
 const CustomGrid = styled(Grid)(({ theme }) => ({
@@ -20,7 +20,7 @@ const CustomGrid = styled(Grid)(({ theme }) => ({
 
 Chart.register(...registerables);
 const data1 = {
-  labels: ["Red", "Blue", "Yellow", "orange"],
+  labels: ["Offline CS", "Online CS", "Occupied CS", "Available CS"],
   datasets: [
     {
       label: "My First Datasetsss",
@@ -28,8 +28,6 @@ const data1 = {
       backgroundColor: ["#B7B597", "#DAD3BE", "#254336", "#6B8A7A"],
       hoverOffset: 15,
       borderColor: "transparent",
-      // hoverBackgroundColor: "red",
-      // hoverBorderColor: "blue",
     },
   ],
 };
@@ -41,7 +39,7 @@ const options = {
   responsive: true,
   plugins: {
     legend: {
-      display: true,
+      display: false,
       position: "bottom",
       align: "center",
       fullSize: true,
@@ -114,7 +112,7 @@ const BalancePage = () => {
       <CustomGrid>
         <Grid
           container
-          sx={{ height: "200px" }}
+          sx={{ height: "205px" }}
           justifyContent={"center"}
           alignItems={"center"}
         >
@@ -122,11 +120,17 @@ const BalancePage = () => {
           <Box
             sx={{
               borderRadius: "16px",
-              background:
-                "linear-gradient(111.41deg, rgba(139, 153, 173, 0.36) 0%, rgba(255, 255, 255, 0.12) 100%)",
+              padding: "10px 40px",
+              // background:
+              //   "linear-gradient(111.41deg, rgba(139, 153, 173, 0.36) 0%, rgba(255, 255, 255, 0.12) 100%)",
             }}
           >
-            <Image src={Station} alt="Charging Station" />
+            <Image
+              src={Station}
+              height={140}
+              width={230}
+              alt="Charging Station"
+            />
           </Box>
         </Grid>
         <Grid container mt={20} mb={2}>

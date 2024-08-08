@@ -8,7 +8,7 @@ const data = {
   labels: Array.from({ length: 20 }, (_, i) => (i + 1).toString()), // Labels from 1 to 50
   datasets: [
     {
-      label: "Active session",
+      label: "Units consumption",
       data: Array.from({ length: 230 }, () => Math.floor(Math.random() * 20)), // 50 random data points
       backgroundColor: "rgba(247, 187, 187, .2)", // Fill color for the area chart
       borderColor: "#C0FE72",
@@ -16,7 +16,7 @@ const data = {
       borderWidth: 2,
     },
     {
-      label: "Current time",
+      label: "Battery SoC",
       data: Array.from({ length: 230 }, () => Math.floor(Math.random() * 20)), // 50 random data points
       backgroundColor: "rgba(247, 187, 187, .2)", // Fill color for the area chart
       borderColor: "#1A1C67",

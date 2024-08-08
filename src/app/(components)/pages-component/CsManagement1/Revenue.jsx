@@ -9,7 +9,7 @@ import { saveAs } from "file-saver";
 import { FaRegFileExcel } from "react-icons/fa";
 import { RevenueManagementData } from "../../table/rows";
 import Fusion from "./fusion";
-import { notifyError,notifySuccess } from "../../mui-components/Snackbar";
+import { notifyError, notifySuccess } from "../../mui-components/Snackbar";
 
 const Charging = ({ value }) => {
   const [page, setPage] = React.useState(0);
@@ -31,9 +31,9 @@ const Charging = ({ value }) => {
     "E-Tractor ID",
     "Charging cycle",
     "Swapping cycle",
-    "Total units consumed(kwh)",
-    "Selected Package",
-    "Variable Unit(kwh)",
+    "Total units consumed(kWh)",
+    "Selected package",
+    "Variable Unit(kWh)",
     "Variable bill",
     "Total bill",
   ];
@@ -106,7 +106,7 @@ const Charging = ({ value }) => {
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "CS-RevenueData.csv");
-    notifySuccess("Download Excel Succefully")
+    notifySuccess("Download Excel Succefully");
   };
 
   const handleOpenDialog = () => {

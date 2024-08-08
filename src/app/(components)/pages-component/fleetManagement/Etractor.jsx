@@ -42,7 +42,6 @@ const buttonData = [
   { label: "Parked", color: "skyblue" },
 ];
 const columns = [
-  "Total distance travelled(km)",
   "E-tractor ID",
   "Status",
   "Current SoC(%)",
@@ -50,19 +49,19 @@ const columns = [
   "Charging cycle",
   "Swapping cycle",
   "Trip cycle",
+  "Total distance travelled(km)",
   "Avg. charging time",
-  "Total units consumed(kwh)",
+  "Total units consumed(kWh)",
   "Avg. speed(km/hr)",
   "Avg. payload(Ton)",
   "Max. payload(Ton)",
-  "Total tues",
-  "Tues handled(40F)",
-  "Tues handled(20F)",
-  "Tues each trip",
-  "avg. consumption(kWh/km)",
+  "Total teus",
+  "Teus handled(40F)",
+  "Teus handled(20F)",
+  "Teus each trip",
+  "Avg. consumption(kWh/km)",
   "Breakdown",
   "Effective range(km)",
-  "Current status",
   "Action",
 ];
 const Charging = ({
@@ -219,40 +218,6 @@ const Charging = ({
   const menuItems = ["Mumbai", "Delhi", "Agra", "Punjab", "Kolkata"];
   return (
     <Grid container columnGap={2}>
-      {activeMarker && activeMarker !== null ? (
-        <Grid item md={8.8} xs={12} height={"380px"}>
-          <Map
-            handleMapData={handleMapData}
-            iconUrls={iconUrls}
-            activeMarker={activeMarker}
-            setActiveMarker={setActiveMarker}
-            buttonData={buttonData}
-            coordinate={coordinate}
-            onClose={onClose}
-          />
-        </Grid>
-      ) : (
-        <Grid item xs={12} height={"380px"}>
-          <Map
-            handleMapData={handleMapData}
-            iconUrls={iconUrls}
-            activeMarker={activeMarker}
-            setActiveMarker={setActiveMarker}
-            buttonData={buttonData}
-            coordinate={coordinate}
-            onClose={onClose}
-          />
-        </Grid>
-      )}
-      {activeMarker && activeMarker !== null && (
-        <Grid item md={3} xs={12} height={"380px"}>
-          <MapDetails
-            icons={icons}
-            onClose={onClose}
-            title={"E-tractor current status"}
-          />
-        </Grid>
-      )}
       <Grid container>
         <Grid
           container

@@ -39,9 +39,9 @@ const Overview1 = () => {
     { component: <Overview /> },
   ];
   const data = [
-    { title: "No. of Session", content: "400" },
+    { title: "No. of session", content: "400" },
     { title: "Usage", content: "1947.33 kWh" },
-    { title: "Up Time", content: "400" },
+    { title: "Up time", content: "400" },
   ];
   return (
     <Grid container spacing={2}>

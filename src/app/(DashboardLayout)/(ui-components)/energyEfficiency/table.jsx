@@ -7,7 +7,10 @@ import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Dat
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
 import { FaRegFileExcel } from "react-icons/fa";
-import ToastComponent,{notifyError,notifySuccess} from "@/app/(components)/mui-components/Snackbar";
+import ToastComponent, {
+  notifyError,
+  notifySuccess,
+} from "@/app/(components)/mui-components/Snackbar";
 
 const Table = ({
   data,
@@ -110,13 +113,12 @@ const Table = ({
     const csvString = Papa.unparse(csvData);
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "CS/SS-EfficiencyData.csv");
-    notifySuccess("Download Excel Succefully")
+    notifySuccess("Download Excel Succefully");
   };
   const handleCancel = () => {
     setOpenDialog(false);
   };
   const getFormattedData = (data) => {
-    console.log("data", data);
     return data?.map((item, index) => ({
       batteryId: (
         <Box>
@@ -134,21 +136,20 @@ const Table = ({
           />
         </Box>
       ),
-
+      region: item.region,
       status: item?.status ?? "--",
-      lastName: item?.lastName ?? "--",
-      mobileNumber: item?.mobileNumber ? item?.mobileNumber : "--",
-      mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
-      mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
-      mobileNumber4: item?.mobileNumber4 ? item?.mobileNumber4 : "--",
-      mobileNumber5: item?.mobileNumber5 ? item?.mobileNumber5 : "--",
-      jobRole: item?.jobRole ? item?.jobRole : "--",
+      queue: item?.queue ?? "--",
+      maxCapacity: item?.maxCapacity ?? "--",
+      currentCharging: item?.currentCharging ?? "--",
+      ETractor: item?.ETractor ?? "--",
+      lastSessionStarted: item?.lastSessionStarted ?? "--",
+      alerts: item?.alerts ?? "--",
     }));
   };
 
   return (
     <Grid container>
-        <ToastComponent/>
+      <ToastComponent />
       <Grid
         container
         justifyContent="space-between"

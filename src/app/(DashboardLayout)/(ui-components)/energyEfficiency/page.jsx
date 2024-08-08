@@ -53,20 +53,23 @@ const EnergyEfficiency = () => {
     { label: "Unavailable", data: "20 Vehicle", color: "#8B99AD" },
   ];
   const Connectorstatus = [
-    { label: "Available CS/SS Station", data: "20", color: "#56C5D8" },
+    { label: "Available CS/SS", data: "20", color: "#56C5D8" },
     { label: "Charging", data: "3 ", color: "#94C6FF" },
     { label: "Finishing", data: "20 Vehicle", color: "#FFE895" },
-    { label: "Down CS/SS Station", data: "25", color: "#F1F1F1" },
+    { label: "Down CS/SS", data: "25", color: "#F1F1F1" },
   ];
   const droDownButtons = [
-    { label: "Region", menuItems:  ["Mumbai", "Delhi", "Agra","Punjab","Kolkata"] },
+    {
+      label: "Region",
+      menuItems: ["Mumbai", "Delhi", "Agra", "Punjab", "Kolkata"],
+    },
     {
       label: "Location",
       menuItems: ["Location 1", "Location 2", "Location 3"],
     },
     {
-      label: "Charging station",
-      menuItems: ["Charging 1", "Charging 2", "Charging 3"],
+      label: "CS/SS Station",
+      menuItems: ["CS/SS Station", "Charging Station", "Swapping Station"],
     },
   ];
   const breadcrumbItems = [

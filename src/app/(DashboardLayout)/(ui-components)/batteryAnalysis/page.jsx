@@ -12,7 +12,7 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import Table from "./table";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import Graph1 from "@/app/(components)/pages-component/CsManagement1/graph2";
+import Graph1 from "./graph2";
 import { CustomDropdown } from "@/app/(components)/mui-components/DropdownButton/index";
 import ManagementGrid from "@/app/(components)/mui-components/Card";
 import { CustomGrid } from "@/app/(components)/mui-components/CustomGrid";

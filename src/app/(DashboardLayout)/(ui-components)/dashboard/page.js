@@ -68,7 +68,6 @@ function ShorterGrid() {
       value: 150,
       icon: "/Img/truck-moving-solid.svg",
       data1: [
-        { title: "fleet" },
         { title: "56" },
         { title: "63" },
         { title: "8" },
@@ -92,7 +91,6 @@ function ShorterGrid() {
   const [icons, setIcons] = useState(null);
 
   const handleMapData = (index, point, color) => {
-    console.log("point", index, point, color);
     setActiveMarker(index);
     setIcons(point);
   };
@@ -109,7 +107,6 @@ function ShorterGrid() {
           {value.split(" ")[0]}
         </span>
         <span style={{ fontSize: "15px", fontWeight: "normal" }}>
-          {" "}
           {value.split(" ")[1]}
         </span>
       </>

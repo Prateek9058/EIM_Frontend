@@ -33,23 +33,23 @@ const coordinate = [
   { lat: "28.512937158827324", log: "77.41783963937374" },
 ];
 const buttonData = [
-  { label: "Offline", color: "red" },
-  { label: "Charging", color: "green" },
-  { label: "Trip", color: "blue" },
-  { label: "Parked", color: "skyblue" },
+  { label: "Charging : 3", color: "red" },
+  { label: "Swapping : 0", color: "green" },
+  { label: "Scheduled CS: 6", color: "blue" },
+  { label: "Scheduled SS : 8", color: "skyblue" },
 ];
 const columns = [
   "Region",
   "E-tractor ID",
   "Current SoC (%)",
   "Current SoH (%)",
-  "Current units charged (kWh)",
+  "Units charged (kW)",
   "Current status",
   "Estimated charging time(hr)",
   "Charging cycle",
   "Swapping cycle",
-  "Total units charged(kWh)",
-  "Avg. charging Time",
+  "Total units charged(kW)",
+  "Avg. charging time",
   "Action",
 ];
 const Charging = ({

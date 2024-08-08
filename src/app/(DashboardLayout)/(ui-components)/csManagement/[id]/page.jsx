@@ -25,7 +25,7 @@ const ChargingId = ({ params }) => {
     "Status",
     "Hub name",
     "Currently charging",
-    "Avg. charging time",
+    "Avg. charging time(hr.)",
     "Peak hours",
   ];
   const E_tractor = [

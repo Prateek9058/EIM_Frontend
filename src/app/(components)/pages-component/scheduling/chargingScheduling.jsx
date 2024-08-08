@@ -52,6 +52,7 @@ const VehicleScheduling = () => {
       soc: "78%",
       rate: "2 hrs",
       charge: "2185W",
+      queue: "queue 3",
     },
     {
       title: "Scheduled",
@@ -69,6 +70,7 @@ const VehicleScheduling = () => {
       soc: "78%",
       rate: "2 hrs",
       charge: "2185W",
+      queue: "queue 3",
     },
     {
       title: "Scheduled",
@@ -77,6 +79,7 @@ const VehicleScheduling = () => {
       soc: "78%",
       rate: "2 hrs",
       charge: "2185W",
+      queue: "queue 3",
     },
   ];
   const InfoRow = ({ label, value }) => (
@@ -119,21 +122,26 @@ const VehicleScheduling = () => {
                 borderRadius: "10px",
               }}
             >
-              {index % 2 == 0 ? (
-                <CardMedia
-                  component="img"
-                  alt="green iguana"
-                  height="140"
-                  image="./available.svg"
-                />
-              ) : (
-                <CardMedia
-                  component="img"
-                  alt="green iguana"
-                  height="140"
-                  image="./not-charging.svg"
-                />
-              )}
+              <Grid container justifyContent={"center"}>
+                {index % 2 === 0 ? (
+                  <Image
+                    src="./available.svg"
+                    alt="not charging"
+                    width={260}
+                    height={140}
+                    objectFit="contain"
+                  />
+                ) : (
+                  <Image
+                    src="./not-charging.svg"
+                    alt="on charging"
+                    width={260}
+                    height={140}
+                    objectFit="contain"
+                  />
+                )}
+              </Grid>
+
               <CardContent
                 sx={{
                   backgroundColor: index % 2 === 0 ? "#009660" : "#0042C6",

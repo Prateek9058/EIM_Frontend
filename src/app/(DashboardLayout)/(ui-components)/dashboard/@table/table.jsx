@@ -33,11 +33,11 @@ const Table = ({
     "Region",
     "E-Tractor ID",
     "Current status",
-    "Total Distance Traveled (km)",
+    "Total distance travelled (km)",
     "Avg. consumption(kWh/km)",
     "Total units consumed(kWh)",
     "Avg. payload (Ton)",
-    // "Action",
+    "Action",
   ];
   const [open, setOpenDialog] = React.useState(false);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
@@ -94,17 +94,17 @@ const Table = ({
       avgconsumption: item?.avgconsumption ? item?.avgconsumption : "--",
       mobileNumber1: item?.mobileNumber1 ? item?.mobileNumber1 : "--",
       mobileNumber2: item?.mobileNumber2 ? item?.mobileNumber2 : "--",
-      // Action: [
-      //   <Grid container justifyContent="center" spacing={2} key={index}>
-      //     <Grid item xs={12}>
-      //       <Tooltip title="View">
-      //         <IconButton size="small">
-      //           <GrMapLocation color="#C0FE72" />
-      //         </IconButton>
-      //       </Tooltip>
-      //     </Grid>
-      //   </Grid>,
-      // ],
+      Action: [
+        <Grid container justifyContent="center" spacing={2} key={index}>
+          <Grid item xs={12}>
+            <Tooltip title="View">
+              <IconButton size="small">
+                <GrMapLocation color="#C0FE72" />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+        </Grid>,
+      ],
     }));
   };
 
