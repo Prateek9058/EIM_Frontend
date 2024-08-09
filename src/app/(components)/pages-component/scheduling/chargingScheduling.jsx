@@ -26,11 +26,11 @@ const iconUrls = [
   "./truck4.svg",
 ];
 const buttonData = [
-  { label: "Offline", color: "red" },
-  { label: "CS available", color: "green" },
-  { label: "SS available", color: "blue" },
-  { label: "SS scheduled", color: "skyblue" },
-  { label: "CS scheduled", color: "gray" },
+  { label: "All" },
+  { label: "Charging : 3", color: "red" },
+  { label: "Swapping : 4", color: "green" },
+  { label: "Scheduled Swapping : 3", color: "blue" },
+  { label: "Scheduled Charging : 6", color: "gray" },
 ];
 const VehicleScheduling = () => {
   const [activeMarker, setActiveMarker] = useState(null);
