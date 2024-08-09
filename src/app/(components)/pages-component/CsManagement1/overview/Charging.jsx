@@ -21,7 +21,7 @@ const coordinate = [
 const cardsData = [
   {
     onlineStatus: "Online",
-    swappingStation: "Charing station",
+    swappingStation: "Charging station",
     ssIdentity: "SS Identity",
     batteryStatus: ["#C0FE72", "#C0FE72", "#C0FE72", "#FE7272"],
     description:
