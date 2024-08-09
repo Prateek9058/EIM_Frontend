@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Profile from "./Profile";
 import { LuMenu } from "react-icons/lu";
 import Image from "next/image";
-import Logo from '../../../../../public/Img/logo.svg'
+import Logo from "../../../../../public/Img/logo.svg";
 import Notification from "./Notification";
 
 const AppBarStyled = styled(AppBar)(({ theme }) => ({
@@ -13,11 +13,10 @@ const AppBarStyled = styled(AppBar)(({ theme }) => ({
   padding: "22px 35px 22px 35px",
   color: theme.palette.text.primary,
   zIndex: "10",
-  borderBottom: "0.5px solid #C8CBD9",
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down("sm")]: {
     padding: "18px 15px 25px 15px",
   },
-  backgroundColor:"rgba(14, 1, 71, 1)"
+  backgroundColor: "rgba(14, 1, 71, 1)",
 }));
 
 const Header = ({ toggleMobileSidebar }) => {
@@ -39,21 +38,27 @@ const Header = ({ toggleMobileSidebar }) => {
           >
             <LuMenu width="22" height="22" />
           </IconButton>
-         <Grid sx={{
+          <Grid
+            sx={{
               color: "",
               display: {
                 lg: "flex",
                 xs: "none",
               },
-            }}>
-              <Image  src={Logo} height={30} />
-          </Grid> 
+            }}
+          >
+            <Image src={Logo} height={30} />
+          </Grid>
         </Grid>
         <Grid item>
           <Grid container alignItems="center" spacing={2}>
             {/* Uncomment Notification component if needed */}
-              <Grid item><Notification /></Grid>
-            <Grid item><Profile /></Grid>
+            <Grid item>
+              <Notification />
+            </Grid>
+            <Grid item>
+              <Profile />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
