@@ -99,7 +99,10 @@ const Overview = ({
       content: "20 ",
       value: "E-tractor",
       titleParts: [
-        { text: "Distance travelled " },
+        {
+          text: "Distance travelled ",
+          style: { fontSize: "16px", fontWeight: 600 },
+        },
         { text: "(km)", style: { fontSize: "13px", fontWeight: 600 } },
       ],
       label: "View report",
@@ -110,7 +113,7 @@ const Overview = ({
       content: "20 ",
       value: "Vehicle",
       titleParts: [
-        { text: "Trip payload " },
+        { text: "Trip payload ", style: { fontSize: "16px", fontWeight: 600 } },
         { text: "(Ton)", style: { fontSize: "13px", fontWeight: 600 } },
       ],
       label: "View report",
@@ -121,7 +124,7 @@ const Overview = ({
       content: "20 ",
       value: "Vehicle",
       titleParts: [
-        { text: "Trips " },
+        { text: "Trips ", style: { fontSize: "16px", fontWeight: 600 } },
         {
           text: "(Units consumed)",
           style: { fontSize: "13px", fontWeight: 600 },
@@ -156,15 +159,14 @@ const Overview = ({
         data={data2}
       />
       {data1.map((item, index) => (
-        <Grid key={index} item xl={4} lg={4} md={4} sm={12} xs={12}>
+        <Grid key={index} item xl={4} lg={4} md={4} sm={6} xs={12}>
           <CustomGrid>
             <Grid
               container
               justifyContent={"space-between"}
               alignItems={"center"}
             >
-              <Typography variant="h6">
-                <TimerIcon sx={{ verticalAlign: "middle", p: "3px" }} />
+              <Typography>
                 {item.titleParts?.map((part, idx) => (
                   <span key={idx} style={part?.style}>
                     {part?.text}

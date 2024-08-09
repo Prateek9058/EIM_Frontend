@@ -87,10 +87,8 @@ const config = {
 };
 const Graph = () => {
   return (
-    <Grid container>
-      <Grid container mt={4} mb={3}>
-        <Line data={data} height={130} options={config.options} />
-      </Grid>
+    <Grid container mt={4} mb={3}>
+      <Line data={data} height={130} options={config.options} />
     </Grid>
   );
 };

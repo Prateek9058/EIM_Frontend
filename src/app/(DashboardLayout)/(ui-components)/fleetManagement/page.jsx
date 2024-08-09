@@ -32,7 +32,6 @@ const Page = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [searchQuery, setSearchQuery] = useState("");
   const [date, setDate] = useState(null);
-  const [data, setData] = useState(null);
   const [tabsValue, setTabsValue] = useState("Overview");
   const getDataFromChildHandler = (date, dataArr) => {
     setDate(date);
