@@ -3,9 +3,7 @@ import AuthProvider from "@/app/(components)/authentication/AuthProvider";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 
-export default async function RootLayout({
-  children,
-}) {
+export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
 
   if (session?.status === "loading") {
