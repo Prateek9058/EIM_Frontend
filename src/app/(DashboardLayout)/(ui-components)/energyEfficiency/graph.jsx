@@ -19,7 +19,7 @@ const data1 = {
       label: "Optimization limit (kW)",
       data: [10, 29, 50, 81, 16, 25, 70, 10, 76, 38, 16],
       backgroundColor: "rgba(247, 187, 187, .2)", // Fill color for the area chart
-      borderColor: "#fff",
+      borderColor: "#ffff",
       borderWidth: 2,
       pointHoverRadius: 10,
     },

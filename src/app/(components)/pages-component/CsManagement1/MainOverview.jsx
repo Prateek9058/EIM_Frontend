@@ -1,15 +1,14 @@
 import { Grid, Typography, Divider } from "@mui/material";
 import React, { useState } from "react";
-import Graph from "./graph";
-import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import Graph2 from "./graph2";
+import Graph from "./overview/Graph/graph";
+import Graph2 from "./overview/Graph/graph2";
+import Graph3 from "./overview/Graph/graph3";
+
 import Overview from "@/app/(components)/pages-component/CsManagement1/overview/Overview";
 import TimerIcon from "@mui/icons-material/Timer";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import styled from "@emotion/styled";
 import CommonDatePicker from "@/app/(components)/mui-components/Text-Field's/Date-range-Picker/index";
 import ManagementGrid from "../../mui-components/Card";
-import { ColoredChip } from "../../mui-components/Chip";
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -61,7 +60,9 @@ const Overview1 = () => {
             <Typography variant="h4" color="primary" sx={{ mt: 2 }}>
               {item.content}{" "}
             </Typography>
-            <Graph />
+            {index === 0 && <Graph />}
+            {index === 1 && <Graph2 />}
+            {index === 2 && <Graph3 />}
             <Divider sx={{ mb: 3 }} />
           </CustomGrid>
         </Grid>

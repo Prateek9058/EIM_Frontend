@@ -9,8 +9,8 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import Graph from "@/app/(components)/pages-component/CsManagement1/graph";
-import Graph2 from "@/app/(components)/pages-component/CsManagement1/graph2";
+import Graph from "./graph";
+import Graph2 from "./graph2";
 
 export default function AlertDialog({ open, setOpen }) {
   const handleClose = () => {

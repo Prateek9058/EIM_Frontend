@@ -2,6 +2,9 @@
 import { Button, Grid, Typography, Badge } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Graph from "@/app/(components)/pages-component/fleetManagement/vehicle/graph";
+import Graph2 from "@/app/(components)/pages-component/fleetManagement/vehicle/graph2";
+import Graph3 from "@/app/(components)/pages-component/fleetManagement/vehicle/graph3";
+
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -14,7 +17,6 @@ import styled from "@emotion/styled";
 import Table from "./table";
 import LinearProgress from "@mui/material/LinearProgress";
 import MapDetails from "@/app/(components)/map/mapDetails";
-import { PiDotBold } from "react-icons/pi";
 
 const CustomGrid = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -121,7 +123,7 @@ const Overview = ({
       titleParts: [
         { text: "Trips " },
         {
-          text: "(Units consumed kWh)",
+          text: "(Units consumed)",
           style: { fontSize: "13px", fontWeight: 600 },
         },
       ],
@@ -172,7 +174,7 @@ const Overview = ({
               <CustomDropdown
                 variant="contained"
                 size="small"
-                buttonname="Daily"
+                buttonname="Weekly"
                 menuitems={days}
               />
             </Grid>
@@ -182,7 +184,8 @@ const Overview = ({
                 E-Tractor
               </span>
             </Typography>
-            <Graph />
+            {index === 0 && <Graph />} {index === 1 && <Graph2 />}{" "}
+            {index === 2 && <Graph3 />}
             <LinearProgress
               variant="determinate"
               value={progress}

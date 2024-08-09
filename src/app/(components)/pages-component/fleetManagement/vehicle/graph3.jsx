@@ -36,7 +36,7 @@ const options = {
       ticks: {
         color: "white",
         callback: function (value) {
-          return value + " km";
+          return value + " kWh";
         },
       },
     },
