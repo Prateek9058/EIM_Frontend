@@ -1,18 +1,20 @@
 import React from "react";
 import Menuitems from "./MenuItems";
 import { usePathname } from "next/navigation";
-import { Box, List, Grid,useMediaQuery } from "@mui/material";
+import { Box, List, Grid, useMediaQuery } from "@mui/material";
 import NavItem from "./NavItem/index";
 import { uniqueId } from "lodash";
 import { AiOutlineLogout } from "react-icons/ai";
 import { signOut } from "next-auth/react";
 import { RiSettings3Line } from "react-icons/ri";
+import Image from "next/image";
+import Logo from "../../../../../public/Img/logo.png";
 
-const Menuitems1= [
+const Menuitems1 = [
   {
     id: uniqueId(),
     title: "Settings",
-    icon:  RiSettings3Line,
+    icon: RiSettings3Line,
     href: "/settings",
     role: ["Admin"],
   },
@@ -35,11 +37,14 @@ const SidebarItems = ({ toggleMobileSidebar }) => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
 
   return (
-    <Grid container  >
-      <Box  sx={{
+    <Grid container>
+      <Box
+        sx={{
           px: 0,
-        }}>
+        }}
+      >
         <List sx={{ pt: 0 }} className="sidebarNav" component="div">
+          {lgUp ? "" : <Image src={Logo} height={55} width={200} />}
           {Menuitems.map((item) => {
             return (
               <NavItem
@@ -61,7 +66,12 @@ const SidebarItems = ({ toggleMobileSidebar }) => {
         }}
       >
         <List
-          sx={{ pt: 0, width: "100%",overflow:"hidden", height:lgUp?"25vh":"35vh"}}
+          sx={{
+            pt: 0,
+            width: "100%",
+            overflow: "hidden",
+            minHeight: lgUp ? "30vh" : "15vh",
+          }}
           className="sidebarNav"
           component="div"
         >

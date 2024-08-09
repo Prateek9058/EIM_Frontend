@@ -2,12 +2,12 @@ import React from "react";
 import { Grid, Breadcrumbs, Typography, useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from "@mui/icons-material/Home";
 import { emphasize, styled } from "@mui/material/styles";
-import Chip from '@mui/material/Chip';
+import Chip from "@mui/material/Chip";
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
-    theme.palette.mode === 'light'
+    theme.palette.mode === "light"
       ? theme.palette.grey[100]
       : theme.palette.grey[800];
   return {
@@ -15,10 +15,10 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
     height: theme.spacing(3),
     color: theme.palette.text.secondary,
     fontWeight: theme.typography.fontWeightRegular,
-    '&:hover, &:focus': {
+    "&:hover, &:focus": {
       backgroundColor: emphasize(backgroundColor, 0.06),
     },
-    '&:active': {
+    "&:active": {
       boxShadow: theme.shadows[1],
       backgroundColor: emphasize(backgroundColor, 0.12),
     },
@@ -36,17 +36,27 @@ const CustomBreadcrumbs = ({ breadcrumbItems }) => {
       container
       sx={{
         pr: "12px",
-        pt: "12px",
+        pt: "6px",
         position: "fixed",
-        top: { xs: "7px", sm: "20px", md: "18px", lg: "20px" },
+        top: { xs: "7px", sm: "16px", md: "18px", lg: "20px" },
         zIndex: "99",
         width: { xs: "90%", sm: "75%", md: "65%", lg: "60%" },
-        marginLeft: isXs ? "50px" : isSm ?"60px" :isMd? "60px": "flex-start"// Align breadcrumbs to the right on small screens
+        marginLeft: isXs
+          ? "50px"
+          : isSm
+          ? "60px"
+          : isMd
+          ? "60px"
+          : "flex-start", // Align breadcrumbs to the right on small screens
       }}
       direction="row"
       alignItems="center"
     >
-      <Breadcrumbs separator=">" aria-label="breadcrumb" sx={{ width: {xs:"55%",sm:"100%"} ,color:"#fff",}}>
+      <Breadcrumbs
+        separator=">"
+        aria-label="breadcrumb"
+        sx={{ width: { xs: "55%", sm: "100%" }, color: "#fff" }}
+      >
         {breadcrumbItems.map((item, index) => {
           // const Data = item?.icon
           return (
@@ -73,18 +83,19 @@ const CustomBreadcrumbs = ({ breadcrumbItems }) => {
             //     {item?.label}
             //   </Typography>
             // </Link>
-          <Link href={item.link} key={index}>
-            <Typography
-              color={pathname === item.link ? "#C1FF72" : "#fff"}
-              variant="h6"
-              sx={{
-                cursor: pathname !== item.link ? "pointer" : "initial",
-              }}
-            >
-              {item.label}
-            </Typography>
-          </Link>
-        )})}
+            <Link href={item.link} key={index}>
+              <Typography
+                color={pathname === item.link ? "#C1FF72" : "#fff"}
+                variant="h6"
+                sx={{
+                  cursor: pathname !== item.link ? "pointer" : "initial",
+                }}
+              >
+                {item.label}
+              </Typography>
+            </Link>
+          );
+        })}
       </Breadcrumbs>
     </Grid>
   );

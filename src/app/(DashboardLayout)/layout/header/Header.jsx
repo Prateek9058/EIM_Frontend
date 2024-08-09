@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import Profile from "./Profile";
 import { LuMenu } from "react-icons/lu";
 import Image from "next/image";
-import Logo from "../../../../../public/Img/logo.svg";
+import Logo from "../../../../../public/Img/logo.png";
 import Notification from "./Notification";
 
 const AppBarStyled = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
   transition: "none",
-  padding: "22px 35px 22px 35px",
+  padding: "12px 35px 12px 35px",
   color: theme.palette.text.primary,
   zIndex: "10",
   [theme.breakpoints.down("sm")]: {
@@ -40,14 +40,14 @@ const Header = ({ toggleMobileSidebar }) => {
           </IconButton>
           <Grid
             sx={{
-              color: "",
+              height: "50px",
               display: {
                 lg: "flex",
                 xs: "none",
               },
             }}
           >
-            <Image src={Logo} height={30} />
+            <Image src={Logo} height={55} width={200} />
           </Grid>
         </Grid>
         <Grid item>
