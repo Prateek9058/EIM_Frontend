@@ -112,7 +112,7 @@ const Table = ({
                 size="small"
                 startIcon={<PiCarBattery color={"#C0FE72"} />}
               >
-                80%
+                100%
               </Button>
             </Tooltip>
           </Grid>

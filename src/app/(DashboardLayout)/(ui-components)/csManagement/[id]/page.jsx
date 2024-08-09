@@ -9,6 +9,8 @@ import { Fleet } from "@/app/(components)/table/rows";
 const ChargingId = ({ params }) => {
   const searchParams = useSearchParams();
   const tabValue = searchParams.get("tab");
+  const eventLabel = searchParams.get("eventLabel");
+
   const [page, setPage] = React.useState(0);
   const [loading, setLoading] = useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -20,6 +22,8 @@ const ChargingId = ({ params }) => {
   const getDataFromChildHandler = (date, dataArr) => {
     setDate(date);
   };
+  const labelStatus = eventLabel?.slice(0, 8);
+
   const vehicle1 = [
     "Date",
     "Status",
@@ -30,31 +34,33 @@ const ChargingId = ({ params }) => {
   ];
   const E_tractor = [
     "Date",
-    "Charging cycle",
+    `${labelStatus} cycle`,
     "Charging time(hr)",
     "Start Soc",
     "End SoC(%)",
     "Current SoC(%)",
     "Units consumed(kWh)",
   ];
+
   const breadcrumbItems = [
     { label: "Dashboard", link: "/" },
     { label: "CS/SS-Management", link: "/csManagement" },
     {
       label: `${params.id}`,
-      link: `/csManagement/${params.id}?tab=${tabValue}`,
+      link: `/csManagement/${params.id}?tab=${tabValue}&eventLabel=${eventLabel}`,
     },
   ];
   useEffect(() => {
     setData(Fleet);
   }, []);
+
   return (
     <Grid container sm={12} md={12}>
       <ManagementGrid breadcrumbItems={breadcrumbItems} />
       {tabValue &&
         (tabValue === "2" ? (
           <Table
-            name={`Charging Station ID (${params.id})`}
+            name={`${eventLabel} ID (${params.id})`}
             columns={vehicle1}
             data={data}
             deviceData={deviceData}

@@ -19,7 +19,7 @@ import { FaRegFileExcel } from "react-icons/fa";
 import { E_tractorData } from "../../table/rows";
 import { notifyError, notifySuccess } from "../../mui-components/Snackbar";
 
-const Charging = ({ value }) => {
+const Charging = ({ value, eventLabel }) => {
   const [page, setPage] = React.useState(0);
   const [loading, setLoading] = useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -31,10 +31,11 @@ const Charging = ({ value }) => {
   const getDataFromChildHandler = (date, dataArr) => {
     setDate(date);
   };
+  const labelStatus = eventLabel?.slice(0, 8);
   const columns = [
     "E-Tractor ID",
-    "Charging cycle",
-    "Charging time",
+    `${labelStatus} cycle`,
+    `${labelStatus} time`,
     "Start SoC(%)",
     "End SoC(%)",
     "Current SoC(%)",
@@ -95,7 +96,7 @@ const Charging = ({ value }) => {
 
     const headerRow = [
       "E-Tractor ID",
-      "Charging cycle",
+      `${labelStatus} cycle`,
       "Charging time",
       "Start SoC(%)",
       "End SoC(%)",
@@ -150,7 +151,14 @@ const Charging = ({ value }) => {
         <Grid container justifyContent="center" spacing={2} key={index}>
           <Grid item xs={12}>
             <Tooltip title="View">
-              <Link href={`/csManagement/1235?tab=${value}`}>
+              <Link
+                href={
+                  "/csManagement/1235?tab=" +
+                  value +
+                  "&eventLabel=" +
+                  eventLabel
+                }
+              >
                 <IconButton size="small">
                   <IoEyeOutline color="rgba(14, 1, 71, 1)" />
                 </IconButton>
