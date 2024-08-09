@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Graph from "./overview/Graph/graph";
 import Graph2 from "./overview/Graph/graph2";
 import Graph3 from "./overview/Graph/graph3";
+import ChargingStation from "@/app/(components)/pages-component/CsManagement1/overview/Charing";
+import SwappingStation from "@/app/(components)/pages-component/CsManagement1/overview/Swapping";
 
 import Overview from "@/app/(components)/pages-component/CsManagement1/overview/Overview";
 import TimerIcon from "@mui/icons-material/Timer";
@@ -21,18 +23,18 @@ const Overview1 = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const getDataFromChildHandler = (date, dataArr) => {
-    setDate(date);
-  };
+
   const tabs = [
     { label: "Overview (512)" },
     { label: "Charging (23)" },
+    { label: "Swapping (14)" },
     { label: "Available (14)" },
     { label: "Offline (296)" },
   ];
   const TabPanelList = [
     { component: <Overview /> },
-    { component: <Overview /> },
+    { component: <ChargingStation /> },
+    { component: <SwappingStation /> },
     { component: <Overview /> },
     { component: <Overview /> },
   ];

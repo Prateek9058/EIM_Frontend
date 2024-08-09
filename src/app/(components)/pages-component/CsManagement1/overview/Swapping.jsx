@@ -27,18 +27,16 @@ const cardsData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore laborum",
     distance: "2 km",
-    queueCharging: "3 Queue in charging",
-    queueSwapping: "3 Queue in swapping",
+    queueCharging: "3 Queue in swapping",
   },
   {
     onlineStatus: "Offline",
-    swappingStation: "Charging station",
+    swappingStation: "Swapping station",
     ssIdentity: "CS Identity (Technical Issue)",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore laborum",
     distance: "5 km",
-    queueCharging: "2 Queue in charging",
-    queueSwapping: "4 Queue in swapping",
+    queueCharging: "2 Queue in swapping",
   },
   {
     onlineStatus: "Offline",
@@ -48,8 +46,7 @@ const cardsData = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore laborum",
     distance: "1 km",
-    queueCharging: "1 Queue in charging",
-    queueSwapping: "2 Queue in swapping",
+    queueCharging: "1 Queue in swapping",
   },
 ];
 const Overview = () => {
@@ -128,9 +125,6 @@ const Overview = () => {
                     <Grid item xs={10}>
                       <Typography color={"secondary"}>
                         {card.queueCharging}
-                      </Typography>
-                      <Typography color={"secondary"}>
-                        {card.queueSwapping}
                       </Typography>
                     </Grid>
                   </Grid>

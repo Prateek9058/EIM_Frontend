@@ -21,14 +21,13 @@ const coordinate = [
 const cardsData = [
   {
     onlineStatus: "Online",
-    swappingStation: "Swapping station",
+    swappingStation: "Charing station",
     ssIdentity: "SS Identity",
     batteryStatus: ["#C0FE72", "#C0FE72", "#C0FE72", "#FE7272"],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore laborum",
     distance: "2 km",
     queueCharging: "3 Queue in charging",
-    queueSwapping: "3 Queue in swapping",
   },
   {
     onlineStatus: "Offline",
@@ -38,18 +37,16 @@ const cardsData = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore laborum",
     distance: "5 km",
     queueCharging: "2 Queue in charging",
-    queueSwapping: "4 Queue in swapping",
   },
   {
     onlineStatus: "Offline",
-    swappingStation: "Swapping station",
+    swappingStation: "Charing station",
     ssIdentity: "SS Identity (No Energy)",
     batteryStatus: ["#C0FE72", "#FE7272", "#FE7272", "#FE7272"],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore laborum",
     distance: "1 km",
     queueCharging: "1 Queue in charging",
-    queueSwapping: "2 Queue in swapping",
   },
 ];
 const Overview = () => {
@@ -128,9 +125,6 @@ const Overview = () => {
                     <Grid item xs={10}>
                       <Typography color={"secondary"}>
                         {card.queueCharging}
-                      </Typography>
-                      <Typography color={"secondary"}>
-                        {card.queueSwapping}
                       </Typography>
                     </Grid>
                   </Grid>

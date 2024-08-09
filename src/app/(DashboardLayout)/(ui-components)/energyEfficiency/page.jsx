@@ -67,10 +67,6 @@ const EnergyEfficiency = () => {
       label: "Location",
       menuItems: ["Location 1", "Location 2", "Location 3"],
     },
-    {
-      label: "CS/SS Station",
-      menuItems: ["CS/SS Station", "Charging Station", "Swapping Station"],
-    },
   ];
   const breadcrumbItems = [
     { label: "Dashboard", link: "/" },
