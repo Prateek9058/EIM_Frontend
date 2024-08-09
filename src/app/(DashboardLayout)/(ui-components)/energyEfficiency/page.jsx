@@ -48,15 +48,15 @@ const EnergyEfficiency = () => {
     },
   ];
   const CSstatus = [
-    { label: "Charging", data: "20 Vehicle", color: "#00BE2A" },
-    { label: "Offline", data: "3 Vehicle", color: "#FF7474" },
-    { label: "Unavailable", data: "20 Vehicle", color: "#8B99AD" },
+    { label: "Occupied", data: "20 ", color: "#00BE2A" },
+    { label: "Offline", data: "3 ", color: "#FF7474" },
+    { label: "Available", data: "20 ", color: "#8B99AD" },
   ];
   const Connectorstatus = [
-    { label: "Available CS/SS", data: "20", color: "#56C5D8" },
+    { label: "Available guns", data: "20", color: "#56C5D8" },
     { label: "Charging", data: "3 ", color: "#94C6FF" },
-    { label: "Finishing", data: "20 Vehicle", color: "#FFE895" },
-    { label: "Down CS/SS", data: "25", color: "#F1F1F1" },
+    { label: "Finishing", data: "20 ", color: "#FFE895" },
+    { label: "Down guns", data: "25", color: "#F1F1F1" },
   ];
   const droDownButtons = [
     {
